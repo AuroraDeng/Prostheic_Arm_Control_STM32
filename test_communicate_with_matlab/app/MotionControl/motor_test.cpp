@@ -9,8 +9,6 @@ void test(int32_t target_position)
 	if(!motor_test.IsHomePosition())
 		motor_test.BackToHomePosition();
 	
-	delay_ms(10);
-	
 	println_str(&UART1_Handler,"The motor is at home position.");	
 	motor_test.MoveToPosition(3000,motor_test.ProfileAcc,motor_test.ProfileDec,1,target_position);
 }
