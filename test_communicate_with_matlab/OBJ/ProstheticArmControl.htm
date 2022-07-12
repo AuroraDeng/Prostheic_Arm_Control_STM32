@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OBJ\ProstheticArmControl.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OBJ\ProstheticArmControl.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Tue Jul  5 10:59:34 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Tue Jul 12 10:34:49 2022
 <BR><P>
 <H3>Maximum Stack Usage =        416 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1129,7 +1129,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;test
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Epos::WriteControlword(unsigned short)
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Epos::InitPPM()
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Epos::Set_ProfileDec(unsigned int)
@@ -1241,10 +1242,11 @@ Global Symbols
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN_SendMsg
 </UL>
 
-<P><STRONG><a name="[c9]"></a>test</STRONG> (Thumb, 114 bytes, Stack size 24 bytes, motor_test.o(.text.test))
+<P><STRONG><a name="[c9]"></a>test</STRONG> (Thumb, 120 bytes, Stack size 24 bytes, motor_test.o(.text.test))
 <BR><BR>[Stack]<UL><LI>Max Depth = 392<LI>Call Chain = test &rArr; Epos::BackToHomePosition() &rArr; Epos::MoveToPosition(unsigned int, unsigned int, unsigned int, unsigned char, int) &rArr; Epos::InitPPM() &rArr; Epos::WriteControlword(unsigned short) &rArr; ReceivePDO &rArr; CAN_SendMsg &rArr; printCANframe &rArr; print_data_dec &rArr; print_str &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;println_str
+<BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;println_str
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Epos::MoveToPosition(unsigned int, unsigned int, unsigned int, unsigned char, int)
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Epos::BackToHomePosition()
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Epos::IsHomePosition()
