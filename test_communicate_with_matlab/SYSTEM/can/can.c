@@ -76,7 +76,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     GPIO_InitStruct.Pin =CAN_RX_PIN|CAN_TX_PIN;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF9_CAN1;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
@@ -135,6 +135,7 @@ void CAN_Filter_Config()
 	CAN_FilterTypeDef *sFilterConfig;
 	sFilterConfig->FilterActivation=ENABLE;//使能过滤器
 	sFilterConfig->FilterFIFOAssignment=CAN_FILTER_FIFO0;
+//	sFilterConfig->FilterBank=14;
 	/*在cube库中，CAN_FxR1与CAN_FxR2寄存器分别被拆成两段，CAN_FxR1寄存器的高16位对应着上面代码中的FilterIdHigh，低16位对应着FilterIdLow;
 	而CAN_FxR2寄存器的高16位对应着FilterMaskIdHigh，低16位对应着FilterMaskIdLow*/
 	sFilterConfig->FilterIdHigh=(uint16_t)0x0000;
@@ -158,6 +159,12 @@ void CAN_Config(void)
 {
   MX_CAN1_Init();
   CAN_Filter_Config();
+	
+	/*##-3- Start the CAN peripheral ###########################################*/
+	HAL_CAN_Start(&hcan1);//！！！一定要打开can外设，不打开can收发就处于关闭状态
+
+  /*##-4- Activate CAN RX notification #######################################*/
+	HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);	
 }
 
 
@@ -182,7 +189,7 @@ uint8_t CAN_SendMsg(Message *m)
 	else
   		TxMessage.RTR = CAN_RTR_DATA;//消息帧
 	TxMessage.DLC = m->len;//数据帧长度
-	
+	TxMessage.TransmitGlobalTime = DISABLE;
 //	if(HAL_CAN_AddTxMessage(&hcan1, &TxMessage,m->Data,(uint32_t *)CAN_TX_MAILBOX0)!=HAL_OK)
 	if(HAL_CAN_AddTxMessage(&hcan1,&TxMessage,m->Data,&CAN_TX_BOX0)!=HAL_OK)
 		return 0;
