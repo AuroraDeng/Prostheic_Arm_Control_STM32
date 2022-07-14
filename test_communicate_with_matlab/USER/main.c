@@ -46,15 +46,7 @@ int main(void)
 					println_str(&UART1_Handler,"Please Enter the Prosthetic Arm Movement Command");
 				delay_ms(10);   
 			} 
-//	Message m;
-//	m.COB_ID=0x01;
-//	m.RTR=0;
-//	m.len=0x04;
-//	m.Data[0]=0x01;
-//	m.Data[1]=0x02;
-//	m.Data[2]=0x03;
-//	m.Data[3]=0x04;
-//	CAN_SendMsg(&m);
+		CAN_ReceiveMsg();
   }
 }
 
