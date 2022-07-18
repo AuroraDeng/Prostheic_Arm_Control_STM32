@@ -7,7 +7,7 @@
 #include "usart_host_communication.h"
 int main(void)
 {
-	u8 len;	
+	Message m;
 	u16 times=0;
 	u32 commandword;
   HAL_Init();                    	//≥ı ºªØHALø‚    
@@ -46,7 +46,8 @@ int main(void)
 					println_str(&UART1_Handler,"Please Enter the Prosthetic Arm Movement Command");
 				delay_ms(10);   
 			} 
-		CAN_ReceiveMsg();
+		CAN_ReceiveMsg(&m);
+		delay_ms(10);
   }
 }
 

@@ -67,7 +67,7 @@ void MX_CAN1_Init(void);
 void CAN_Config(void);
 void CAN_Filter_Config(void);
 uint8_t CAN_SendMsg(Message *m);
-Message* CAN_ReceiveMsg(void);
+u8 CAN_ReceiveMsg(Message* m);
 
 /* USER CODE END Prototypes */
 

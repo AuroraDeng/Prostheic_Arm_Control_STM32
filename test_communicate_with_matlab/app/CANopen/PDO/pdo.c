@@ -7,7 +7,7 @@ uint16_t RxPDO[4]={0x200,0x300,0x400,0x500};
 uint32_t TransmitPDO(uint8_t NodeID,uint8_t TxPDO_n)
 {
 	Message txm={0};//STM32给epos发的远程帧
-	Message *rxm;//epos给STM32发的数据帧
+	Message rxm={0};//epos给STM32发的数据帧
 	uint32_t data=0;
 	txm.COB_ID=TxPDO[TxPDO_n-1]+NodeID;
 	txm.RTR=1;
@@ -41,9 +41,8 @@ uint32_t TransmitPDO(uint8_t NodeID,uint8_t TxPDO_n)
 	if(CAN_SendMsg(&txm))
 	{
 		delay_ms(10);
-		rxm=CAN_ReceiveMsg();
-		if(rxm!=0)
-			data=(rxm->Data[3]<<24)+(rxm->Data[2]<<16)+(rxm->Data[5]<<8)+rxm->Data[4];
+		if(CAN_ReceiveMsg(&rxm)!=0)
+			data=(rxm.Data[3]<<24)+(rxm.Data[2]<<16)+(rxm.Data[5]<<8)+rxm.Data[4];
 	}
 		return data;
 }

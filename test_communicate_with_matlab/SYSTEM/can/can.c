@@ -27,30 +27,29 @@
 
 CAN_HandleTypeDef hcan1;
 
-Message *rxm;
-CANRxMsg RxMessage = {0};
-uint8_t Rx_Flag=0;//接收状态标记	
+CANRxMsg RxMessage;
 /* CAN1 init function */
 void MX_CAN1_Init(void)
 {
 
   /* USER CODE BEGIN CAN1_Init 0 */
-
+	CAN_InitTypeDef		CAN1_InitConf;
   /* USER CODE END CAN1_Init 0 */
 
   /* USER CODE BEGIN CAN1_Init 1 */
 
   /* USER CODE END CAN1_Init 1 */
   hcan1.Instance = CAN1;
+	hcan1.Init = CAN1_InitConf;
   hcan1.Init.Prescaler = 3;
   hcan1.Init.Mode = CAN_MODE_NORMAL;
   hcan1.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan1.Init.TimeSeg1 = CAN_BS1_6TQ;
-  hcan1.Init.TimeSeg2 = CAN_BS2_7TQ;
+  hcan1.Init.TimeSeg1 = CAN_BS1_7TQ;
+  hcan1.Init.TimeSeg2 = CAN_BS2_6TQ;
   hcan1.Init.TimeTriggeredMode = DISABLE;
-  hcan1.Init.AutoBusOff = ENABLE;
-  hcan1.Init.AutoWakeUp = ENABLE;
-  hcan1.Init.AutoRetransmission = DISABLE;
+  hcan1.Init.AutoBusOff = DISABLE;
+  hcan1.Init.AutoWakeUp = DISABLE;
+  hcan1.Init.AutoRetransmission = ENABLE;	
   hcan1.Init.ReceiveFifoLocked = DISABLE;
   hcan1.Init.TransmitFifoPriority = DISABLE;
 	HAL_CAN_Init(&hcan1);
@@ -78,50 +77,22 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     */
     GPIO_InitStruct.Pin =CAN_RX_PIN|CAN_TX_PIN;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;              //上拉
+    GPIO_InitStruct.Speed = GPIO_SPEED_FAST;         //快速
     GPIO_InitStruct.Alternate = GPIO_AF9_CAN1;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* CAN1 interrupt Init */
-    HAL_NVIC_SetPriority(CAN1_TX_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
-    HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
+//    HAL_NVIC_SetPriority(CAN1_TX_IRQn, 0, 0);
+//    HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
+//    HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
+//    HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 //    HAL_NVIC_SetPriority(CAN1_RX1_IRQn, 0, 0);
 //    HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
 //    HAL_NVIC_SetPriority(CAN1_SCE_IRQn, 0, 0);
 //    HAL_NVIC_EnableIRQ(CAN1_SCE_IRQn);
   /* USER CODE BEGIN CAN1_MspInit 1 */
   /* USER CODE END CAN1_MspInit 1 */
-  }
-}
-
-void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
-{
-
-  if(canHandle->Instance==CAN1)
-  {
-  /* USER CODE BEGIN CAN1_MspDeInit 0 */
-
-  /* USER CODE END CAN1_MspDeInit 0 */
-    /* Peripheral clock disable */
-    __HAL_RCC_CAN1_CLK_DISABLE();
-
-    /**CAN1 GPIO Configuration
-    PA11     ------> CAN1_RX
-    PA12     ------> CAN1_TX
-    */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_11|GPIO_PIN_12);
-
-    /* CAN1 interrupt Deinit */
-    HAL_NVIC_DisableIRQ(CAN1_TX_IRQn);
-    HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
-    HAL_NVIC_DisableIRQ(CAN1_RX1_IRQn);
-    HAL_NVIC_DisableIRQ(CAN1_SCE_IRQn);
-  /* USER CODE BEGIN CAN1_MspDeInit 1 */
-
-  /* USER CODE END CAN1_MspDeInit 1 */
   }
 }
 
@@ -135,21 +106,23 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 void CAN_Filter_Config()
 {	
 	/*config later*/
-	CAN_FilterTypeDef *sFilterConfig;
-	sFilterConfig->FilterBank = 0;
-	sFilterConfig->FilterActivation=ENABLE;//使能过滤器
-	sFilterConfig->FilterFIFOAssignment=CAN_FILTER_FIFO0;
+	CAN_FilterTypeDef sFilterConfig;
+	sFilterConfig.FilterBank = 0;
+
 	/*在cube库中，CAN_FxR1与CAN_FxR2寄存器分别被拆成两段，CAN_FxR1寄存器的高16位对应着上面代码中的FilterIdHigh，低16位对应着FilterIdLow;
 	而CAN_FxR2寄存器的高16位对应着FilterMaskIdHigh，低16位对应着FilterMaskIdLow*/
-	sFilterConfig->FilterIdHigh=(uint16_t)0x0000;
-	sFilterConfig->FilterIdLow=(uint16_t)0x0000;
-	sFilterConfig->FilterMaskIdHigh=0x0000;
-	sFilterConfig->FilterMaskIdLow=0x0000;
-	sFilterConfig->FilterMode=CAN_FILTERMODE_IDMASK;//过滤器工作模式设置：掩码模式or列表模式
-	sFilterConfig->FilterScale=CAN_FILTERSCALE_16BIT;//标准的CAN ID：16位的寄存器；扩展CAN ID：32位的寄存器
-	sFilterConfig->SlaveStartFilterBank = 14;
+	sFilterConfig.FilterMode=CAN_FILTERMODE_IDMASK;//过滤器工作模式设置：掩码模式or列表模式
+	sFilterConfig.FilterScale=CAN_FILTERSCALE_32BIT;//标准的CAN ID：16位的寄存器；扩展CAN ID：32位的寄存器
+	sFilterConfig.FilterIdHigh=0x0000;
+	sFilterConfig.FilterIdLow=0x0000;
+	sFilterConfig.FilterMaskIdHigh=0x0000;
+	sFilterConfig.FilterMaskIdLow=0x0000;
+	sFilterConfig.FilterFIFOAssignment=CAN_FILTER_FIFO0;
+	sFilterConfig.FilterActivation=CAN_FILTER_ENABLE;//使能过滤器
+	sFilterConfig.SlaveStartFilterBank = 14;
 	
-	HAL_CAN_ConfigFilter(&hcan1,sFilterConfig);
+	if(HAL_CAN_ConfigFilter(&hcan1,&sFilterConfig)!=HAL_OK)
+		println_str(&UART1_Handler,"The CAN filter config has not finished!");	
 }
 
 /*
@@ -206,69 +179,31 @@ uint8_t CAN_SendMsg(Message *m)
 		return 1;
 	}
 }
-
-
-void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *CanNum)
-{	
-	if(HAL_CAN_GetRxMessage(&hcan1,CAN_RX_FIFO0,&RxMessage,rxm->Data)==HAL_OK)
-	{
-		Rx_Flag =1;  //接收标志位
-		
-		rxm->len = RxMessage.DLC;
-		
-		if(RxMessage.RTR == CAN_RTR_REMOTE)//判断是远程帧还是数据帧
-			rxm->RTR = 1;
-		else
-			rxm->RTR=0;
-		
-		rxm->COB_ID = RxMessage.StdId;
-	}
-}
 	
-Message* CAN_ReceiveMsg()
+u8 CAN_ReceiveMsg(Message* m)
 {		
-	if(Rx_Flag)
-		{
-			println_str(&UART1_Handler,"CAN Message receive successfully!");
-			printCANframe(rxm->COB_ID,rxm->RTR,rxm->len,rxm->Data);
-			Rx_Flag=0;
-			return rxm;
-		}		
-		else
-			return 0;//接收数据
+	u32 i;
+	u8	RxData[8];
+	
+	if(HAL_CAN_GetRxMessage(&hcan1,CAN_RX_FIFO0,&RxMessage,RxData)!=HAL_OK)
+		return 0;//接收数据
+	
+	m->len = RxMessage.DLC;
+			
+	if(RxMessage.RTR == CAN_RTR_REMOTE)//判断是远程帧还是数据帧
+		m->RTR = 1;
+	else
+		m->RTR=0;
 
+	m->COB_ID = RxMessage.StdId;
+	
+  for(i=0;i<RxMessage.DLC;i++)
+		m->Data[i]=RxData[i];
+	
+	println_str(&UART1_Handler,"CAN Message receive successfully!");
+	printCANframe(m->COB_ID,m->RTR,m->len,m->Data);
+	
+	return RxMessage.DLC;
 }
 
-//Message* CAN_ReceiveMsg()
-//{		
-//	CANRxMsg RxMessage = {0};
-//  Message *rxm;
-///*如果你是用中断接收CAN数据（即在CubeMx里面使能了Rx0 interrupts中断接收并配置中断优先级），千万不要用这个判断，不然一旦接收到数据后，就触发return 0xF1*/
-////		if(HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) != 1)//知道Rx Fifo接收箱里当前存储了多少帧数据，
-////		{
-////			return 0;	
-////		}
-//	
-//    if(HAL_CAN_GetRxMessage(&hcan1,CAN_RX_FIFO0,&RxMessage,rxm->Data)!=HAL_OK)
-//			return 0;//接收数据
-//		else
-//		{
-//			rxm->len = RxMessage.DLC;
-//			
-//			if(RxMessage.RTR == CAN_RTR_REMOTE)//判断是远程帧还是数据帧
-//				rxm->RTR = 1;
-//			else
-//				rxm->RTR=0;
-//			
-//			if(RxMessage.IDE == CAN_ID_STD) //标准IDor扩展ID
-//			{
-//				rxm->COB_ID = RxMessage.StdId;
-//				println_str(&UART1_Handler,"CAN Message receive successfully!");
-//				printCANframe(rxm->COB_ID,rxm->RTR,rxm->len,rxm->Data);
-//				return rxm;
-//			}
-//			else
-//				return 0;
-//		}
-//}
 /* USER CODE END 1 */
