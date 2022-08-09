@@ -18,7 +18,7 @@ int main(void)
 
   while(1)
   {
-	if(USART1_RX_STA&0x8000)//判断接收是否完成：0x8000=1000 0000 0000 0000/uint16_t USART1_RX_STA的bit15（接收完成标志）置1
+			if(USART1_RX_STA&0x8000)//判断接收是否完成：0x8000=1000 0000 0000 0000/uint16_t USART1_RX_STA的bit15（接收完成标志）置1
 			{	
 				commandword=Get_USART_Command(&UART1_Handler);	 				   
 
@@ -26,7 +26,8 @@ int main(void)
 				{
 					case 1:
 					{
-						test(72000);
+						test(500000);
+						delay_ms(10);
 						break;
 					}
 					case 2:
@@ -46,8 +47,6 @@ int main(void)
 					println_str(&UART1_Handler,"Please Enter the Prosthetic Arm Movement Command");
 				delay_ms(10);   
 			} 
-		CAN_ReceiveMsg(&m);
-		delay_ms(10);
   }
 }
 

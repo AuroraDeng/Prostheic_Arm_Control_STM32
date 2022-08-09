@@ -8,6 +8,7 @@
 #include "can.h"
 #include "pdo.h"
 #include "sdo.h"
+#include "NMT_control.h"
 #include "usart_print.h"
 #include "delay.h"
 #include "sys.h"

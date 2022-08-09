@@ -76,7 +76,14 @@ void Epos::UpdateActualData(int32_t actual_position,Uint32 actual_velocity)
 
 void Epos::Get_ActualPos()
 {	
+	WriteControlword(switchon_and_enable);
 	ActualPos=TransmitPDO(Epos::NodeID,3);
+	
+	print_str(&UART1_Handler,"The motor ");
+	print_data_dec(&UART1_Handler,Epos::NodeID);
+	print_str(&UART1_Handler,"'s actual position is at ");
+	print_data_dec(&UART1_Handler,Epos::ActualPos);
+	print_str(&UART1_Handler,"\n");
 }
 
 void Epos::Get_ActualVel()
@@ -86,6 +93,7 @@ void Epos::Get_ActualVel()
 
 BOOL Epos::IsHomePosition()
 {
+	NMT_State_Change(0,NMT_Start_Node);
 	Get_ActualPos();
 	if(ActualPos==0)
 		return 1;
@@ -99,23 +107,25 @@ void Epos::BackToHomePosition()
 }
 
 void Epos::MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_dec,uint8_t IsAbsolute,int32_t target_position)
-{
+{	
+	InitPPM();
+	
 	Set_ProfileVel(profile_vel);
 	Set_ProfileAcc(profile_acc);
 	Set_ProfileDec(profile_dec);
 	
-	InitPPM();
-	
 	Set_TargetPosition(IsAbsolute,target_position);
+	
 	if(m_bIsAbsolute)
 		WriteControlword(absolute_immediate_movement);
 	else
 		WriteControlword(relative_immediate_movement);
+
 }
 
 void Epos::MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_dec,int32_t *posList, uint8_t len)
 {	
-	InitPPM();
+	//InitPPM();
 	
 	for(int i=0;i<len;i++)
 	{
@@ -137,15 +147,26 @@ uint16_t Epos::ReadStatusword()
 {
 	uint16_t statusword;
 	statusword=TransmitPDO(Epos::NodeID,1);
+	
+	print_data_hex(&UART1_Handler,(uint32_t)statusword);
+	
 	return statusword;
 }
 
 /*初始化轮廓位置控制模式PPM*/
 void Epos::InitPPM()
 {
+	NMT_State_Change(0,NMT_Start_Node);
+	
 	Set_Operation_Mode(PPM);
 	
 	println_str(&UART1_Handler,"Switch on and enable ...");
+	
+	Sync_Send();
+	
+	WriteControlword(shutdown);
+	
+	Sync_Send();
 	
 	WriteControlword(switchon_and_enable);//使能
 	
@@ -155,9 +176,17 @@ void Epos::InitPPM()
 /*初始化循环同步位置模式CSP*/
 void Epos::InitCSP()
 {
+	NMT_State_Change(0,NMT_Start_Node);
+	
 	Set_Operation_Mode(CSP);
 	
 	println_str(&UART1_Handler,"Switch on and enable ...");
+	
+	Sync_Send();
+	
+	WriteControlword(shutdown);
+	
+	Sync_Send();
 	
 	WriteControlword(switchon_and_enable);
 	

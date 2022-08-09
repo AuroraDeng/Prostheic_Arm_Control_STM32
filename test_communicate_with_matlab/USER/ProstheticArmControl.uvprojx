@@ -582,7 +582,7 @@
           <Files>
             <File>
               <FileName>NMT_control.c</FileName>
-              <FileType>1</FileType>
+              <FileType>8</FileType>
               <FilePath>..\app\CANopen\NMT\NMT_control.c</FilePath>
             </File>
             <File>

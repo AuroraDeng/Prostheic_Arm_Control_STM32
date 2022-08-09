@@ -182,10 +182,8 @@ uint8_t CAN_SendMsg(Message *m)
 	
 u8 CAN_ReceiveMsg(Message* m)
 {		
-	u32 i;
-	u8	RxData[8];
 	
-	if(HAL_CAN_GetRxMessage(&hcan1,CAN_RX_FIFO0,&RxMessage,RxData)!=HAL_OK)
+	if(HAL_CAN_GetRxMessage(&hcan1,CAN_RX_FIFO0,&RxMessage,m->Data)!=HAL_OK)
 		return 0;//接收数据
 	
 	m->len = RxMessage.DLC;
@@ -196,9 +194,6 @@ u8 CAN_ReceiveMsg(Message* m)
 		m->RTR=0;
 
 	m->COB_ID = RxMessage.StdId;
-	
-  for(i=0;i<RxMessage.DLC;i++)
-		m->Data[i]=RxData[i];
 	
 	println_str(&UART1_Handler,"CAN Message receive successfully!");
 	printCANframe(m->COB_ID,m->RTR,m->len,m->Data);
