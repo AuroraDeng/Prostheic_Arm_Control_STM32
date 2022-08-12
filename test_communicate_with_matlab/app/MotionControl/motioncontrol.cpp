@@ -25,8 +25,10 @@ void Wrist_Flextion()
 	if(!motor_W2.IsHomePosition())
 		motor_W2.BackToHomePosition();
 	
-	motor_W1.MoveToPosition(3000,motor_W1.ProfileAcc,motor_W1.ProfileDec,1,-72200);
-	motor_W2.MoveToPosition(3000,motor_W2.ProfileAcc,motor_W2.ProfileDec,1,72200);
+//	motor_W1.MoveToPosition(3000,motor_W1.ProfileAcc,motor_W1.ProfileDec,1,-72200);
+//	motor_W2.MoveToPosition(3000,motor_W2.ProfileAcc,motor_W2.ProfileDec,1,72200);
+	motor_W1.MoveToPosition(3000,motor_W1.ProfileAcc,motor_W1.ProfileDec,1,0);
+	motor_W2.MoveToPosition(3000,motor_W2.ProfileAcc,motor_W2.ProfileDec,1,0);
 }
 	
 void Wrist_Ulnar_Deviation()
@@ -36,6 +38,9 @@ void Wrist_Ulnar_Deviation()
 		motor_W1.BackToHomePosition();
 	if(!motor_W2.IsHomePosition())
 		motor_W2.BackToHomePosition();
+	
+	motor_W1.WriteObject(0x1003,0x00,0);
+	motor_W2.WriteObject(0x1003,0x00,0);
 	
 	motor_W1.MoveToPosition(3000,motor_W1.ProfileAcc,motor_W1.ProfileDec,1,42100);
 	motor_W2.MoveToPosition(3000,motor_W2.ProfileAcc,motor_W2.ProfileDec,1,42100);
@@ -51,4 +56,19 @@ void Wrist_Radial_Deviation()
 	
 	motor_W1.MoveToPosition(3000,motor_W1.ProfileAcc,motor_W1.ProfileDec,1,-84200);
 	motor_W2.MoveToPosition(3000,motor_W2.ProfileAcc,motor_W2.ProfileDec,1,-84200);
+}
+
+void Motor_Reset()
+{
+	if(!motor_W1.IsHomePosition())
+			motor_W1.BackToHomePosition();
+	delay_ms(10);
+		
+	if(!motor_W2.IsHomePosition())
+			motor_W2.BackToHomePosition();
+	delay_ms(10);
+	
+	if(!motor_QB.IsHomePosition())
+			motor_QB.BackToHomePosition();
+	delay_ms(10);
 }

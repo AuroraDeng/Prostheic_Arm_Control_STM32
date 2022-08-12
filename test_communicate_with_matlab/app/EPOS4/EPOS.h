@@ -56,6 +56,8 @@ class Epos
 		/*写入&读取命令*/
 		void WriteControlword(uint16_t controlword);
 		uint16_t ReadStatusword();
+		/*写入&读取对象字典*/
+		void WriteObject(uint16_t Index,uint8_t SubIndex,uint32_t param);
 		/*设置参数*/
 		void Set_Operation_Mode(uint8_t mode);
 		void Set_TargetPosition(uint8_t IsAbsolute,int32_t target_position);//？？？
@@ -72,6 +74,8 @@ class Epos
 		void MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_dec,uint8_t IsAbsolute,int32_t target_position);
 		void MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_dec,int32_t *posList, uint8_t len);
 		void BackToHomePosition();
+		
+		void ClearFault();//清错
 };
 
 /**

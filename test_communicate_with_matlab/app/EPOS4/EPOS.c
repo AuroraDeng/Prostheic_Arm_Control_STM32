@@ -76,7 +76,7 @@ void Epos::UpdateActualData(int32_t actual_position,Uint32 actual_velocity)
 
 void Epos::Get_ActualPos()
 {	
-	WriteControlword(switchon_and_enable);
+//	WriteControlword(switchon_and_enable);
 	ActualPos=TransmitPDO(Epos::NodeID,3);
 	
 	print_str(&UART1_Handler,"The motor ");
@@ -94,7 +94,9 @@ void Epos::Get_ActualVel()
 BOOL Epos::IsHomePosition()
 {
 	NMT_State_Change(0,NMT_Start_Node);
+	
 	Get_ActualPos();
+
 	if(ActualPos==0)
 		return 1;
 	else
@@ -108,6 +110,8 @@ void Epos::BackToHomePosition()
 
 void Epos::MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_dec,uint8_t IsAbsolute,int32_t target_position)
 {	
+	ClearFault();
+	
 	InitPPM();
 	
 	Set_ProfileVel(profile_vel);
@@ -120,6 +124,8 @@ void Epos::MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_d
 		WriteControlword(absolute_immediate_movement);
 	else
 		WriteControlword(relative_immediate_movement);
+	
+	WriteControlword(switchon_and_enable);
 
 }
 
@@ -153,10 +159,16 @@ uint16_t Epos::ReadStatusword()
 	return statusword;
 }
 
+/*写入对象字典*/
+void Epos::WriteObject(uint16_t Index,uint8_t SubIndex,uint32_t param)
+{
+	while(SDO_Write(NodeID,Index,SubIndex,param)!=1);
+}
+
 /*初始化轮廓位置控制模式PPM*/
 void Epos::InitPPM()
 {
-	NMT_State_Change(0,NMT_Start_Node);
+	NMT_State_Change(NodeID,NMT_Start_Node);
 	
 	Set_Operation_Mode(PPM);
 	
@@ -176,7 +188,7 @@ void Epos::InitPPM()
 /*初始化循环同步位置模式CSP*/
 void Epos::InitCSP()
 {
-	NMT_State_Change(0,NMT_Start_Node);
+	NMT_State_Change(NodeID,NMT_Start_Node);
 	
 	Set_Operation_Mode(CSP);
 	
@@ -191,5 +203,10 @@ void Epos::InitCSP()
 	WriteControlword(switchon_and_enable);
 	
 	delay_ms(10);
+}
+
+void Epos::ClearFault()
+{
+	WriteObject(0x1003,0x00,0);
 }
 

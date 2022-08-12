@@ -26,16 +26,18 @@ int main(void)
 				{
 					case 1:
 					{
-						test(500000);
-						delay_ms(10);
+						test(10000);
 						break;
 					}
 					case 2:
 					{
+						Wrist_Ulnar_Deviation();
+						break;
 					}
 					case 3:
 					{
-					
+						Motor_Reset();
+						break;
 					}
 				
 				}

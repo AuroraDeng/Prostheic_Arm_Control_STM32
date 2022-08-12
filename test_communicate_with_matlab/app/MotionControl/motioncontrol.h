@@ -19,7 +19,7 @@ void Wrist_Extension();
 void Wrist_Flextion();
 void Wrist_Ulnar_Deviation();
 void Wrist_Radial_Deviation();
-	 
+void Motor_Reset();
 #ifdef __cplusplus
 }
 #endif
