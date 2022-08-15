@@ -134,8 +134,9 @@ void Epos::MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_d
 	Set_ProfileVel(profile_vel);
 	Set_ProfileAcc(profile_acc);
 	Set_ProfileDec(profile_dec);
-	
 	Set_TargetPosition(IsAbsolute,target_position);
+	
+	EnableDevice();
 	
 	if(m_bIsAbsolute)
 		WriteControlword(absolute_immediate_movement);
@@ -146,6 +147,20 @@ void Epos::MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_d
 
 }
 
+void Epos::MoveToPosition(uint8_t IsAbsolute,int32_t target_position)
+{
+	Set_TargetPosition(IsAbsolute,target_position);
+	
+	EnableDevice();
+	
+	if(m_bIsAbsolute)
+		WriteControlword(absolute_immediate_movement);
+	else
+		WriteControlword(relative_immediate_movement);
+	
+	WriteControlword(switchon_and_enable);
+}
+
 void Epos::MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_dec,int32_t *posList, uint8_t len)
 {	
 	//InitPPM();
@@ -153,8 +168,7 @@ void Epos::MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_d
 	for(int i=0;i<len;i++)
 	{
 		MoveToPosition(profile_vel,profile_acc,profile_dec,1,posList[i]);
-		//delay_ms(100);
-		WriteControlword(0x000F);
+		delay_ms(100);
 	}
 }
 
@@ -189,17 +203,7 @@ void Epos::InitPPM()
 	
 	Set_Operation_Mode(PPM);
 	
-	println_str(&UART1_Handler,"Switch on and enable ...");
-	
-	Sync_Send();
-	
-	WriteControlword(shutdown);
-	
-	Sync_Send();
-	
-	WriteControlword(switchon_and_enable);//使能
-	
-	delay_ms(10);
+	println_str(&UART1_Handler,"Set PPM Mode");
 }
 
 /*初始化循环同步位置模式CSP*/
@@ -209,8 +213,11 @@ void Epos::InitCSP()
 	
 	Set_Operation_Mode(CSP);
 	
-	println_str(&UART1_Handler,"Switch on and enable ...");
-	
+	println_str(&UART1_Handler,"Set CSP Mode");
+}
+
+void Epos::EnableDevice()
+{
 	Sync_Send();
 	
 	WriteControlword(shutdown);
@@ -218,8 +225,6 @@ void Epos::InitCSP()
 	Sync_Send();
 	
 	WriteControlword(switchon_and_enable);
-	
-	delay_ms(10);
 }
 
 void Epos::ClearFault()

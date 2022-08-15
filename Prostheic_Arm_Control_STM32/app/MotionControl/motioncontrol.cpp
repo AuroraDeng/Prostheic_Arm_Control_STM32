@@ -9,10 +9,10 @@ void Wrist_Extension()
 {
 	println_str(&UART1_Handler,"The wrist is extending. ");
 	Motor_Reset();
-	delay_ms(500);
+//	delay_ms(500);
 	
-	motor_W1.MoveToPosition(3000,motor_W1.ProfileAcc,motor_W1.ProfileDec,1,72200);
-	motor_W2.MoveToPosition(3000,motor_W2.ProfileAcc,motor_W2.ProfileDec,1,-72200);
+	motor_W1.MoveToPosition(1,72200);
+	motor_W2.MoveToPosition(1,-72200);
 }
 
 void Wrist_Flextion()
@@ -21,8 +21,8 @@ void Wrist_Flextion()
 	Motor_Reset();
 	delay_ms(500);
 	
-	motor_W1.MoveToPosition(3000,motor_W1.ProfileAcc,motor_W1.ProfileDec,1,-72200);
-	motor_W2.MoveToPosition(3000,motor_W2.ProfileAcc,motor_W2.ProfileDec,1,72200);
+	motor_W1.MoveToPosition(1,-72200);
+	motor_W2.MoveToPosition(1,72200);
 }
 	
 void Wrist_Ulnar_Deviation()
@@ -32,8 +32,8 @@ void Wrist_Ulnar_Deviation()
 	delay_ms(500);
 
 	
-	motor_W1.MoveToPosition(3000,motor_W1.ProfileAcc,motor_W1.ProfileDec,1,42100);
-	motor_W2.MoveToPosition(3000,motor_W2.ProfileAcc,motor_W2.ProfileDec,1,42100);
+	motor_W1.MoveToPosition(1,42100);
+	motor_W2.MoveToPosition(1,42100);
 }
 
 void Wrist_Radial_Deviation()
@@ -42,8 +42,8 @@ void Wrist_Radial_Deviation()
 	Motor_Reset();
 	delay_ms(500);
 	
-	motor_W1.MoveToPosition(3000,motor_W1.ProfileAcc,motor_W1.ProfileDec,1,-84200);
-	motor_W2.MoveToPosition(3000,motor_W2.ProfileAcc,motor_W2.ProfileDec,1,-84200);
+	motor_W1.MoveToPosition(1,-84200);
+	motor_W2.MoveToPosition(1,-84200);
 }
 
 void HelloWorld()
@@ -51,9 +51,9 @@ void HelloWorld()
 	for(int i=4;i>0;i--)
 	{
 		Wrist_Radial_Deviation();
-		delay_ms(500);
+		delay_ms(1000);
 		Wrist_Ulnar_Deviation();
-		delay_ms(500);
+		delay_ms(1000);
 	}
 }
 void Motor_Reset()

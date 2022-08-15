@@ -46,13 +46,14 @@ class Epos
 		BOOL  m_bIsAbsolute; //是否为绝对运动
 	
 		/*初始化*/
-		Epos(Uint8 nodeid,Uint8 mode,int32_t profile_pos=0,int32_t actual_pos=0,Uint32 profile_vel=1000,Uint32 actual_vel=0,Uint32 profile_acc=10000,Uint32 profile_dec=10000,BOOL isabsolute=1):
+		Epos(Uint8 nodeid,Uint8 mode,int32_t profile_pos=0,int32_t actual_pos=0,Uint32 profile_vel=3000,Uint32 actual_vel=0,Uint32 profile_acc=10000,Uint32 profile_dec=10000,BOOL isabsolute=1):
 		NodeID(nodeid),Mode(mode),ProfilePos(profile_pos),ActualPos(actual_pos),ProfileVel(profile_vel),ActualVel(actual_vel),ProfileAcc(profile_acc),ProfileDec(profile_dec),m_bIsAbsolute(isabsolute)
 		{ }
 		Epos();
 		
 		void InitPPM();
 		void InitCSP();
+		void EnableDevice();
 		/*写入&读取命令*/
 		void WriteControlword(uint16_t controlword);
 		uint16_t ReadStatusword();
@@ -74,6 +75,7 @@ class Epos
 		BOOL IsHomePosition();
 	
 		void MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_dec,uint8_t IsAbsolute,int32_t target_position);
+		void MoveToPosition(uint8_t IsAbsolute,int32_t target_position);
 		void MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_dec,int32_t *posList, uint8_t len);
 		void BackToHomePosition();
 		
