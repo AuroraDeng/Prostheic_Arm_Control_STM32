@@ -10,13 +10,13 @@
 #include "usart_host_communication.h"
 
 //
-#define TASK1_TASK_PRIO			1
+#define TASK1_TASK_PRIO			2
 #define TASK1_STK_SIZE			128
 void task1_task(void * pvParameters);
 TaskHandle_t Task1Task_Handler;		//任务句柄	 
  
-#define TASK2_TASK_PRIO			2
-#define TASK2_STK_SIZE			2560
+#define TASK2_TASK_PRIO			1
+#define TASK2_STK_SIZE			256000
 void task2_task(void * pvParameters);
 TaskHandle_t Task2Task_Handler;		//任务句柄
 
@@ -40,6 +40,14 @@ int main(void)
 				(void * 		) NULL,
 				(UBaseType_t	) TASK1_TASK_PRIO,
 				(TaskHandle_t*	) &Task1Task_Handler);
+				
+	//创建Task2
+	xTaskCreate((TaskFunction_t	) task2_task,
+							(char*			) "task2_task",
+							(uint16_t		) TASK1_STK_SIZE,
+							(void * 		) NULL,
+							(UBaseType_t	) TASK2_TASK_PRIO,
+							(TaskHandle_t*	) &Task2Task_Handler);
 
 	vTaskStartScheduler();          //开启任务调度
 }
@@ -59,13 +67,7 @@ void task1_task(void * pvParameters)
 				if(xStatus==pdPASS)
 				{
 					println_str(&UART1_Handler,"Send to the queue successfully!");
-					//创建Task2
-					xTaskCreate((TaskFunction_t	) task2_task,
-											(char*			) "task2_task",
-											(uint16_t		) TASK1_STK_SIZE,
-											(void * 		) NULL,
-											(UBaseType_t	) TASK2_TASK_PRIO,
-											(TaskHandle_t*	) &Task2Task_Handler);
+//					vTaskPrioritySet(Task2Task_Handler,3);
 				}
 				else
 					println_str(&UART1_Handler,"Could not send to the queue!");
@@ -86,49 +88,54 @@ void task2_task(void * pvParameters)
 	BaseType_t xStatus;
 	const TickType_t xTicksToWait=pdMS_TO_TICKS(100UL);
 	
-	xStatus=xQueueReceive(CommandQueue,&ReceiveCommand,0);
-	if(xStatus==pdPASS)
+	for(;;)
 	{
-		println_str(&UART1_Handler,"Receive from the queue successfully!");
-		switch(ReceiveCommand)
-		{
-			case 1:
+		xStatus=xQueueReceive(CommandQueue,&ReceiveCommand,xTicksToWait);
+		if(xStatus==pdPASS)
+		{		
+			taskENTER_CRITICAL();
+			println_str(&UART1_Handler,"Receive from the queue successfully!");
+			switch(ReceiveCommand)
 			{
-				Wrist_Extension();
-				break;
+				case 1:
+				{
+					Wrist_Extension();
+					break;
+				}
+				case 2:
+				{
+					Wrist_Flextion();
+					break;
+				}
+				case 3:
+				{
+					Wrist_Ulnar_Deviation();
+					break;
+				}
+				case 4:
+				{
+					Wrist_Radial_Deviation();
+					break;
+				}
+				case 5:
+				{
+					HelloWorld();
+					break;
+				}
+				case 6:
+				{
+					Motor_Reset();
+					break;
+				}
 			}
-			case 2:
-			{
-				Wrist_Flextion();
-				break;
-			}
-			case 3:
-			{
-				Wrist_Ulnar_Deviation();
-				break;
-			}
-			case 4:
-			{
-				Wrist_Radial_Deviation();
-				break;
-			}
-			case 5:
-			{
-				HelloWorld();
-				break;
-			}
-			case 6:
-			{
-				Motor_Reset();
-				break;
-			}
+//			vTaskPrioritySet(NULL,1);
+			vTaskDelay(5);
+			taskEXIT_CRITICAL();
 		}
+		else
+			println_str(&UART1_Handler,"Could not receive from the queue!");
+		ReceiveCommand=0;
 	}
-	else
-		println_str(&UART1_Handler,"Could not receive from the queue!");
-	
-	ReceiveCommand=0;
-	vTaskDelete(NULL);
 }
 
 
