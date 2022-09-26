@@ -14,13 +14,17 @@ static int motor_number=3; //控制电机数量
 //Epos motor_W2(2,PPM);
 //Epos motor_QB(3,PPM);
 //Epos motor_ZB(4,PPM);
-//	 
+	 
 void Wrist_Extension();
 void Wrist_Flextion();
 void Wrist_Ulnar_Deviation();
 void Wrist_Radial_Deviation();
 void Motor_Reset();
 void HelloWorld();
+	 
+void Motor_W1(int32_t ReceiveCommand);
+void Motor_W2(int32_t ReceiveCommand);
+void Motor_QB(int32_t ReceiveCommand);
 #ifdef __cplusplus
 }
 #endif

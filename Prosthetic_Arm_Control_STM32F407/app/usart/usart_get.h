@@ -11,7 +11,7 @@
  extern "C" {
 #endif
 
-void Get_USART_Command(UART_HandleTypeDef * huart,u32 Command[]);	 
+void Get_USART_Command(UART_HandleTypeDef * huart,int32_t Command[]);	 
 	 
 #ifdef __cplusplus
 }

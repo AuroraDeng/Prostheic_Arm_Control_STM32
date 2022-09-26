@@ -58,7 +58,20 @@ void HelloWorld()
 }
 void Motor_Reset()
 {
-			motor_W1.BackToHomePosition();
-			motor_W2.BackToHomePosition();
-			motor_QB.BackToHomePosition();
+	motor_W1.BackToHomePosition();
+	motor_W2.BackToHomePosition();
+	motor_QB.BackToHomePosition();
+}
+
+void Motor_W1(int32_t ReceiveCommand)
+{
+	motor_W1.MoveToPosition(1,ReceiveCommand);
+}
+void Motor_W2(int32_t ReceiveCommand)
+{
+	motor_W2.MoveToPosition(1,ReceiveCommand);
+}
+void Motor_QB(int32_t ReceiveCommand)
+{
+	motor_QB.MoveToPosition(1,ReceiveCommand);
 }
