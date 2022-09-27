@@ -21,23 +21,23 @@ TaskHandle_t StartTask_Handler;		//任务句柄
 void task1_task(void * pvParameters);
 TaskHandle_t Task1Task_Handler;		//任务句柄	 
 
-//电机1运动指令
-#define MOTOR1_TASK_PRIO			2
-#define MOTOR1_STK_SIZE			512
-void motor1_task(void * pvParameters);
-TaskHandle_t Motor1Task_Handler;		//任务句柄
+//电机运动指令
+#define MOTOR_TASK_PRIO			2
+#define MOTOR_STK_SIZE			512
+void motor_task(void * pvParameters);
+TaskHandle_t MotorTask_Handler;		//任务句柄
 
-//电机2运动指令
-#define MOTOR2_TASK_PRIO			2
-#define MOTOR2_STK_SIZE			512
-void motor2_task(void * pvParameters);
-TaskHandle_t Motor2Task_Handler;		//任务句柄
+////电机2运动指令
+//#define MOTOR2_TASK_PRIO			2
+//#define MOTOR2_STK_SIZE			512
+//void motor2_task(void * pvParameters);
+//TaskHandle_t Motor2Task_Handler;		//任务句柄
 
-//电机3运动指令
-#define MOTOR3_TASK_PRIO			2
-#define MOTOR3_STK_SIZE			512
-void motor3_task(void * pvParameters);
-TaskHandle_t Motor3Task_Handler;		//任务句柄
+////电机3运动指令
+//#define MOTOR3_TASK_PRIO			2
+//#define MOTOR3_STK_SIZE			512
+//void motor3_task(void * pvParameters);
+//TaskHandle_t Motor3Task_Handler;		//任务句柄
 
 //创建队列
 #define QUEUE_LENGTH        3
@@ -78,28 +78,28 @@ void start_task(void * pvParameters)
 				      (TaskHandle_t*	) &Task1Task_Handler);
 				
 	//创建Task2:控制电机1的运动
-	xTaskCreate((TaskFunction_t	) motor1_task,
-							(char*			) "motor1_task",
-							(uint16_t		) MOTOR1_STK_SIZE,
+	xTaskCreate((TaskFunction_t	) motor_task,
+							(char*			) "motor_task",
+							(uint16_t		) MOTOR_STK_SIZE,
 							(void * 		) NULL,
-							(UBaseType_t	) MOTOR1_TASK_PRIO,
-							(TaskHandle_t*	) &Motor1Task_Handler);
+							(UBaseType_t	) MOTOR_TASK_PRIO,
+							(TaskHandle_t*	) &MotorTask_Handler);
 							
-  //创建Task3:控制电机2的运动					
-	xTaskCreate((TaskFunction_t	) motor2_task,
-							(char*			) "motor2_task",
-							(uint16_t		) MOTOR2_STK_SIZE,
-							(void * 		) NULL,
-							(UBaseType_t	) MOTOR2_TASK_PRIO,
-							(TaskHandle_t*	) &Motor2Task_Handler);
-							
-	//创建Task4:控制电机3的运动					
-	xTaskCreate((TaskFunction_t	) motor3_task,
-							(char*			) "motor3_task",
-							(uint16_t		) MOTOR3_STK_SIZE,
-							(void * 		) NULL,
-							(UBaseType_t	) MOTOR3_TASK_PRIO,
-							(TaskHandle_t*	) &Motor3Task_Handler);
+//  //创建Task3:控制电机2的运动					
+//	xTaskCreate((TaskFunction_t	) motor2_task,
+//							(char*			) "motor2_task",
+//							(uint16_t		) MOTOR2_STK_SIZE,
+//							(void * 		) NULL,
+//							(UBaseType_t	) MOTOR2_TASK_PRIO,
+//							(TaskHandle_t*	) &Motor2Task_Handler);
+//							
+//	//创建Task4:控制电机3的运动					
+//	xTaskCreate((TaskFunction_t	) motor3_task,
+//							(char*			) "motor3_task",
+//							(uint16_t		) MOTOR3_STK_SIZE,
+//							(void * 		) NULL,
+//							(UBaseType_t	) MOTOR3_TASK_PRIO,
+//							(TaskHandle_t*	) &Motor3Task_Handler);
 							
 	vTaskDelete(StartTask_Handler); //删除开始任务
                 
@@ -120,7 +120,7 @@ void task1_task(void * pvParameters)
 				Get_USART_Command(&UART1_Handler,SendCommand);	
 				for(i=0;i<3;i++)
 				{
-					xStatus=xQueueSend(CommandQueue,&SendCommand[i],xTicksToWait);
+					xStatus=xQueueSend(CommandQueue,&SendCommand[i],0);
 					if(xStatus==pdPASS)
 					{
 						println_str(&UART1_Handler,"Send to the queue successfully!");
@@ -140,69 +140,76 @@ void task1_task(void * pvParameters)
   }
 }
 
-void motor1_task(void * pvParameters)
+void motor_task(void * pvParameters)
 {
-	int32_t ReceiveCommand1=0;
-	BaseType_t xStatus;
+	int32_t ReceiveCommand[3]={0};
+	BaseType_t xStatus[3];
+	u8 i;
 	
 	for(;;)
 	{
-		xStatus=xQueueReceive(CommandQueue,&ReceiveCommand1,xTicksToWait);
-		if(xStatus==pdPASS)
-		{		
-			taskENTER_CRITICAL();
+		for(i=0;i<3;i++)
+		{
+			int32_t ReceiveCommand[3]={0};
+			xStatus[i]=xQueueReceive(CommandQueue,&ReceiveCommand[i],xTicksToWait);
+		}	
+		if(xStatus[0]==pdPASS&&xStatus[1]==pdPASS&&xStatus[2]==pdPASS)
+		{
 			println_str(&UART1_Handler,"Receive from the queue successfully!");
-			Motor_W1(ReceiveCommand1);
-//			vTaskPrioritySet(NULL,1);
-			taskEXIT_CRITICAL();
+			taskENTER_CRITICAL();	
+			
+			Motor_W1(ReceiveCommand[0]);
+			Motor_W2(ReceiveCommand[1]);
+			Motor_QB(ReceiveCommand[2]);
+			
+			taskEXIT_CRITICAL();	
 		}
-//		else
-//			println_str(&UART1_Handler,"Could not receive from the queue!");
-		ReceiveCommand1=0;
+//	else
+//		println_str(&UART1_Handler,"Could not receive from the queue!");
 	}
 }
 
-void motor2_task(void * pvParameters)
-{
-	int32_t ReceiveCommand2=0;
-	BaseType_t xStatus;
-	
-	for(;;)
-	{
-		xStatus=xQueueReceive(CommandQueue,&ReceiveCommand2,xTicksToWait);
-		if(xStatus==pdPASS)
-		{		
-			taskENTER_CRITICAL();
-			println_str(&UART1_Handler,"Receive from the queue successfully!");
-			Motor_W2(ReceiveCommand2);
-//			vTaskPrioritySet(NULL,1);
-			taskEXIT_CRITICAL();
-		}
-//		else
-//			println_str(&UART1_Handler,"Could not receive from the queue!");
-		ReceiveCommand2=0;
-	}
-}
+//void motor2_task(void * pvParameters)
+//{
+//	int32_t ReceiveCommand2=0;
+//	BaseType_t xStatus;
+//	
+//	for(;;)
+//	{
+//		xStatus=xQueueReceive(CommandQueue,&ReceiveCommand2,xTicksToWait);
+//		if(xStatus==pdPASS)
+//		{		
+//			taskENTER_CRITICAL();
+//			println_str(&UART1_Handler,"Receive from the queue successfully!");
+//			Motor_W2(ReceiveCommand2);
+////			vTaskPrioritySet(NULL,1);
+//			taskEXIT_CRITICAL();
+//		}
+////		else
+////			println_str(&UART1_Handler,"Could not receive from the queue!");
+//		ReceiveCommand2=0;
+//	}
+//}
 
-void motor3_task(void * pvParameters)
-{
-	int32_t ReceiveCommand3=0;
-	BaseType_t xStatus;
-	
-	for(;;)
-	{
-		xStatus=xQueueReceive(CommandQueue,&ReceiveCommand3,xTicksToWait);
-		if(xStatus==pdPASS)
-		{		
-			taskENTER_CRITICAL();
-			println_str(&UART1_Handler,"Receive from the queue successfully!");
-			Motor_QB(ReceiveCommand3);
-//			vTaskPrioritySet(NULL,1);
-			taskEXIT_CRITICAL();
-		}
-//		else
-//			println_str(&UART1_Handler,"Could not receive from the queue!");
-		ReceiveCommand3=0;
-	}
-}
+//void motor3_task(void * pvParameters)
+//{
+//	int32_t ReceiveCommand3=0;
+//	BaseType_t xStatus;
+//	
+//	for(;;)
+//	{
+//		xStatus=xQueueReceive(CommandQueue,&ReceiveCommand3,xTicksToWait);
+//		if(xStatus==pdPASS)
+//		{		
+//			taskENTER_CRITICAL();
+//			println_str(&UART1_Handler,"Receive from the queue successfully!");
+//			Motor_QB(ReceiveCommand3);
+////			vTaskPrioritySet(NULL,1);
+//			taskEXIT_CRITICAL();
+//		}
+////		else
+////			println_str(&UART1_Handler,"Could not receive from the queue!");
+//		ReceiveCommand3=0;
+//	}
+//}
 

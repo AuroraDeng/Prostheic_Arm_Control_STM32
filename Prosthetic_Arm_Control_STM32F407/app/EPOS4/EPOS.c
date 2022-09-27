@@ -142,6 +142,8 @@ void Epos::MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_d
 		WriteControlword(absolute_immediate_movement);
 	else
 		WriteControlword(relative_immediate_movement);
+	
+	WriteControlword(switchon_and_enable);
 }
 
 void Epos::MoveToPosition(uint8_t IsAbsolute,int32_t target_position)
@@ -154,6 +156,8 @@ void Epos::MoveToPosition(uint8_t IsAbsolute,int32_t target_position)
 		WriteControlword(absolute_immediate_movement);
 	else
 		WriteControlword(relative_immediate_movement);
+	
+	WriteControlword(switchon_and_enable);
 }
 
 void Epos::MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_dec,int32_t *posList, uint8_t len)
