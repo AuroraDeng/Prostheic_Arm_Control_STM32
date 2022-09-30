@@ -65,13 +65,25 @@ void Motor_Reset()
 
 void Motor_W1(int32_t ReceiveCommand)
 {
-	motor_W1.MoveToPosition(3000,10000,10000,1,ReceiveCommand);
+	if(!motor_W1.IsHomePosition())
+	{
+		motor_W1.BackToHomePosition();
+	}
+	motor_W1.MoveToPosition(1,ReceiveCommand);
 }
 void Motor_W2(int32_t ReceiveCommand)
 {
-	motor_W2.MoveToPosition(3000,10000,10000,1,ReceiveCommand);
+	if(!motor_W2.IsHomePosition())
+	{
+		motor_W2.BackToHomePosition();
+	}
+	motor_W2.MoveToPosition(1,ReceiveCommand);
 }
 void Motor_QB(int32_t ReceiveCommand)
 {
-	motor_QB.MoveToPosition(3000,10000,10000,1,ReceiveCommand);
+	if(!motor_QB.IsHomePosition())
+	{
+		motor_QB.BackToHomePosition();
+	}
+	motor_QB.MoveToPosition(1,ReceiveCommand);
 }

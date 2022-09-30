@@ -109,7 +109,7 @@ void start_task(void * pvParameters)
 void task1_task(void * pvParameters)
 {
 	u16 times=0;
-	BaseType_t xStatus;
+	BaseType_t SendStatus;
 	u8 i;
 	
   for(;;)
@@ -120,15 +120,15 @@ void task1_task(void * pvParameters)
 				Get_USART_Command(&UART1_Handler,SendCommand);	
 				for(i=0;i<3;i++)
 				{
-					xStatus=xQueueSend(CommandQueue,&SendCommand[i],0);
-					if(xStatus==pdPASS)
+					SendStatus=xQueueSend(CommandQueue,&SendCommand[i],0);
+					if(SendStatus==pdPASS)
 					{
 						println_str(&UART1_Handler,"Send to the queue successfully!");
 					}
 					else
 						println_str(&UART1_Handler,"Could not send to the queue!");
 				}
-//				vTaskPrioritySet(NULL,1);
+//				vTaskPrioritySet(MotorTask_Handler,4);
 		}
 		else
 		{
@@ -143,27 +143,27 @@ void task1_task(void * pvParameters)
 void motor_task(void * pvParameters)
 {
 	int32_t ReceiveCommand[3]={0};
-	BaseType_t xStatus[3];
+	BaseType_t ReceiveStatus[3];
 	u8 i;
 	
 	for(;;)
 	{
+		int32_t ReceiveCommand[3]={0};
+		taskENTER_CRITICAL();	
+		
 		for(i=0;i<3;i++)
-		{
-			int32_t ReceiveCommand[3]={0};
-			xStatus[i]=xQueueReceive(CommandQueue,&ReceiveCommand[i],xTicksToWait);
-		}	
-		if(xStatus[0]==pdPASS&&xStatus[1]==pdPASS&&xStatus[2]==pdPASS)
+			ReceiveStatus[i]=xQueueReceive(CommandQueue,&ReceiveCommand[i],0);
+//		vTaskPrioritySet(NULL,2);
+		if(ReceiveStatus[0]==pdPASS&&ReceiveStatus[1]==pdPASS&&ReceiveStatus[2]==pdPASS)
 		{
 			println_str(&UART1_Handler,"Receive from the queue successfully!");
-			taskENTER_CRITICAL();	
-			
+		
 			Motor_W1(ReceiveCommand[0]);
 			Motor_W2(ReceiveCommand[1]);
 			Motor_QB(ReceiveCommand[2]);
-			
-			taskEXIT_CRITICAL();	
 		}
+		
+		taskEXIT_CRITICAL();	
 //	else
 //		println_str(&UART1_Handler,"Could not receive from the queue!");
 	}

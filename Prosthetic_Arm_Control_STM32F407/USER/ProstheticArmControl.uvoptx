@@ -152,9 +152,41 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
+          <LineNumber>151</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134233272</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\app\EPOS4\EPOS.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\ProstheticArmControl\../app/EPOS4/EPOS.c\151</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>150</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134233266</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\app\EPOS4\EPOS.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\ProstheticArmControl\../app/EPOS4/EPOS.c\150</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
           <LineNumber>161</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134231724</Address>
+          <Address>134232558</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -166,11 +198,11 @@
           <Expression>\\ProstheticArmControl\main.c\161</Expression>
         </Bp>
         <Bp>
-          <Number>1</Number>
+          <Number>3</Number>
           <Type>0</Type>
           <LineNumber>162</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134231730</Address>
+          <Address>134232564</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -182,11 +214,11 @@
           <Expression>\\ProstheticArmControl\main.c\162</Expression>
         </Bp>
         <Bp>
-          <Number>2</Number>
+          <Number>4</Number>
           <Type>0</Type>
           <LineNumber>163</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134231736</Address>
+          <Address>134232570</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -198,53 +230,74 @@
           <Expression>\\ProstheticArmControl\main.c\163</Expression>
         </Bp>
         <Bp>
-          <Number>3</Number>
+          <Number>5</Number>
           <Type>0</Type>
-          <LineNumber>119</LineNumber>
+          <LineNumber>148</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134231902</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
+          <BreakIfRCount>0</BreakIfRCount>
           <Filename>.\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ProstheticArmControl\../USER/main.c\119</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>4</Number>
+          <Number>6</Number>
           <Type>0</Type>
-          <LineNumber>158</LineNumber>
+          <LineNumber>148</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134231700</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.c</Filename>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\app\EPOS4\EPOS.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ProstheticArmControl\../USER/main.c\158</Expression>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>7</Number>
+          <Type>0</Type>
+          <LineNumber>149</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\app\EPOS4\EPOS.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>ReceiveCommand[0]</ItemText>
+          <ItemText>ReceiveCommand[0],0x0A</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>ReceiveCommand[1]</ItemText>
+          <ItemText>ReceiveCommand[1],0x0A</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>ReceiveCommand[2]</ItemText>
+          <ItemText>ReceiveCommand[2],0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>SendCommand[i],0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
