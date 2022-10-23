@@ -12,6 +12,7 @@
 #endif
 
 void Get_USART_Command(UART_HandleTypeDef * huart,int32_t Command[]);	 
+void Get_WristPos();
 	 
 #ifdef __cplusplus
 }

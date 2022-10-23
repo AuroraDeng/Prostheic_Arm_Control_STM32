@@ -44,6 +44,7 @@
 "..\obj\timers.o"
 "..\obj\heap_4.o"
 "..\obj\port.o"
+"..\obj\bwt61cl.o"
 --library_type=microlib --strict --scatter "..\OBJ\ProstheticArmControl.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

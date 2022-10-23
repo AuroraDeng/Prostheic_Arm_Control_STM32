@@ -33,3 +33,8 @@ void Get_USART_Command(UART_HandleTypeDef * huart,int32_t Command[])
 		printf("\r\n\r\n");//≤Â»Îªª––
 		USART1_RX_STA=0;		
 }
+
+void Get_WristPos()
+{
+
+}

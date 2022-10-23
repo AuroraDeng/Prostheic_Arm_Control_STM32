@@ -84,7 +84,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 #endif	
 	}
 	
-	if(huart->Instance==USART2)//如果是串口1，进行串口1 MSP初始化
+	if(huart->Instance==USART2)//如果是串口2，进行串口2 MSP初始化
 	{
 		__HAL_RCC_GPIOA_CLK_ENABLE();			//使能GPIOA时钟
 		__HAL_RCC_USART2_CLK_ENABLE();			//使能USART1时钟
@@ -129,27 +129,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 			}
 		}
 	}
-	else
-	{
-		if((USART2_RX_STA&0x8000)==0)//接收未完成：0x8000=1000 0000 0000 0000/uint16_t USART1_RX_STA的bit15（接收完成标志）置1
-		{
-			if(USART2_RX_STA&0x4000)//接收到了0x0d：0x4000=0100 0000 0000 0000/uint16_t USART1_RX_STA的bit14（接收到0x0d标志）置1/接收到“回车”符号
-			{
-				if(bRxBuffer[0]!=0x0a)USART2_RX_STA=0;//没有收到0x0a（换行符）接收错误,重新开始
-				else USART2_RX_STA|=0x8000;	//接收完成了 
-			}
-			else //还没收到0X0D
-			{	
-				if(bRxBuffer[0]==0x0d)USART2_RX_STA|=0x4000;//接收到0x0d，接收到“回车”符号，uint16_t USART1_RX_STA的bit14（接收到0x0d标志）置1
-				else
-				{
-					USART2_RX_BUF[USART2_RX_STA&0X3FFF]=bRxBuffer[0] ;//将接收缓冲区里的每个字节一一保存到接收数组中
-					USART2_RX_STA++;
-					if(USART2_RX_STA>(USART_REC_LEN-1))USART2_RX_STA=0;//当接收字节数大于接收数组的最大容量则认为数据错误,重新开始接收	  
-				}		 
-			}
-		}
-	}
+	else if(huart->Instance==USART2)//如果是串口2
+		CopeWristPosData((unsigned char)bRxBuffer[0]);//处理数据
 }
  
 //串口1中断服务程序
@@ -164,7 +145,6 @@ void USART1_IRQHandler(void)
 	{
 	 timeout++;////超时处理
      if(timeout>HAL_MAX_DELAY) break;		
-	
 	}
      
 	timeout=0;
@@ -178,7 +158,7 @@ void USART1_IRQHandler(void)
 
  #if EN_USART2_RX   //如果使能了接收
 
-u8 USART2_RX_BUF[USART_REC_LEN];     //接收缓冲,最大USART_REC_LEN个字节.
+//u8 USART2_RX_BUF[USART_REC_LEN];     //接收缓冲,最大USART_REC_LEN个字节.
 u16 USART2_RX_STA=0;       //接收状态标记	
 u8 bRxBuffer[RXBUFFERSIZE];
 UART_HandleTypeDef UART2_Handler; //UART句柄
@@ -198,30 +178,30 @@ void uart2_init(u32 bound)
 	HAL_UART_Init(&UART2_Handler);					    //HAL_UART_Init()会使能UART2
 	
 	HAL_UART_Receive_IT(&UART2_Handler, (u8 *)bRxBuffer, RXBUFFERSIZE);//该函数会开启接收中断：标志位UART_IT_RXNE，并且设置接收缓冲以及接收缓冲接收最大数据量
-  
 }
 
-//串口1中断服务程序
+//串口2中断服务程序
 void USART2_IRQHandler(void)                	
-{ 
+{ 	
 	u32 timeout=0;
 	
 	HAL_UART_IRQHandler(&UART2_Handler);	//调用HAL库中断处理公用函数
 	
-	timeout=0;
-    while (HAL_UART_GetState(&UART2_Handler) != HAL_UART_STATE_READY)//等待就绪
+  while (HAL_UART_GetState(&UART2_Handler) != HAL_UART_STATE_READY)//等待就绪
 	{
-	 timeout++;////超时处理
-     if(timeout>HAL_MAX_DELAY) break;		
-	
+		timeout++;////超时处理
+		if(timeout>HAL_MAX_DELAY) break;		
 	}
-     
+	
 	timeout=0;
 	while(HAL_UART_Receive_IT(&UART2_Handler, (u8 *)bRxBuffer, RXBUFFERSIZE) != HAL_OK)//一次处理完成之后，重新开启中断并设置RxXferCount为1
 	{
 	 timeout++; //超时处理
 	 if(timeout>HAL_MAX_DELAY) break;	
 	}
+	
+	__HAL_UART_CLEAR_FLAG(&UART2_Handler,UART_FLAG_RXNE);
+	__HAL_UART_CLEAR_FLAG(&UART2_Handler,UART_FLAG_ORE);
 } 
 #endif	
 

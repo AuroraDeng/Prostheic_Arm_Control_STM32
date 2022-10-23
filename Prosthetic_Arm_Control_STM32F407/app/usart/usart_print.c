@@ -38,6 +38,33 @@ void usart1_send_string (uint8_t *str)
     print_str(&UART1_Handler,(char*)str);
 }
 
+//用串口2给BWT模块发送指令
+void SendCmdtoBWT(char cmd[])
+{
+	print_str(&UART2_Handler,(char*)cmd);
+}
+
+//void CopeSerial1Data(unsigned char ucData)
+//{	
+//	UART2_Put_Char(ucData);//转发串口1收到的数据给串口2（JY模块）
+//}
+
+//void UART2_Put_Char(unsigned char DataToSend)
+//{
+//	TxBuffer[count++] = DataToSend;  
+//  USART_ITConfig(USART2, USART_IT_TXE, ENABLE);  
+//}
+
+//void UART2_Put_String(unsigned char *Str)
+//{
+//	while(*Str)
+//	{
+//		if(*Str=='\r')UART2_Put_Char(0x0d);
+//			else if(*Str=='\n')UART2_Put_Char(0x0a);
+//				else UART2_Put_Char(*Str);
+//		Str++;
+//	}
+//}
 //printCANFrame
 void printCANframe(u16 id,u8 RTR,u32 len,u8* buff)
 {
@@ -56,4 +83,5 @@ void printCANframe(u16 id,u8 RTR,u32 len,u8* buff)
     print_str(&UART1_Handler,"\n");
 	 USART1_RX_STA=0;		
 }
+
 
