@@ -79,5 +79,6 @@
   ..\FreeRTOS\include\list.h ..\FreeRTOS\include\queue.h \
   ..\app\usart\usart_get.h ..\app\MotionControl\motioncontrol.h \
   ..\app\EPOS4\EPOS.h ..\app\CANopen\PDO\pdo.h ..\app\CANopen\SDO\sdo.h \
-  ..\app\CANopen\NMT\NMT_control.h ..\app\MotionControl\motor_test.h \
-  ..\app\sensor\BWT61CL\BWT61CL.h
+  ..\app\CANopen\NMT\NMT_control.h \
+  ..\app\MotionControl\FuzzyPID\FuzzyPID.h \
+  ..\app\MotionControl\motor_test.h ..\app\sensor\BWT61CL\BWT61CL.h

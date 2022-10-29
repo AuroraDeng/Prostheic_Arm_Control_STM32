@@ -46,7 +46,7 @@ QueueHandle_t CommandQueue=xQueueCreate(QUEUE_LENGTH,ITEM_SIZE);
 
 //创建队列2：腕部姿态数据
 #define WRISTPOS_QUEUE_LENGTH        3
-#define WRISTPOS_ITEM_SIZE       		sizeof(int32_t)
+#define WRISTPOS_ITEM_SIZE       		sizeof(float)
 QueueHandle_t WristPosQueue=xQueueCreate(WRISTPOS_QUEUE_LENGTH,WRISTPOS_ITEM_SIZE);
 
 const TickType_t xTicksToWait=pdMS_TO_TICKS(100UL);
@@ -147,21 +147,20 @@ void task1_task(void * pvParameters)
 
 void Wrist_task(void * pvParameters)
 {
-	int32_t ReceiveCommand[3]={0};
-	float WristPos[3]={0};
 	BaseType_t CommandStatus[3];
 	BaseType_t WristPosStatus[3];
 	u8 i;
 	
 	for(;;)
 	{
-		int32_t ReceiveCommand[3]={0};
+		int32_t WristTargetPos[3]={0};
+		float WristPos[3]={0};
 		
 		taskENTER_CRITICAL();	//进入临界状态
 		
 		for(i=0;i<3;i++)
 		{
-			CommandStatus[i]=xQueueReceive(CommandQueue,&ReceiveCommand[i],0);
+			CommandStatus[i]=xQueueReceive(CommandQueue,&WristTargetPos[i],0);
 			WristPosStatus[i]=xQueueReceive(WristPosQueue,&WristPos[i],0);
 		}
 //		vTaskPrioritySet(NULL,2);
@@ -169,9 +168,10 @@ void Wrist_task(void * pvParameters)
 		{
 			println_str(&UART1_Handler,"Receive from the queue successfully!");
 			
-			Motor_W1(ReceiveCommand[0]);
-			Motor_W2(ReceiveCommand[1]);
-			Motor_QB(ReceiveCommand[2]);
+			WristPositionControl(WristTargetPos,WristPos);
+//			Motor_W1(ReceiveCommand[0]);
+//			Motor_W2(ReceiveCommand[1]);
+//			Motor_QB(ReceiveCommand[2]);
 		}
 		
 		taskEXIT_CRITICAL();	//退出临界状态
@@ -198,15 +198,15 @@ void WristPos_task(void * pvParameters)
 //		//输出角速度
 //		printf("Gyro:%.3f %.3f %.3f\r\n",(float)stcGyro.w[0]/32768*2000,(float)stcGyro.w[1]/32768*2000,(float)stcGyro.w[2]/32768*2000);
 //		vTaskDelay(10);
-		for(i=0;i<3;i++)
-		{
-			WristPos[i]=(float)stcAngle.Angle[i]/32768*180;
-			SendStatus=xQueueSend(WristPosQueue,&WristPos[i],0);
-			if(SendStatus==pdPASS)
-				println_str(&UART1_Handler,"Send to the queue successfully!");
-			else
-				println_str(&UART1_Handler,"Could not send to the queue!");
-		}
+//		for(i=0;i<3;i++)
+//		{
+//			WristPos[i]=(float)stcAngle.Angle[i]/32768*180;
+//			SendStatus=xQueueSend(WristPosQueue,&WristPos[i],0);
+//			if(SendStatus==pdPASS)
+//				println_str(&UART1_Handler,"Send to the queue successfully!");
+//			else
+//				println_str(&UART1_Handler,"Could not send to the queue!");
+//		}
 		//输出角度
 		printf("Angle:%.3f %.3f %.3f\r\n",(float)stcAngle.Angle[0]/32768*180,(float)stcAngle.Angle[1]/32768*180,(float)stcAngle.Angle[2]/32768*180);
 		

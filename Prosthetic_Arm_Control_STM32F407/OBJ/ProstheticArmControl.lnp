@@ -35,6 +35,7 @@
 "..\obj\epos.o"
 "..\obj\motioncontrol.o"
 "..\obj\motor_test.o"
+"..\obj\fuzzypid.o"
 "..\obj\croutine.o"
 "..\obj\event_groups.o"
 "..\obj\list.o"

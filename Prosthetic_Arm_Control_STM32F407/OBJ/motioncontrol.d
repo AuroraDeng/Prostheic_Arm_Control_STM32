@@ -73,4 +73,5 @@
   ..\SYSTEM\can\can.h ..\USER\main.h ..\SYSTEM\sys\sys.h \
   ..\SYSTEM\delay\delay.h ..\SYSTEM\usart\usart.h \
   ..\app\usart\usart_print.h ..\app\CANopen\PDO\pdo.h \
-  ..\app\CANopen\SDO\sdo.h ..\app\CANopen\NMT\NMT_control.h
+  ..\app\CANopen\SDO\sdo.h ..\app\CANopen\NMT\NMT_control.h \
+  ..\app\MotionControl\FuzzyPID\FuzzyPID.h

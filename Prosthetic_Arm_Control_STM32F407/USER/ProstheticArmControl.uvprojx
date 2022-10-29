@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\OBJ;..\USER;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HALLIB\STM32F4xx_HAL_Driver\Inc;..\SYSTEM\can;..\app\CANopen\NMT;..\app\CANopen;..\app\CANopen\PDO;..\app\CANopen\SDO;..\app\usart;..\app\EPOS4;..\app\MotionControl;..\FreeRTOS\include;..\FreeRTOS\portable\GCC\ARM_CM4F;..\app\sensor\BWT61CL</IncludePath>
+              <IncludePath>..\CORE;..\OBJ;..\USER;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HALLIB\STM32F4xx_HAL_Driver\Inc;..\SYSTEM\can;..\app\CANopen\NMT;..\app\CANopen;..\app\CANopen\PDO;..\app\CANopen\SDO;..\app\usart;..\app\EPOS4;..\app\MotionControl;..\FreeRTOS\include;..\FreeRTOS\portable\GCC\ARM_CM4F;..\app\sensor\BWT61CL;..\app\MotionControl\FuzzyPID</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -634,6 +634,11 @@
               <FileType>8</FileType>
               <FilePath>..\app\MotionControl\motor_test.cpp</FilePath>
             </File>
+            <File>
+              <FileName>FuzzyPID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\MotionControl\FuzzyPID\FuzzyPID.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -691,7 +696,7 @@
           <Files>
             <File>
               <FileName>BWT61CL.c</FileName>
-              <FileType>1</FileType>
+              <FileType>8</FileType>
               <FilePath>..\app\sensor\BWT61CL\BWT61CL.c</FilePath>
             </File>
           </Files>
