@@ -10,7 +10,8 @@
 #endif
 //static int motor_number=3; //控制电机数量
 static float PositionError[3]={0};
-static float PositionErrorLast[3]={0};
+static float PositionErrorPre[3]={0};
+static float PositionErrorPpre[3]={0};
 
 
 void Wrist_Extension();

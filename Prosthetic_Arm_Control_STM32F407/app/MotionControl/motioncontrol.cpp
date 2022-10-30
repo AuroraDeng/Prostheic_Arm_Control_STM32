@@ -1,9 +1,11 @@
 #include "motioncontrol.h"
+#include "FuzzyPID.h"
 
 Epos motor_W1(1,PPM);
 Epos motor_W2(2,PPM);
 Epos motor_QB(3,PPM);
 Epos motor_ZB(4,PPM);
+FuzzyPID Poseture_Adjustment;
 
 void Wrist_Extension()
 {
@@ -92,18 +94,19 @@ void Motor_QB(int32_t ReceiveCommand)
 
 void WristPositionControl(int32_t TargetPose[],float ActualPose[])
 {
-	PID pid;
 	float PositionErrorDifference[3];
 	u8 i;
 	
-	PID_Init(&pid,5,1,1,10,360,-360);
-	
 	for(i=0;i<3;i++)
 	{
-		PositionErrorLast[i]=PositionError[i];//假肢腕上一次的位姿偏差
+		PositionErrorPpre[i]=PositionErrorPre[i];
+		PositionErrorPre[i]=PositionError[i];//假肢腕上一次的位姿偏差
 		PositionError[i]=(float)TargetPose[i]-ActualPose[i];//假肢腕的实时位姿偏差
-		PositionErrorDifference[i]=PositionError[i]-PositionErrorLast[i];//当前位姿偏差和上次位姿偏差的变化（差值）
+		PositionErrorDifference[i]=PositionError[i]-PositionErrorPre[i];//当前位姿偏差和上次位姿偏差的变化（差值）
+		Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, float kp_max, float kp_min, PositionError[i],PositionErrorDifference[i],float ki_max,float ki_min,float kd_max,float kd_min,PositionErrorPre[i],PositionErrorPpre[i]);
 	}
+	
+	
 	
 	
 
