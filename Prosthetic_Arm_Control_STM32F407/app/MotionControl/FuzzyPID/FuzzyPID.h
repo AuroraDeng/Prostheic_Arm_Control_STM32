@@ -4,20 +4,20 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
-#define LIMIT(x,min,max) (x)=(((x)<=(min))?(min):(((x)>=(max))?(max):(x)))
 
 class FuzzyPID
 {
 	public:
     FuzzyPID();
     ~FuzzyPID();
-		void Get_grad_membership();//输入e与de/dt隶属度计算函数///
+		void Get_grad_membership(float erro,float erro_c);//输入e与de/dt隶属度计算函数///
 		void GetSumGrad();//获取输出增量kp,ki,kd的总隶属度/
 		void GetOUT();//计算输出增量kp,kd,ki对应论域值//
 		float FuzzyPIDcontroller(float e_max, float e_min, float ec_max, float ec_min, float kp_max, float kp_min, float erro, float erro_c,float ki_max,float ki_min,float kd_max,float kd_min,float erro_pre,float errp_ppre);
 		float Quantization(float maximum,float minimum,float x);//区间映射函数
-			
+		float Inverse_quantization(float maximum, float minimum, float qvalues);
+		int changeOut(double out,double sss);
+	
 		const int  num_area = 8; //划分区域个数
 		float e_membership_values[7]  = { -3,-2,-1,0,1,2,3 };//输入E(目标位姿与实际位姿的偏差)的隶属值
     float ec_membership_values[7] = { -3,-2,-1,0,1,2,3 };//输入dE/dt（当前偏差和上次偏差的差值）的隶属值
@@ -77,10 +77,6 @@ class FuzzyPID
                                 {ZO,ZO,ZO,NM,NB,NB,NB},
                                 {ZO,NS,NB,NB,NB,NB,NB} };
 };
-
-//void Fuzzy_PID_Regulation(PID *pid,float reference,float feedback);
-//void PID_Init(PID *pid,float p,float i,float d,float maxI,float maxOut,float minOut);
-//void PID_Clear(PID *pid);	
 	
 #ifdef __cplusplus
 }

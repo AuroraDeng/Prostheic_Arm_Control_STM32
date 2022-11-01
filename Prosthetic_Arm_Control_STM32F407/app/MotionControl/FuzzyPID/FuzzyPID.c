@@ -1,5 +1,5 @@
 #include "FuzzyPID.h"
-
+#include "math.h"
 FuzzyPID::FuzzyPID()  //构造函数
 {
     kp = 0;
@@ -19,7 +19,7 @@ FuzzyPID::~FuzzyPID()//析构函数
 }
 
 //输入e与de/dt隶属度计算函数///
-void FuzzyPID::Get_grad_membership()
+void FuzzyPID::Get_grad_membership(float erro,float erro_c)
 {
 	//计算误差的隶属度
     if (erro > e_membership_values[0] && erro < e_membership_values[6])//在误差项NB~PB的范围内
@@ -146,10 +146,29 @@ void FuzzyPID::GetOUT()
     }
 }
 
+int FuzzyPID::changeOut(double out,double sss)
+{
+    int times=0;
+    int a=0;
+    if(sss<0)
+    {
+        a=1;
+    }else {
+        a=0;
+    }
+    if(out>0)
+    {
+        times = out/0.53+a;
+    }else{
+        times = out/0.1-1;
+    }
+    return times;
+}
+
 //模糊PID控制实现函数/
 float FuzzyPID::FuzzyPIDcontroller(float e_max, float e_min, float ec_max, float ec_min, float kp_max, float kp_min, float erro, float erro_c,float ki_max,float ki_min,float kd_max,float kd_min,float erro_pre,float errp_ppre)
 {
-    errosum += erro;
+    errosum += erro;//误差累积
     qerro = Quantization(e_max, e_min, erro);
     qerro_c = Quantization(ec_max, ec_min, erro_c);
     Get_grad_membership(qerro, qerro_c);
@@ -186,23 +205,9 @@ float FuzzyPID::Quantization(float maximum,float minimum,float x)
     return qvalues;
 }
 
-//void Fuzzy_PID_Regulation(PID *pid,float reference,float feedback)
-//{
-//	//更新数据
-//	pid->lastError=pid->error;
-//	pid->error=reference-feedback;
-//	//模糊策略确定kd，kp，ki
-//	
-//	
-//	
-//	//计算微分
-//	pid->output=(pid->error-pid->lastError)*pid->kd;
-//	//计算比例
-//	pid->output+=pid->error*pid->kp;
-//	//计算积分
-//	pid->integral+=pid->error*pid->ki;
-//	LIMIT(pid->integral,-pid->maxIntegral,pid->maxIntegral);//积分限幅
-//	pid->output+=pid->integral;
-//	//输出限幅
-//	LIMIT(pid->output,-pid->maxOutput,pid->maxOutput);
-//}
+//反区间映射函数
+float FuzzyPID::Inverse_quantization(float maximum, float minimum, float qvalues)
+{
+    float x = (maximum - minimum) *(qvalues + 3)/6 + minimum;
+    return x;
+}

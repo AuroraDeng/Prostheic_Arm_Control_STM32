@@ -4,6 +4,7 @@
 #include "EPOS.h"
 #include "usart_print.h"
 #include "FuzzyPID.h"
+#include "math.h"
 
 #ifdef __cplusplus
  extern "C" {
@@ -20,7 +21,7 @@ void Wrist_Ulnar_Deviation();
 void Wrist_Radial_Deviation();
 void Motor_Reset();
 void HelloWorld();
-void WristPositionControl(int32_t TargetPose[],float ActualPose[]);
+void WristPositionControl(float PositionError[]);
 	 
 void Motor_W1(int32_t ReceiveCommand);
 void Motor_W2(int32_t ReceiveCommand);

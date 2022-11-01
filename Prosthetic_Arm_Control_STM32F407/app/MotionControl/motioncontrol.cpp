@@ -1,5 +1,4 @@
 #include "motioncontrol.h"
-#include "FuzzyPID.h"
 
 Epos motor_W1(1,PPM);
 Epos motor_W2(2,PPM);
@@ -92,22 +91,36 @@ void Motor_QB(int32_t ReceiveCommand)
 	motor_QB.MoveToPosition(1,ReceiveCommand);
 }
 
-void WristPositionControl(int32_t TargetPose[],float ActualPose[])
+void WristPositionControl(float PositionError[])
 {
 	float PositionErrorDifference[3];
 	u8 i;
+	int32_t motorinc;
 	
 	for(i=0;i<3;i++)
 	{
-		PositionErrorPpre[i]=PositionErrorPre[i];
-		PositionErrorPre[i]=PositionError[i];//假肢腕上一次的位姿偏差
-		PositionError[i]=(float)TargetPose[i]-ActualPose[i];//假肢腕的实时位姿偏差
-		PositionErrorDifference[i]=PositionError[i]-PositionErrorPre[i];//当前位姿偏差和上次位姿偏差的变化（差值）
-		Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, float kp_max, float kp_min, PositionError[i],PositionErrorDifference[i],float ki_max,float ki_min,float kd_max,float kd_min,PositionErrorPre[i],PositionErrorPpre[i]);
+			PositionErrorPpre[i]=PositionErrorPre[i];
+			PositionErrorPre[i]=PositionError[i];//假肢腕上一次的位姿偏差
+			PositionErrorDifference[i]=PositionError[i]-PositionErrorPre[i];//当前位姿偏差和上次位姿偏差的变化（差值）
 	}
 	
+	if(abs(PositionError[0])>1)//x轴角度偏差纠正
+	{
+		motorinc=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, -50, -100, PositionError[i],PositionErrorDifference[i],-10,-20,-10,-20,PositionErrorPre[i],PositionErrorPpre[i]);
+		Motor_W1(motorinc);
+		Motor_W2(motorinc);
+	}
 	
+	if(abs(PositionError[1])>1)//y轴角度偏差纠正
+	{
+		motorinc=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, -50, -100, PositionError[i],PositionErrorDifference[i],-10,-20,-10,-20,PositionErrorPre[i],PositionErrorPpre[i]);
+		Motor_W1(motorinc);
+		Motor_W2(-motorinc);
+	}
 	
-	
-
+	if(abs(PositionError[2])>1)//z轴角度偏差纠正
+	{
+		motorinc=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, -50, -100, PositionError[i],PositionErrorDifference[i],-10,-20,-10,-20,PositionErrorPre[i],PositionErrorPpre[i]);
+		Motor_QB(motorinc);
+	}
 }
