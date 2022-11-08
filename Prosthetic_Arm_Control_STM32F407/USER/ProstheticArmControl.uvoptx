@@ -152,55 +152,103 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>136</LineNumber>
+          <LineNumber>166</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134234298</Address>
+          <Address>134233938</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.c</Filename>
+          <Filename>..\app\MotionControl\motioncontrol.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ProstheticArmControl\main.c\136</Expression>
+          <Expression>\\ProstheticArmControl\../app/MotionControl/motioncontrol.cpp\166</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>141</LineNumber>
+          <LineNumber>140</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134234358</Address>
+          <Address>134233688</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.c</Filename>
+          <Filename>..\app\MotionControl\motioncontrol.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ProstheticArmControl\main.c\141</Expression>
+          <Expression>\\ProstheticArmControl\../app/MotionControl/motioncontrol.cpp\140</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>165</LineNumber>
+          <LineNumber>131</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134233598</Address>
+          <Address>134233466</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.c</Filename>
+          <Filename>..\app\MotionControl\motioncontrol.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ProstheticArmControl\../USER/main.c\165</Expression>
+          <Expression>\\ProstheticArmControl\../app/MotionControl/motioncontrol.cpp\131</Expression>
         </Bp>
         <Bp>
           <Number>3</Number>
           <Type>0</Type>
-          <LineNumber>213</LineNumber>
+          <LineNumber>126</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134233416</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\app\MotionControl\motioncontrol.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\ProstheticArmControl\../app/MotionControl/motioncontrol.cpp\126</Expression>
+        </Bp>
+        <Bp>
+          <Number>4</Number>
+          <Type>0</Type>
+          <LineNumber>121</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134233326</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\app\MotionControl\motioncontrol.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\ProstheticArmControl\../app/MotionControl/motioncontrol.cpp\121</Expression>
+        </Bp>
+        <Bp>
+          <Number>5</Number>
+          <Type>0</Type>
+          <LineNumber>116</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134233236</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\app\MotionControl\motioncontrol.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\ProstheticArmControl\../app/MotionControl/motioncontrol.cpp\116</Expression>
+        </Bp>
+        <Bp>
+          <Number>6</Number>
+          <Type>0</Type>
+          <LineNumber>164</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -209,11 +257,53 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>.\main.c</Filename>
+          <Filename>..\app\MotionControl\motioncontrol.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
       </Breakpoint>
+      <WatchWindow1>
+        <Ww>
+          <count>0</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>PositionError[0]</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>PositionError[1]</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>PositionError[2]</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>motorincx,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>motorincy,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>motorinc[0],0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>6</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>motorinc[1],0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>7</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>motorinc[2],0x0A</ItemText>
+        </Ww>
+      </WatchWindow1>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>
@@ -715,7 +805,7 @@
 
   <Group>
     <GroupName>CANopen</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -859,7 +949,7 @@
 
   <Group>
     <GroupName>FreeRTOS</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -867,7 +957,7 @@
       <GroupNumber>9</GroupNumber>
       <FileNumber>45</FileNumber>
       <FileType>1</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\FreeRTOS\croutine.c</PathWithFileName>

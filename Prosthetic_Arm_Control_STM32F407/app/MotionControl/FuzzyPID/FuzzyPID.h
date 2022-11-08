@@ -1,6 +1,8 @@
 #ifndef __FUZZYPID_H
 #define __FUZZYPID_H
 
+#define LIMIT(x,min,max) (x)=(((x)<=(min))?(min):(((x)>=(max))?(max):(x)))
+
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -66,28 +66,28 @@ void Motor_Reset()
 
 void Motor_W1(int32_t ReceiveCommand)
 {
-	if(!motor_W1.IsHomePosition())
-	{
-		motor_W1.BackToHomePosition();
-	}
+//	if(!motor_W1.IsHomePosition())
+//	{
+//		motor_W1.BackToHomePosition();
+//	}
 	motor_W1.MoveToPosition(1,ReceiveCommand);
 }
 
 void Motor_W2(int32_t ReceiveCommand)
 {
-	if(!motor_W2.IsHomePosition())
-	{
-		motor_W2.BackToHomePosition();
-	}
+//	if(!motor_W2.IsHomePosition())
+//	{
+//		motor_W2.BackToHomePosition();
+//	}
 	motor_W2.MoveToPosition(1,ReceiveCommand);
 }
 
 void Motor_QB(int32_t ReceiveCommand)
 {
-	if(!motor_QB.IsHomePosition())
-	{
-		motor_QB.BackToHomePosition();
-	}
+//	if(!motor_QB.IsHomePosition())
+//	{
+//		motor_QB.BackToHomePosition();
+//	}
 	motor_QB.MoveToPosition(1,ReceiveCommand);
 }
 
@@ -95,7 +95,7 @@ void WristPositionControl(float PositionError[])
 {
 	float PositionErrorDifference[3];
 	u8 i;
-	int32_t motorinc;
+	int32_t motorinc[3]={0};
 	
 	for(i=0;i<3;i++)
 	{
@@ -104,23 +104,64 @@ void WristPositionControl(float PositionError[])
 			PositionErrorDifference[i]=PositionError[i]-PositionErrorPre[i];//当前位姿偏差和上次位姿偏差的变化（差值）
 	}
 	
-	if(abs(PositionError[0])>1)//x轴角度偏差纠正
+	NMT_State_Change(0,NMT_Start_Node);
+	
+	if(abs(PositionError[0])>1||abs(PositionError[1])>1)//x,y轴角度偏差纠正
 	{
-		motorinc=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, -50, -100, PositionError[i],PositionErrorDifference[i],-10,-20,-10,-20,PositionErrorPre[i],PositionErrorPpre[i]);
-		Motor_W1(motorinc);
-		Motor_W2(motorinc);
+		int32_t motorincx=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, 150, 200, PositionError[0],PositionErrorDifference[0],30,40,20,30,PositionErrorPre[0],PositionErrorPpre[0]);
+		int32_t motorincy=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, 150, 200, PositionError[1],PositionErrorDifference[1],30,40,20,30,PositionErrorPre[1],PositionErrorPpre[1]);
+		
+		if(PositionError[0]>0&&PositionError[1]>0)
+		{
+			motorinc[0]=(abs(motorincx)>=abs(motorincy))?(-motorincx):(-motorincy);
+			motorinc[1]=-motorincx+motorincy;
+		}
+		else if (PositionError[0]>0&&PositionError[1]<0)
+		{
+			motorinc[0]=-motorincx+motorincy;
+			motorinc[1]=(abs(motorincx)>=abs(motorincy))?(-motorincx):(-motorincy);
+		}
+		else if(PositionError[0]<0&&PositionError[1]>0)
+		{
+			motorinc[0]=motorincx-motorincy;
+			motorinc[1]=(abs(motorincx)>=abs(motorincy))?(motorincx):(motorincy);
+		}
+		else
+		{
+			motorinc[0]=(abs(motorincx)>=abs(motorincy))?(motorincx):(motorincy);
+			motorinc[1]=motorincx-motorincy;
+		}
+		motor_W1.Get_ActualPos();
+		motor_W2.Get_ActualPos();
+//		LIMIT(motorinc[0],-154800-motor_W1.ActualPos,154800-motor_W1.ActualPos);
+//		LIMIT(motorinc[1],-154800-motor_W2.ActualPos,154800-motor_W2.ActualPos);
+		LIMIT(motorinc[0],-154800,154800);
+		LIMIT(motorinc[1],-154800,154800);
+		motor_W1.MoveToPosition(0,motorinc[0]);
+		motor_W2.MoveToPosition(0,motorinc[1]);
+		motorinc[0]=0;
+		motorinc[1]=0;
 	}
 	
-	if(abs(PositionError[1])>1)//y轴角度偏差纠正
-	{
-		motorinc=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, -50, -100, PositionError[i],PositionErrorDifference[i],-10,-20,-10,-20,PositionErrorPre[i],PositionErrorPpre[i]);
-		Motor_W1(motorinc);
-		Motor_W2(-motorinc);
-	}
+//	if(abs(PositionError[1])>1)//y轴角度偏差纠正
+//	{
+//		motorinc=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, -100, -150, PositionError[1],PositionErrorDifference[1],-10,-20,-10,-20,PositionErrorPre[1],PositionErrorPpre[1]);
+//		motor_W1.Get_ActualPos();
+//		motor_W2.Get_ActualPos();
+//		LIMIT(motorinc,-154800,154800);
+//		motor_W1.MoveToPosition(0,motorinc);
+//		motor_W2.MoveToPosition(0,-motorinc);
+//		motorinc=0;
+//	}
 	
 	if(abs(PositionError[2])>1)//z轴角度偏差纠正
 	{
-		motorinc=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, -50, -100, PositionError[i],PositionErrorDifference[i],-10,-20,-10,-20,PositionErrorPre[i],PositionErrorPpre[i]);
-		Motor_QB(motorinc);
+		motorinc[2]=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, -50, -100, PositionError[2],PositionErrorDifference[2],-10,-20,-10,-20,PositionErrorPre[2],PositionErrorPpre[2]);
+//		motor_QB.Get_ActualPos();
+//		LIMIT(motorinc[2],-154800-motor_QB.ActualPos,154800-motor_QB.ActualPos);
+		LIMIT(motorinc[2],-154800,154800);
+//		motor_QB.MoveToPosition(0,-motorinc[2]);//√
+		Motor_QB(0);
+		motorinc[2]=0;
 	}
 }

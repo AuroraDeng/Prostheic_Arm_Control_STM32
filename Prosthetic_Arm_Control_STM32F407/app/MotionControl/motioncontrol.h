@@ -10,7 +10,7 @@
  extern "C" {
 #endif
 //static int motor_number=3; //控制电机数量
-static float PositionError[3]={0};
+static float PositionError[3]={1.1};
 static float PositionErrorPre[3]={0};
 static float PositionErrorPpre[3]={0};
 

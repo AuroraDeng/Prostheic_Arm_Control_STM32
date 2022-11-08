@@ -105,7 +105,7 @@ void Epos::Get_ActualVel()
 
 BOOL Epos::IsHomePosition()
 {
-	NMT_State_Change(0,NMT_Start_Node);
+//	NMT_State_Change(0,NMT_Start_Node);
 	
 	Get_ActualPos();
 
@@ -121,7 +121,7 @@ void Epos::BackToHomePosition()
 }
 
 void Epos::MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_dec,uint8_t IsAbsolute,int32_t target_position)
-{	
+{		
 	ClearFault();
 	
 	InitPPM();

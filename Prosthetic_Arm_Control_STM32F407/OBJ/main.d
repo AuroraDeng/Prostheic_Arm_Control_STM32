@@ -77,6 +77,7 @@
   ..\FreeRTOS\portable\GCC\ARM_CM4F\portmacro.h \
   ..\FreeRTOS\include\mpu_wrappers.h ..\FreeRTOS\include\task.h \
   ..\FreeRTOS\include\list.h ..\FreeRTOS\include\queue.h \
+  ..\FreeRTOS\include\event_groups.h ..\FreeRTOS\include\timers.h \
   ..\app\usart\usart_get.h ..\app\MotionControl\motioncontrol.h \
   ..\app\EPOS4\EPOS.h ..\app\CANopen\PDO\pdo.h ..\app\CANopen\SDO\sdo.h \
   ..\app\CANopen\NMT\NMT_control.h \
