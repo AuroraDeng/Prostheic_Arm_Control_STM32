@@ -1,0 +1,2 @@
+# Prostheic_Arm_Control_STM32
+FreeRTOS_V3.3：基本实现了模糊PID调节假肢腕平台的位姿，但是收敛速度有待提高
