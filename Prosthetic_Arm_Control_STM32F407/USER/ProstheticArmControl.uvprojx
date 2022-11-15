@@ -601,7 +601,7 @@
           <Files>
             <File>
               <FileName>usart_get.c</FileName>
-              <FileType>1</FileType>
+              <FileType>8</FileType>
               <FilePath>..\app\usart\usart_get.c</FilePath>
             </File>
             <File>

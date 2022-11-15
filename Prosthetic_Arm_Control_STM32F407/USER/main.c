@@ -19,7 +19,7 @@ TaskHandle_t StartTask_Handler;		//任务句柄
 
 //接收运动指令任务
 #define COMMAND_TASK_PRIO			3
-#define COMMAND_STK_SIZE			128
+#define COMMAND_STK_SIZE			150
 void Command_task(void * pvParameters);
 TaskHandle_t CommandTask_Handler;		//任务句柄	 
 
@@ -30,7 +30,7 @@ void Wrist_task(void * pvParameters);
 TaskHandle_t WristTask_Handler;		//任务句柄
 
 //腕部位置传感器检测
-#define WristPos_TASK_PRIO			3
+#define WristPos_TASK_PRIO		3
 #define WristPos_STK_SIZE			256
 void WristPos_task(void * pvParameters);
 TaskHandle_t WristPosTask_Handler;		//任务句柄
@@ -44,7 +44,7 @@ TaskHandle_t ElbowTask_Handler;		//任务句柄
 /*消息队列*/
 //创建队列1:腕部运动指令
 #define QUEUE_LENGTH        3
-#define ITEM_SIZE       		sizeof(int32_t)
+#define ITEM_SIZE       		sizeof(float)
 QueueHandle_t CommandQueue=xQueueCreate(QUEUE_LENGTH,ITEM_SIZE);
 
 //创建队列2：腕部姿态数据
@@ -129,7 +129,8 @@ void Command_task(void * pvParameters)
 		
 		if(USART1_RX_STA&0x8000)//判断接收是否完成：0x8000=1000 0000 0000 0000/uint16_t USART1_RX_STA的bit15（接收完成标志）置1
 		{	
-			int32_t SendCommand[3]={0};
+//			int32_t SendCommand[3]={0};
+			float SendCommand[3]={0};
 			Get_USART_Command(&UART1_Handler,SendCommand);	
 				
 			for(i=0;i<3;i++)
@@ -167,7 +168,7 @@ void Wrist_task(void * pvParameters)
 		{	
 			if(xEventGroupWaitBits(EventGroupHandler,0x03,pdTRUE,pdTRUE,0)==0x03)
 			{
-				int32_t WristTargetPos[3]={0};
+				float WristTargetPos[3]={0};
 				float WristPos[3]={0};
 				
 				/*获取假肢腕的实时姿态和目标姿态*/
@@ -178,7 +179,7 @@ void Wrist_task(void * pvParameters)
 					if(WristPosStatus[i]==pdPASS&&CommandStatus[i]==pdPASS)
 					{					
 						println_str(&UART1_Handler,"Receive from the queue successfully!");
-						PositionError[i]=(float)WristTargetPos[i]-WristPos[i];//假肢腕的实时位姿偏差
+						PositionError[i]=WristTargetPos[i]-WristPos[i];//假肢腕的实时位姿偏差
 					}
 				}
 				taskENTER_CRITICAL();	//进入临界状态	
@@ -187,8 +188,9 @@ void Wrist_task(void * pvParameters)
 				
 				taskEXIT_CRITICAL();	//退出临界状态
 			}
-			vTaskDelay(10);
+			vTaskDelay(2);
 		}
+//		vTaskDelay(1);
 	}
 }
 

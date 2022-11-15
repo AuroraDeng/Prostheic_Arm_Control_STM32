@@ -20,6 +20,14 @@ void print_data_dec(UART_HandleTypeDef *huart,uint32_t data)
 		print_str(huart,"\n");
 }
 
+void print_fdata_dec(UART_HandleTypeDef *huart,float data)
+{
+    char str[25];
+    sprintf(str,"%f ",data);//´òÓ¡µ½×Ö·û´®ÖÐ
+    HAL_UART_Transmit(huart,(uint8_t*)str,strlen(str),100);
+		print_str(huart,"\n");
+}
+
 void print_data_format(UART_HandleTypeDef *huart,uint32_t data, char * format)
 {
     char str[25];

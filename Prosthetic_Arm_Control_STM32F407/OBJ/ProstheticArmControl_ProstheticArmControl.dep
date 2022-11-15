@@ -1,6 +1,6 @@
 Dependencies for Project 'ProstheticArmControl', Target 'ProstheticArmControl': (DO NOT MODIFY !)
 CompilerVersion: 6180000::V6.18::ARMCLANG
-F (.\main.c)(0x6369C582)(-xc++ -std=c++11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/main.o -MD)
+F (.\main.c)(0x63724AAA)(-xc++ -std=c++11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/main.o -MD)
 I (..\USER\main.h)(0x63676EE2)
 I (..\SYSTEM\sys\sys.h)(0x6319E638)
 I (..\USER\stm32f4xx.h)(0x6319DCF5)
@@ -78,7 +78,7 @@ I (..\SYSTEM\usart\usart.h)(0x6354B0DD)
 I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\stdio.h)(0x625260D6)
 I (D:\Download\keil5\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
 I (..\SYSTEM\can\can.h)(0x6319DCF5)
-I (..\app\usart\usart_print.h)(0x6354FFA9)
+I (..\app\usart\usart_print.h)(0x6370B430)
 I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\string.h)(0x625260D6)
 I (D:\Download\keil5\ARM\ARMCLANG\include\string.h)(0x625260D6)
 I (..\FreeRTOS\include\FreeRTOS.h)(0x6326873D)
@@ -93,7 +93,7 @@ I (..\FreeRTOS\include\list.h)(0x6319DED7)
 I (..\FreeRTOS\include\queue.h)(0x63319A15)
 I (..\FreeRTOS\include\event_groups.h)(0x6319DED7)
 I (..\FreeRTOS\include\timers.h)(0x6319DED7)
-I (..\app\usart\usart_get.h)(0x6354FFA9)
+I (..\app\usart\usart_get.h)(0x6370ADEE)
 I (..\app\MotionControl\motioncontrol.h)(0x6367BDB4)
 I (..\app\EPOS4\EPOS.h)(0x6353EF88)
 I (..\app\CANopen\PDO\pdo.h)(0x6319DCF5)
@@ -184,7 +184,7 @@ I (..\SYSTEM\delay\delay.h)(0x6319DCF5)
 I (..\SYSTEM\usart\usart.h)(0x6354B0DD)
 I (D:\Download\keil5\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
 I (..\SYSTEM\can\can.h)(0x6319DCF5)
-I (..\app\usart\usart_print.h)(0x6354FFA9)
+I (..\app\usart\usart_print.h)(0x6370B430)
 I (D:\Download\keil5\ARM\ARMCLANG\include\string.h)(0x625260D6)
 I (..\USER\stm32f4xx_it.h)(0x6319DCF5)
 F (.\system_stm32f4xx.c)(0x6319DCF5)(-xc -std=gnu90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/system_stm32f4xx.o -MD)
@@ -323,7 +323,7 @@ I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x6319DCF5)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x6319DCF5)
 F (..\CORE\core_cm4.h)(0x6319DCF5)()
 F (..\CORE\cmsis_armcc.h)(0x6319DCF5)()
-F (..\CORE\startup_stm32f407xx.s)(0x63691F0A)(--cpu Cortex-M4.fp.sp -g --pd "__MICROLIB SETA 1"-ID:\Download\keil5\ARM\Pack\Keil\STM32F4xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\Download\keil5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 537"--pd "STM32F407xx SETA 1"--list ..\obj\startup_stm32f407xx.lst--xref -o ..\obj\startup_stm32f407xx.o--depend ..\obj\startup_stm32f407xx.d)
+F (..\CORE\startup_stm32f407xx.s)(0x6370BF02)(--cpu Cortex-M4.fp.sp -g --pd "__MICROLIB SETA 1"-ID:\Download\keil5\ARM\Pack\Keil\STM32F4xx_DFP\2.2.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\Download\keil5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 537"--pd "STM32F407xx SETA 1"--list ..\obj\startup_stm32f407xx.lst--xref -o ..\obj\startup_stm32f407xx.o--depend ..\obj\startup_stm32f407xx.d)
 F (..\CORE\cmsis_armclang.h)(0x6319DCF5)()
 F (..\CORE\cmsis_compiler.h)(0x6319DCF5)()
 F (..\CORE\cmsis_version.h)(0x6319DCF5)()
@@ -1065,7 +1065,7 @@ I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd.h)(0x6319DCF5)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h)(0x6319DCF5)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x6319DCF5)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x6319DCF5)
-F (..\HALLIB\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c)(0x63359F2C)(-xc -std=gnu90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/stm32f4xx_hal_can.o -MD)
+F (..\HALLIB\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c)(0x63722B9E)(-xc -std=gnu90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/stm32f4xx_hal_can.o -MD)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x6319DCF5)
 I (..\USER\stm32f4xx_hal_conf.h)(0x6319DCF5)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x6319DCF5)
@@ -1831,7 +1831,7 @@ I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x6319DCF5)
 I (..\SYSTEM\delay\delay.h)(0x6319DCF5)
 I (..\SYSTEM\usart\usart.h)(0x6354B0DD)
 I (D:\Download\keil5\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
-I (..\app\usart\usart_print.h)(0x6354FFA9)
+I (..\app\usart\usart_print.h)(0x6370B430)
 I (D:\Download\keil5\ARM\ARMCLANG\include\string.h)(0x625260D6)
 F (..\readme.txt)(0x6319DCF5)()
 F (..\app\CANopen\NMT\NMT_control.c)(0x63691F15)(-xc++ -std=c++11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/nmt_control.o -MD)
@@ -1913,7 +1913,7 @@ I (..\SYSTEM\delay\delay.h)(0x6319DCF5)
 I (..\SYSTEM\usart\usart.h)(0x6354B0DD)
 I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\stdio.h)(0x625260D6)
 I (D:\Download\keil5\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
-I (..\app\usart\usart_print.h)(0x6354FFA9)
+I (..\app\usart\usart_print.h)(0x6370B430)
 I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\string.h)(0x625260D6)
 I (D:\Download\keil5\ARM\ARMCLANG\include\string.h)(0x625260D6)
 F (..\app\CANopen\PDO\pdo.c)(0x636A0998)(-xc -std=gnu90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/pdo.o -MD)
@@ -1990,7 +1990,7 @@ I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x6319DCF5)
 I (..\SYSTEM\delay\delay.h)(0x6319DCF5)
 I (..\SYSTEM\usart\usart.h)(0x6354B0DD)
 I (D:\Download\keil5\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
-I (..\app\usart\usart_print.h)(0x6354FFA9)
+I (..\app\usart\usart_print.h)(0x6370B430)
 I (D:\Download\keil5\ARM\ARMCLANG\include\string.h)(0x625260D6)
 F (..\app\CANopen\SDO\sdo.c)(0x6319DCF5)(-xc -std=gnu90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/sdo.o -MD)
 I (..\app\CANopen\SDO\sdo.h)(0x6319DCF5)
@@ -2066,17 +2066,21 @@ I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x6319DCF5)
 I (..\SYSTEM\delay\delay.h)(0x6319DCF5)
 I (..\SYSTEM\usart\usart.h)(0x6354B0DD)
 I (D:\Download\keil5\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
-I (..\app\usart\usart_print.h)(0x6354FFA9)
+I (..\app\usart\usart_print.h)(0x6370B430)
 I (D:\Download\keil5\ARM\ARMCLANG\include\string.h)(0x625260D6)
-F (..\app\usart\usart_get.c)(0x6354FFA9)(-xc -std=gnu90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/usart_get.o -MD)
-I (..\app\usart\usart_get.h)(0x6354FFA9)
+F (..\app\usart\usart_get.c)(0x6370C2CA)(-xc++ -std=c++11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/usart_get.o -MD)
+I (..\app\usart\usart_get.h)(0x6370ADEE)
+I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\string.h)(0x625260D6)
+I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\__config)(0x625260CE)
 I (D:\Download\keil5\ARM\ARMCLANG\include\string.h)(0x625260D6)
+I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\stdio.h)(0x625260D6)
 I (D:\Download\keil5\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
 I (..\USER\main.h)(0x63676EE2)
 I (..\SYSTEM\sys\sys.h)(0x6319E638)
 I (..\USER\stm32f4xx.h)(0x6319DCF5)
 I (..\USER\stm32f407xx.h)(0x6354B10F)
 I (..\CORE\core_cm4.h)(0x6319DCF5)
+I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\stdint.h)(0x625260D6)
 I (D:\Download\keil5\ARM\ARMCLANG\include\stdint.h)(0x625260D8)
 I (..\CORE\cmsis_version.h)(0x6319DCF5)
 I (..\CORE\cmsis_compiler.h)(0x6319DCF5)
@@ -2090,7 +2094,9 @@ I (..\USER\stm32f4xx_hal_conf.h)(0x6319DCF5)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x6319DCF5)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h)(0x6319DCF5)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x6319DCF5)
+I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\stddef.h)(0x625260D6)
 I (D:\Download\keil5\ARM\ARMCLANG\include\stddef.h)(0x625260D6)
+I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\__nullptr)(0x625260D4)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h)(0x6319DCF5)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h)(0x6319DCF5)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h)(0x6319DCF5)
@@ -2143,10 +2149,18 @@ I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x6319DCF5)
 I (..\SYSTEM\delay\delay.h)(0x6319DCF5)
 I (..\SYSTEM\usart\usart.h)(0x6354B0DD)
 I (..\SYSTEM\can\can.h)(0x6319DCF5)
-I (..\app\usart\usart_print.h)(0x6354FFA9)
+I (..\app\usart\usart_print.h)(0x6370B430)
+I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\math.h)(0x625260D6)
 I (D:\Download\keil5\ARM\ARMCLANG\include\math.h)(0x625260D6)
-F (..\app\usart\usart_print.c)(0x6354FFA9)(-xc -std=gnu90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/usart_print.o -MD)
-I (..\app\usart\usart_print.h)(0x6354FFA9)
+I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\limits)(0x625260D6)
+I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\type_traits)(0x625260D6)
+I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\cstddef)(0x625260D6)
+I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\version)(0x625260D6)
+I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\__undef_macros)(0x625260D4)
+I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\stdlib.h)(0x625260D6)
+I (D:\Download\keil5\ARM\ARMCLANG\include\stdlib.h)(0x625260D6)
+F (..\app\usart\usart_print.c)(0x6370B41E)(-xc -std=gnu90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/usart_print.o -MD)
+I (..\app\usart\usart_print.h)(0x6370B430)
 I (D:\Download\keil5\ARM\ARMCLANG\include\string.h)(0x625260D6)
 I (D:\Download\keil5\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
 I (..\USER\main.h)(0x63676EE2)
@@ -2294,9 +2308,9 @@ I (..\SYSTEM\delay\delay.h)(0x6319DCF5)
 I (..\SYSTEM\usart\usart.h)(0x6354B0DD)
 I (D:\Download\keil5\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
 I (..\SYSTEM\can\can.h)(0x6319DCF5)
-I (..\app\usart\usart_print.h)(0x6354FFA9)
+I (..\app\usart\usart_print.h)(0x6370B430)
 I (D:\Download\keil5\ARM\ARMCLANG\include\string.h)(0x625260D6)
-F (..\app\EPOS4\EPOS.c)(0x636904E7)(-xc++ -std=c++11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/epos.o -MD)
+F (..\app\EPOS4\EPOS.c)(0x63704E9D)(-xc++ -std=c++11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/epos.o -MD)
 I (..\app\EPOS4\EPOS.h)(0x6353EF88)
 I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\stdio.h)(0x625260D6)
 I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\__config)(0x625260CE)
@@ -2377,11 +2391,11 @@ I (..\USER\main.h)(0x63676EE2)
 I (..\SYSTEM\sys\sys.h)(0x6319E638)
 I (..\SYSTEM\delay\delay.h)(0x6319DCF5)
 I (..\SYSTEM\usart\usart.h)(0x6354B0DD)
-I (..\app\usart\usart_print.h)(0x6354FFA9)
+I (..\app\usart\usart_print.h)(0x6370B430)
 I (..\app\CANopen\PDO\pdo.h)(0x6319DCF5)
 I (..\app\CANopen\SDO\sdo.h)(0x6319DCF5)
 I (..\app\CANopen\NMT\NMT_control.h)(0x6368F630)
-F (..\app\MotionControl\motioncontrol.cpp)(0x636A0E3C)(-xc++ -std=c++11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/motioncontrol.o -MD)
+F (..\app\MotionControl\motioncontrol.cpp)(0x63724778)(-xc++ -std=c++11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-D__MICROLIB -gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID-ID:/Download/keil5/ARM/Pack/Keil/STM32F4xx_DFP/2.2.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/Download/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="537" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/motioncontrol.o -MD)
 I (..\app\MotionControl\motioncontrol.h)(0x6367BDB4)
 I (..\app\EPOS4\EPOS.h)(0x6353EF88)
 I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\stdio.h)(0x625260D6)
@@ -2463,7 +2477,7 @@ I (..\USER\main.h)(0x63676EE2)
 I (..\SYSTEM\sys\sys.h)(0x6319E638)
 I (..\SYSTEM\delay\delay.h)(0x6319DCF5)
 I (..\SYSTEM\usart\usart.h)(0x6354B0DD)
-I (..\app\usart\usart_print.h)(0x6354FFA9)
+I (..\app\usart\usart_print.h)(0x6370B430)
 I (..\app\CANopen\PDO\pdo.h)(0x6319DCF5)
 I (..\app\CANopen\SDO\sdo.h)(0x6319DCF5)
 I (..\app\CANopen\NMT\NMT_control.h)(0x6368F630)
@@ -2559,7 +2573,7 @@ I (..\USER\main.h)(0x63676EE2)
 I (..\SYSTEM\sys\sys.h)(0x6319E638)
 I (..\SYSTEM\delay\delay.h)(0x6319DCF5)
 I (..\SYSTEM\usart\usart.h)(0x6354B0DD)
-I (..\app\usart\usart_print.h)(0x6354FFA9)
+I (..\app\usart\usart_print.h)(0x6370B430)
 I (..\app\CANopen\PDO\pdo.h)(0x6319DCF5)
 I (..\app\CANopen\SDO\sdo.h)(0x6319DCF5)
 I (..\app\CANopen\NMT\NMT_control.h)(0x6368F630)
@@ -2709,7 +2723,7 @@ I (..\app\sensor\BWT61CL\BWT61CL.h)(0x635D09C0)
 I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\string.h)(0x625260D6)
 I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\__config)(0x625260CE)
 I (D:\Download\keil5\ARM\ARMCLANG\include\string.h)(0x625260D6)
-I (..\app\usart\usart_print.h)(0x6354FFA9)
+I (..\app\usart\usart_print.h)(0x6370B430)
 I (D:\Download\keil5\ARM\ARMCLANG\include\libcxx\stdio.h)(0x625260D6)
 I (D:\Download\keil5\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
 I (..\USER\main.h)(0x63676EE2)

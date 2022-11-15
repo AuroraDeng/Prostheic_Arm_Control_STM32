@@ -89,6 +89,7 @@ void Epos::Get_ActualPos()
 	print_str(&UART1_Handler,"'s actual position is at ");
 	print_data_dec(&UART1_Handler,Epos::ActualPos);
 	print_str(&UART1_Handler,"\n");
+	
 }
 
 int16_t Epos::Get_AcutalTor()

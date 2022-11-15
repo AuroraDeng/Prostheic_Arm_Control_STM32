@@ -11,8 +11,8 @@
  extern "C" {
 #endif
 
-void Get_USART_Command(UART_HandleTypeDef * huart,int32_t Command[]);	 
-void Get_WristPos();
+//void Get_USART_Command(UART_HandleTypeDef * huart,int32_t Command[]);	 
+void Get_USART_Command(UART_HandleTypeDef * huart,float Command[]);
 	 
 #ifdef __cplusplus
 }

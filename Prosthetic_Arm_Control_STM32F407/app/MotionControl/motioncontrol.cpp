@@ -108,8 +108,8 @@ void WristPositionControl(float PositionError[])
 	
 	if(abs(PositionError[0])>1||abs(PositionError[1])>1)//x,y轴角度偏差纠正
 	{
-		int32_t motorincx=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, 150, 200, PositionError[0],PositionErrorDifference[0],30,40,20,30,PositionErrorPre[0],PositionErrorPpre[0]);
-		int32_t motorincy=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, 150, 200, PositionError[1],PositionErrorDifference[1],30,40,20,30,PositionErrorPre[1],PositionErrorPpre[1]);
+		int32_t motorincx=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, 100, 800, PositionError[0],PositionErrorDifference[0],30,40,20,30,PositionErrorPre[0],PositionErrorPpre[0]);
+		int32_t motorincy=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, 100, 800, PositionError[1],PositionErrorDifference[1],30,40,20,30,PositionErrorPre[1],PositionErrorPpre[1]);
 		
 		if(PositionError[0]>0&&PositionError[1]>0)
 		{
@@ -137,22 +137,13 @@ void WristPositionControl(float PositionError[])
 //		LIMIT(motorinc[1],-154800-motor_W2.ActualPos,154800-motor_W2.ActualPos);
 		LIMIT(motorinc[0],-154800,154800);
 		LIMIT(motorinc[1],-154800,154800);
-		motor_W1.MoveToPosition(0,motorinc[0]);
-		motor_W2.MoveToPosition(0,motorinc[1]);
+//		motor_W1.MoveToPosition(0,motorinc[0]);
+//		motor_W2.MoveToPosition(0,motorinc[1]);
+		motor_W1.MoveToPosition(1,0);
+		motor_W2.MoveToPosition(1,0);
 		motorinc[0]=0;
 		motorinc[1]=0;
 	}
-	
-//	if(abs(PositionError[1])>1)//y轴角度偏差纠正
-//	{
-//		motorinc=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, -100, -150, PositionError[1],PositionErrorDifference[1],-10,-20,-10,-20,PositionErrorPre[1],PositionErrorPpre[1]);
-//		motor_W1.Get_ActualPos();
-//		motor_W2.Get_ActualPos();
-//		LIMIT(motorinc,-154800,154800);
-//		motor_W1.MoveToPosition(0,motorinc);
-//		motor_W2.MoveToPosition(0,-motorinc);
-//		motorinc=0;
-//	}
 	
 	if(abs(PositionError[2])>1)//z轴角度偏差纠正
 	{

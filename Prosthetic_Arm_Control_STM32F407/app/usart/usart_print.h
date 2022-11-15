@@ -14,6 +14,7 @@
 void print_str(UART_HandleTypeDef * huart,const char *str);
 void print_data_hex(UART_HandleTypeDef *huart,uint32_t data);
 void print_data_dec(UART_HandleTypeDef *huart,uint32_t data);
+void print_fdata_dec(UART_HandleTypeDef *huart,float data);
 void print_data_format(UART_HandleTypeDef *huart,uint32_t data, char * format);
 void println_str(UART_HandleTypeDef *huart,const char *str);
 void usart1_send_string (uint8_t *str);
