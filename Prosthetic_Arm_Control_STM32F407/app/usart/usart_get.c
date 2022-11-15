@@ -37,11 +37,11 @@
 void Get_USART_Command(UART_HandleTypeDef * huart,float Command[])
 {
 		u16 len;	
-		int i,j=2;
-		u8 num=0,point=0;
+	int i,j=2;//j:第j个运动控制指令；i:移动读取位置
+	u8 num=0,point=0;//point:记录运动指令中小数点的位置;num=记录前一条运动指令所占的位数
 		
 		len=USART1_RX_STA&0x3fff;//得到此次接收到的数据长度：USART1_RX_STA的0-13位用来表示接收数据的长度
-		for(i=len-1;i>=0;i--)
+	for(i=len-1;i>=0;i--)
 		{
 			if(USART1_RX_BUF[i]!=' ')
 			{
@@ -51,8 +51,9 @@ void Get_USART_Command(UART_HandleTypeDef * huart,float Command[])
 					Command[j]=-Command[j];
 				else
 				{
-					Command[j]=Command[j]*pow(10,i-1-num);
-					point=2+num-i;//记录运动指令中小数点的位置
+					point=(len-1)-i-num;
+					Command[j]=Command[j]*pow(10,-point);
+					point++;
 				}
 			}
 			else

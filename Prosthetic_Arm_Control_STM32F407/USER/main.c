@@ -185,6 +185,7 @@ void Wrist_task(void * pvParameters)
 				taskENTER_CRITICAL();	//进入临界状态	
 				
 				WristPositionControl(PositionError);
+				vTaskPrioritySet(NULL,2);
 				
 				taskEXIT_CRITICAL();	//退出临界状态
 			}
@@ -218,6 +219,7 @@ void WristPos_task(void * pvParameters)
 			{
 				println_str(&UART1_Handler,"Send to WristPosQueue successfully!");
 				xEventGroupSetBits(EventGroupHandler,0x02);
+				vTaskPrioritySet(WristTask_Handler,4);
 			}
 			else
 				println_str(&UART1_Handler,"Could not send to WristPosQueue!");
