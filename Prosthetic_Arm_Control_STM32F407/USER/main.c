@@ -18,19 +18,19 @@ void start_task(void * pvParameters);
 TaskHandle_t StartTask_Handler;		//任务句柄
 
 //接收运动指令任务
-#define COMMAND_TASK_PRIO			3
+#define COMMAND_TASK_PRIO			2
 #define COMMAND_STK_SIZE			150
 void Command_task(void * pvParameters);
 TaskHandle_t CommandTask_Handler;		//任务句柄	 
 
 //腕部电机运动指令
-#define WRIST_TASK_PRIO			2
+#define WRIST_TASK_PRIO			3
 #define WRIST_STK_SIZE			512
 void Wrist_task(void * pvParameters);
 TaskHandle_t WristTask_Handler;		//任务句柄
 
 //腕部位置传感器检测
-#define WristPos_TASK_PRIO		3
+#define WristPos_TASK_PRIO		2
 #define WristPos_STK_SIZE			256
 void WristPos_task(void * pvParameters);
 TaskHandle_t WristPosTask_Handler;		//任务句柄
@@ -185,7 +185,7 @@ void Wrist_task(void * pvParameters)
 				taskENTER_CRITICAL();	//进入临界状态	
 				
 				WristPositionControl(PositionError);
-				vTaskPrioritySet(NULL,2);
+//				vTaskPrioritySet(NULL,2);
 				
 				taskEXIT_CRITICAL();	//退出临界状态
 			}
@@ -219,7 +219,7 @@ void WristPos_task(void * pvParameters)
 			{
 				println_str(&UART1_Handler,"Send to WristPosQueue successfully!");
 				xEventGroupSetBits(EventGroupHandler,0x02);
-				vTaskPrioritySet(WristTask_Handler,4);
+//				vTaskPrioritySet(WristTask_Handler,4);
 			}
 			else
 				println_str(&UART1_Handler,"Could not send to WristPosQueue!");
