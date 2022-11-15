@@ -1,0 +1,3 @@
+# Prostheic_Arm_Control_STM32
+FreeRTOS_V3.3：基本实现了模糊PID调节假肢腕平台的位姿，但是收敛速度有待提高，而且电机实时位置的获取存在问题
+FreeRTOS_3.3.1:将接收运动的指令从int→float，基本实现指令的连续接收；模糊pid控制器未调好，任务切换和CAN总线通讯存在一定问题
