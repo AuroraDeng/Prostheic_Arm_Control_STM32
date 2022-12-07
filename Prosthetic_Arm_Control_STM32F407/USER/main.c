@@ -184,8 +184,16 @@ void Wrist_task(void * pvParameters)
 				}
 				taskENTER_CRITICAL();	//进入临界状态	
 				
-				WristPositionControl(PositionError);
-				vTaskPrioritySet(NULL,2);
+					if(WristTargetPos[0]>60||WristTargetPos[1]>60||WristTargetPos[0]<-60||WristTargetPos[1]<-60)
+					{
+							Motor_W1(0);
+							Motor_W2(0);
+					}
+					else
+					{
+							WristPositionControl(PositionError);
+							vTaskPrioritySet(NULL,2);
+					}
 				
 				taskEXIT_CRITICAL();	//退出临界状态
 			}
@@ -244,5 +252,9 @@ void WristPos_task(void * pvParameters)
 
 void Elbow_task(void * pvParameters)
 {
-
+	
+	for(;;)
+	{
+		
+	}
 }

@@ -4,6 +4,7 @@
 #include "EPOS.h"
 #include "usart_print.h"
 #include "FuzzyPID.h"
+#include "ImpedanceControl.h"
 #include "math.h"
 
 #ifdef __cplusplus
@@ -22,7 +23,8 @@ void Wrist_Radial_Deviation();
 void Motor_Reset();
 void HelloWorld();
 void WristPositionControl(float PositionError[]);
-	 
+void ElbowImpedanceControl();
+
 void Motor_W1(int32_t ReceiveCommand);
 void Motor_W2(int32_t ReceiveCommand);
 void Motor_QB(int32_t ReceiveCommand);

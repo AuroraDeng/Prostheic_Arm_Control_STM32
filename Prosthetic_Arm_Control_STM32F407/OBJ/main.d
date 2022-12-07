@@ -82,6 +82,7 @@
   ..\app\EPOS4\EPOS.h ..\app\CANopen\PDO\pdo.h ..\app\CANopen\SDO\sdo.h \
   ..\app\CANopen\NMT\NMT_control.h \
   ..\app\MotionControl\FuzzyPID\FuzzyPID.h \
+  ..\app\MotionControl\ImpedanceControl\ImpedanceControl.h \
   D:\Download\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\math.h \
   D:\Download\keil5\ARM\ARMCLANG\Bin\..\include\math.h \
   D:\Download\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\limits \

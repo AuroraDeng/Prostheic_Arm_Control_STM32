@@ -5,6 +5,7 @@ Epos motor_W2(2,PPM);
 Epos motor_QB(3,PPM);
 Epos motor_ZB(4,PPM);
 FuzzyPID Poseture_Adjustment;
+ImpedanceModel Impedance_Adjustment;
 
 void Wrist_Extension()
 {
@@ -108,8 +109,8 @@ void WristPositionControl(float PositionError[])
 	
 	if(abs(PositionError[0])>1||abs(PositionError[1])>1)//x,yÖá½Ç¶ÈÆ«²î¾ÀÕý
 	{
-		int32_t motorincx=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, 100, 800, PositionError[0],PositionErrorDifference[0],30,40,20,30,PositionErrorPre[0],PositionErrorPpre[0]);
-		int32_t motorincy=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, 100, 800, PositionError[1],PositionErrorDifference[1],30,40,20,30,PositionErrorPre[1],PositionErrorPpre[1]);
+		int32_t motorincx=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, 100, 400, PositionError[0],PositionErrorDifference[0],20,30,15,20,PositionErrorPre[0],PositionErrorPpre[0]);
+		int32_t motorincy=Poseture_Adjustment.FuzzyPIDcontroller(120,-120, 20,-20, 100, 400, PositionError[1],PositionErrorDifference[1],20,30,15,20,PositionErrorPre[1],PositionErrorPpre[1]);
 		
 		if(PositionError[0]>0&&PositionError[1]>0)
 		{
@@ -133,14 +134,10 @@ void WristPositionControl(float PositionError[])
 		}
 		motor_W1.Get_ActualPos();
 		motor_W2.Get_ActualPos();
-//		LIMIT(motorinc[0],-154800-motor_W1.ActualPos,154800-motor_W1.ActualPos);
-//		LIMIT(motorinc[1],-154800-motor_W2.ActualPos,154800-motor_W2.ActualPos);
-		LIMIT(motorinc[0],-154800,154800);
-		LIMIT(motorinc[1],-154800,154800);
-//		motor_W1.MoveToPosition(0,motorinc[0]);
-//		motor_W2.MoveToPosition(0,motorinc[1]);
-		motor_W1.MoveToPosition(1,0);
-		motor_W2.MoveToPosition(1,0);
+		LIMIT(motorinc[0],-154800-motor_W1.ActualPos,154800-motor_W1.ActualPos);
+		LIMIT(motorinc[1],-154800-motor_W2.ActualPos,154800-motor_W2.ActualPos);
+		motor_W1.MoveToPosition(0,motorinc[0]);
+		motor_W2.MoveToPosition(0,motorinc[1]);
 		motorinc[0]=0;
 		motorinc[1]=0;
 	}
@@ -155,4 +152,9 @@ void WristPositionControl(float PositionError[])
 		Motor_QB(0);
 		motorinc[2]=0;
 	}
+}
+
+void ElbowImpedanceControl()
+{
+
 }

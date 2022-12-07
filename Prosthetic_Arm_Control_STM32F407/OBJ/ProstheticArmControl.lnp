@@ -36,6 +36,7 @@
 "..\obj\motioncontrol.o"
 "..\obj\motor_test.o"
 "..\obj\fuzzypid.o"
+"..\obj\impedancecontrol.o"
 "..\obj\croutine.o"
 "..\obj\event_groups.o"
 "..\obj\list.o"

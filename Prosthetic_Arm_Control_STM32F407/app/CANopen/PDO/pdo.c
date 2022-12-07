@@ -41,7 +41,7 @@ uint32_t TransmitPDO(uint8_t NodeID,uint8_t TxPDO_n)
 	if(CAN_SendMsg(&txm))
 	{
 		delay_ms(10);
-		if(CAN_ReceiveMsg(&rxm)!=0)
+		if(CAN_ReceiveMsg(&rxm)!=0&&rxm.COB_ID==txm.COB_ID)
 			data=(rxm.Data[3]<<24)+(rxm.Data[2]<<16)+(rxm.Data[1]<<8)+rxm.Data[0];
 	}
 		return data;
