@@ -12,7 +12,6 @@
 #include "usart_print.h"
 #include "delay.h"
 #include "sys.h"
-#include "stdint.h"
 
 //------------------------------------------------------------------------
 //define variables  定义变量类型

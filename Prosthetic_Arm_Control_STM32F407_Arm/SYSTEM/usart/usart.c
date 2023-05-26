@@ -1,5 +1,6 @@
 #include "usart.h"
 #include "delay.h"
+
 ////////////////////////////////////////////////////////////////////////////////// 	 
 //如果使用os,则包括下面的头文件即可.
 #if SYSTEM_SUPPORT_OS
@@ -176,8 +177,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		}
 	}
 	else if(huart->Instance==USART2)//如果是串口2
-//		CopeWristPosData((unsigned char)bRxBuffer[0]);//处理数据
-	CopeSerial2Data((unsigned char)bRxBuffer[0]);
+////		CopeWristPosData((unsigned char)bRxBuffer[0]);//处理数据
+			CopeMPData((unsigned char)bRxBuffer[0]);
 	else if(huart->Instance==UART4)
 	{	
 		WitSerialDataIn((unsigned char)dRxBuffer[0]);

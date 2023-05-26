@@ -2,62 +2,31 @@
 #include "math.h"
 #include "stdint.h"
 
-short aacx,aacy,aacz;		//加速度传感器原始数据
-short gyrox,gyroy,gyroz;	//陀螺仪原始数据
-
-float hN_roll = 0; 
-float hN_Pitch = 0; 
-float hN_Yaw = 0; 
-
-float Accel_x;	     //X轴加速度值暂存
-float Accel_y;	     //Y轴加速度值暂存
-float Accel_z;	     //Z轴加速度值暂存
-
-float Gyro_x;		 //X轴陀螺仪数据暂存
-float Gyro_y;    //Y轴陀螺仪数据暂存
-float Gyro_z;		 //Z轴陀螺仪数据暂存
-
-//float Angle_gy;    //由角速度计算的倾斜角度
-float Angle_x_temp;  //由加速度计算的x倾斜角度
-float Angle_y_temp;  //由加速度计算的y倾斜角度
-float Angle_z_temp;
-
-float Angle_X_Final; //X最终倾斜角度
-float Angle_Y_Final; //Y最终倾斜角度
-float Angle_Z_Final; //Z最终倾斜角度
-
-//卡尔曼参数
-char  C_0 = 1;
-float Q_bias_x, Q_bias_y, Q_bias_z;
-float Angle_err_x, Angle_err_y, Angle_err_z;
-float PCt_0, PCt_1, E;
-float K_0, K_1, t_0, t_1;
-float Pdot[4] = { 0,0,0,0 };
-float PP[2][2] = { { 1, 0 },{ 0, 1 } };
-
-double KalmanFilter(const double ResrcData, double ProcessNiose_Q, double MeasureNoise_R)
-{
-	double R = MeasureNoise_R;
-	double Q = ProcessNiose_Q;
-	static double x_last;
-	double x_mid = x_last;
-	double x_now;
-	static double p_last;
-	double p_mid;
-	double p_now;
-	double kg;
-	x_mid = x_last; //x_last=x(k-1|k-1),x_mid=x(k|k-1)
-	p_mid = p_last + Q; //p_mid=p(k|k-1),p_last=p(k-1|k-1),Q=噪声
-	kg = p_mid / (p_mid + R); //kg=kalman filter,R=噪声
-	x_now = x_mid + kg*(ResrcData - x_mid);//估最优值
-	p_now = (1 - kg)*p_mid;//最优值对应的covariance
-	p_last = p_now; //更新covariance值
-	x_last = x_now; //更新系统状态值
-	return x_now;
-}
+IMU MPlatform;
+IMU SPlatform;
+//double IMU::KalmanFilter(const double ResrcData, double ProcessNiose_Q, double MeasureNoise_R)
+//{
+//	double R = MeasureNoise_R;
+//	double Q = ProcessNiose_Q;
+//	static double x_last;
+//	double x_mid = x_last;
+//	double x_now;
+//	static double p_last;
+//	double p_mid;
+//	double p_now;
+//	double kg;
+//	x_mid = x_last; //x_last=x(k-1|k-1),x_mid=x(k|k-1)
+//	p_mid = p_last + Q; //p_mid=p(k|k-1),p_last=p(k-1|k-1),Q=噪声
+//	kg = p_mid / (p_mid + R); //kg=kalman filter,R=噪声
+//	x_now = x_mid + kg*(ResrcData - x_mid);//估最优值
+//	p_now = (1 - kg)*p_mid;//最优值对应的covariance
+//	p_last = p_now; //更新covariance值
+//	x_last = x_now; //更新系统状态值
+//	return x_now;
+//}
 
 //角度计算
-void Angle_Calcu(void)
+void IMU::Angle_Calcu(void)
 {
 	//范围为2g时，换算关系：16384 LSB/g
 	//deg = rad*180/3.14
@@ -117,7 +86,7 @@ void Angle_Calcu(void)
 	Kalman_Filter_Z(Angle_z_temp, Gyro_z);  //卡尔曼滤波计算Y倾角
 }
 
-void Kalman_Filter_X(float Accel, float Gyro) //卡尔曼函数
+void IMU::Kalman_Filter_X(float Accel, float Gyro) //卡尔曼函数
 {
 	Angle_X_Final += (Gyro - Q_bias_x) * dt; //先验估计
 
@@ -155,7 +124,7 @@ void Kalman_Filter_X(float Accel, float Gyro) //卡尔曼函数
 	Gyro_x = Gyro - Q_bias_x;	 //输出值(后验估计)的微分=角速度
 }
 
-void Kalman_Filter_Y(float Accel, float Gyro) //卡尔曼函数		
+void IMU::Kalman_Filter_Y(float Accel, float Gyro) //卡尔曼函数		
 {
 	Angle_Y_Final += (Gyro - Q_bias_y) * dt; //先验估计
 
@@ -193,7 +162,7 @@ void Kalman_Filter_Y(float Accel, float Gyro) //卡尔曼函数
 	Gyro_y = Gyro - Q_bias_y;	 //输出值(后验估计)的微分=角速度
 }
 
-void Kalman_Filter_Z(float Accel, float Gyro) //卡尔曼函数
+void IMU::Kalman_Filter_Z(float Accel, float Gyro) //卡尔曼函数
 {
 	Angle_Z_Final += (Gyro - Q_bias_z) * dt; //先验估计
 
@@ -231,51 +200,51 @@ void Kalman_Filter_Z(float Accel, float Gyro) //卡尔曼函数
 	Gyro_z = Gyro - Q_bias_z;	 //输出值(后验估计)的微分=角速度
 }
 
-float angle_P,angle_R;
-float A_P,A_R,A2_P;
+//float angle_P,angle_R;
+//float A_P,A_R,A2_P;
 
-void yijiehubu_P(float angle_m, float gyro_m)
-{
-	float K1 =0.09;
-	float d=0.01;
-	angle_P = K1 * angle_m + (1-K1) * (angle_P + gyro_m * d);
-	A_P = angle_P;
-}
+//void yijiehubu_P(float angle_m, float gyro_m)
+//{
+//	float K1 =0.09;
+//	float d=0.01;
+//	angle_P = K1 * angle_m + (1-K1) * (angle_P + gyro_m * d);
+//	A_P = angle_P;
+//}
 
-void yijiehubu_R(float angle_m, float gyro_m)
-{
-	float K1 =0.1;
-	angle_R = K1 * angle_m + (1-K1) * (angle_R + gyro_m * dt);
-	A_R = angle_R;
-}
+//void yijiehubu_R(float angle_m, float gyro_m)
+//{
+//	float K1 =0.1;
+//	angle_R = K1 * angle_m + (1-K1) * (angle_R + gyro_m * dt);
+//	A_R = angle_R;
+//}
 
-void erjiehubu_P(float angle_m, float gyro_m)
-{
-	float K = 0.05;
-	float y1;
-	float x2;
-	float x1 = (angle_m - angle_P) * K * K;
-	y1 = y1 + x1 * dt;
-	x2 = y1 + 2 * K *(angle_m - angle_P) + gyro_m;
-	angle_P = angle_P + x2 * dt;
-	A_P = angle_P;
-}
+//void erjiehubu_P(float angle_m, float gyro_m)
+//{
+//	float K = 0.05;
+//	float y1;
+//	float x2;
+//	float x1 = (angle_m - angle_P) * K * K;
+//	y1 = y1 + x1 * dt;
+//	x2 = y1 + 2 * K *(angle_m - angle_P) + gyro_m;
+//	angle_P = angle_P + x2 * dt;
+//	A_P = angle_P;
+//}
 
 
-float K2 =0.2;
-float x1,x2,y1;
-float angle2;
+//float K2 =0.2;
+//float x1,x2,y1;
+//float angle2;
 
-void Erjielvbo(float angle_m,float gyro_m)
-{
-	x1=(angle_m-angle2)*(1-K2)*(1-K2);
-	y1=y1+x1*dt;
-	x2=y1+2*(1-K2)*(angle_m-angle2)+gyro_m;
-	angle2=angle2+ x2*dt;
-	A2_P = angle2;
-}
+//void Erjielvbo(float angle_m,float gyro_m)
+//{
+//	x1=(angle_m-angle2)*(1-K2)*(1-K2);
+//	y1=y1+x1*dt;
+//	x2=y1+2*(1-K2)*(angle_m-angle2)+gyro_m;
+//	angle2=angle2+ x2*dt;
+//	A2_P = angle2;
+//}
 
-void CopeSerial2Data(unsigned char ucData)
+void CopeMPData(unsigned char ucData)
 {
 	static unsigned char ucRxBuffer[250];
 	static unsigned char ucRxCnt = 0;	
@@ -291,24 +260,24 @@ void CopeSerial2Data(unsigned char ucData)
 	{
 		if ( (ucRxBuffer[1]==0x55)&&(ucRxBuffer[2]==0x01) )
 		{
-				 hN_roll = (float)((int16_t)(ucRxBuffer[4]<<8) | ucRxBuffer[5]) / 32768 * 180;
+				 MPlatform.hN_roll = (float)((int16_t)(ucRxBuffer[4]<<8) | ucRxBuffer[5]) / 32768 * 180;
 					
-				hN_Pitch = (float)((int16_t)(ucRxBuffer[6]<<8) | ucRxBuffer[7]) / 32768 * 180;
+				MPlatform.hN_Pitch = (float)((int16_t)(ucRxBuffer[6]<<8) | ucRxBuffer[7]) / 32768 * 180;
 					
-				hN_Yaw = (float)((int16_t)(ucRxBuffer[8]<<8) | ucRxBuffer[9]) / 32768 * 180;
+				MPlatform.hN_Yaw = (float)((int16_t)(ucRxBuffer[8]<<8) | ucRxBuffer[9]) / 32768 * 180;
 		}
 		
 		if ( (ucRxBuffer[1]==0x55)&&(ucRxBuffer[2]==0x03) )
 		{
 		
 			//加速度原始数据
-				aacx = (float)((int16_t)(ucRxBuffer[5]<<8) | ucRxBuffer[4]) ;					
-				aacy = (float)((int16_t)(ucRxBuffer[7]<<8) | ucRxBuffer[6]) ;
-				aacz = (float)((int16_t)(ucRxBuffer[9]<<8) | ucRxBuffer[8]) ;
+				MPlatform.aacx = (float)((int16_t)(ucRxBuffer[5]<<8) | ucRxBuffer[4]) ;					
+				MPlatform.aacy = (float)((int16_t)(ucRxBuffer[7]<<8) | ucRxBuffer[6]) ;
+				MPlatform.aacz = (float)((int16_t)(ucRxBuffer[9]<<8) | ucRxBuffer[8]) ;
 		  //陀螺仪原始数据
-				gyrox = (float)((int16_t)(ucRxBuffer[11]<<8) | ucRxBuffer[10]) ;					
-				gyroy = (float)((int16_t)(ucRxBuffer[13]<<8) | ucRxBuffer[12]) ;
-				gyroz = (float)((int16_t)(ucRxBuffer[15]<<8) | ucRxBuffer[14]) ;
+				MPlatform.gyrox = (float)((int16_t)(ucRxBuffer[11]<<8) | ucRxBuffer[10]) ;					
+				MPlatform.gyroy = (float)((int16_t)(ucRxBuffer[13]<<8) | ucRxBuffer[12]) ;
+				MPlatform.gyroz = (float)((int16_t)(ucRxBuffer[15]<<8) | ucRxBuffer[14]) ;
 			
 		}
 		ucRxCnt=0;//清空缓存区

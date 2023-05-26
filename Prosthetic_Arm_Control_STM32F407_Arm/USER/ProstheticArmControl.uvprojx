@@ -739,7 +739,7 @@
             </File>
             <File>
               <FileName>kaerman.c</FileName>
-              <FileType>1</FileType>
+              <FileType>8</FileType>
               <FilePath>..\app\sensor\kaerman\kaerman.c</FilePath>
             </File>
           </Files>

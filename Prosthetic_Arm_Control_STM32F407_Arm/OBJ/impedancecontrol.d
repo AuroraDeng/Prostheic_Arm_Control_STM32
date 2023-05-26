@@ -75,9 +75,8 @@
   ..\SYSTEM\can\can.h ..\USER\main.h ..\SYSTEM\sys\sys.h \
   ..\SYSTEM\delay\delay.h ..\SYSTEM\usart\usart.h ..\app\gpio\gpio.h \
   ..\app\usart\usart_print.h ..\app\usart\RS485\rs485_drv.h \
-  ..\app\sensor\kaerman\kaerman.h ..\app\CANopen\PDO\pdo.h \
-  ..\app\CANopen\SDO\sdo.h ..\app\CANopen\NMT\NMT_control.h \
-  ..\app\MotionControl\motioncontrol.h \
+  ..\app\CANopen\PDO\pdo.h ..\app\CANopen\SDO\sdo.h \
+  ..\app\CANopen\NMT\NMT_control.h ..\app\MotionControl\motioncontrol.h \
   ..\app\MotionControl\FuzzyPID\FuzzyPID.h \
   ..\app\MotionControl\ImpedanceControl\ImpedanceControl.h \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\math.h \

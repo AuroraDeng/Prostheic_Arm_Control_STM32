@@ -14,6 +14,7 @@
 #include "BWT61CL.h"
 #include "KWR46C.h"
 #include "HWT101.h"
+#include "kaerman.h"
 
 /*任务*/
 //创建开始任务（用于创建其他功能性任务）
@@ -232,8 +233,8 @@ void WristPos_task(void * pvParameters)
   {	
 		taskENTER_CRITICAL();	//进入临界状态
 		
-		Angle_Calcu();
-		printf("%f  , %f  , %f\r\n",Angle_X_Final,Angle_Y_Final,Angle_Z_Final);
+		MPlatform.Angle_Calcu();
+		printf("%f  , %f  , %f\r\n",MPlatform.Angle_X_Final,MPlatform.Angle_Y_Final,MPlatform.Angle_Z_Final);
 			
 		taskEXIT_CRITICAL();	//退出临界状态
 		

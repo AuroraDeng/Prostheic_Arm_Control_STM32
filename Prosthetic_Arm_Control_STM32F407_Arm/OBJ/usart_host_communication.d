@@ -67,4 +67,4 @@
   D:\keil5\ARM\ARMCLANG\Bin\..\include\stdio.h ..\SYSTEM\can\can.h \
   ..\app\usart\usart_print.h \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\string.h ..\app\gpio\gpio.h \
-  ..\app\usart\RS485\rs485_drv.h ..\app\sensor\kaerman\kaerman.h
+  ..\app\usart\RS485\rs485_drv.h
