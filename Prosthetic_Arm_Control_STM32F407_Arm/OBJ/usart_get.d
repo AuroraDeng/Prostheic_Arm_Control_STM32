@@ -71,7 +71,8 @@
   ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h \
   ..\SYSTEM\delay\delay.h ..\SYSTEM\usart\usart.h ..\SYSTEM\can\can.h \
   ..\app\usart\usart_print.h ..\app\gpio\gpio.h \
-  ..\app\usart\RS485\rs485_drv.h ..\app\usart\usart_print.h \
+  ..\app\usart\RS485\rs485_drv.h ..\app\sensor\kaerman\kaerman.h \
+  ..\app\usart\usart_print.h \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\math.h \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\math.h \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\type_traits \

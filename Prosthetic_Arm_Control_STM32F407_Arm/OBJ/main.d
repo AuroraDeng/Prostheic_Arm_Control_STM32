@@ -70,9 +70,9 @@
   ..\USER\main.h ..\app\usart\usart_print.h \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\string.h \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\string.h ..\app\gpio\gpio.h \
-  ..\app\usart\RS485\rs485_drv.h ..\FreeRTOS\include\FreeRTOS.h \
-  ..\FreeRTOS\include\FreeRTOSConfig.h ..\FreeRTOS\include\projdefs.h \
-  ..\FreeRTOS\include\portable.h \
+  ..\app\usart\RS485\rs485_drv.h ..\app\sensor\kaerman\kaerman.h \
+  ..\FreeRTOS\include\FreeRTOS.h ..\FreeRTOS\include\FreeRTOSConfig.h \
+  ..\FreeRTOS\include\projdefs.h ..\FreeRTOS\include\portable.h \
   ..\FreeRTOS\include\deprecated_definitions.h \
   ..\FreeRTOS\portable\GCC\ARM_CM4F\portmacro.h \
   ..\FreeRTOS\include\mpu_wrappers.h ..\FreeRTOS\include\task.h \

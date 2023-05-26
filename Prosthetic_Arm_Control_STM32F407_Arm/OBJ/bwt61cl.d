@@ -72,4 +72,5 @@
   ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h \
   ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h \
   ..\SYSTEM\delay\delay.h ..\SYSTEM\usart\usart.h ..\SYSTEM\can\can.h \
-  ..\app\gpio\gpio.h ..\app\usart\RS485\rs485_drv.h
+  ..\app\gpio\gpio.h ..\app\usart\RS485\rs485_drv.h \
+  ..\app\sensor\kaerman\kaerman.h

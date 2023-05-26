@@ -71,4 +71,5 @@
   ..\app\usart\usart_print.h \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\string.h \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\string.h \
-  ..\app\usart\RS485\rs485_drv.h ..\app\can\canget.h
+  ..\app\usart\RS485\rs485_drv.h ..\app\sensor\kaerman\kaerman.h \
+  ..\app\can\canget.h

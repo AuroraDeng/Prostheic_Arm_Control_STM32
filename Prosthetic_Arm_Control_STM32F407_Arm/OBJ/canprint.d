@@ -71,6 +71,6 @@
   ..\app\usart\usart_print.h \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\string.h \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\string.h \
-  ..\app\usart\RS485\rs485_drv.h ..\app\EPOS4\EPOS.h \
-  ..\app\CANopen\PDO\pdo.h ..\app\CANopen\SDO\sdo.h \
+  ..\app\usart\RS485\rs485_drv.h ..\app\sensor\kaerman\kaerman.h \
+  ..\app\EPOS4\EPOS.h ..\app\CANopen\PDO\pdo.h ..\app\CANopen\SDO\sdo.h \
   ..\app\CANopen\NMT\NMT_control.h

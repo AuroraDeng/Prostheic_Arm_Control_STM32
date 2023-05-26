@@ -118,13 +118,13 @@ void start_task(void * pvParameters)
 //							(UBaseType_t	) WRIST_TASK_PRIO,
 //							(TaskHandle_t*	) &WristTask_Handler);
 //							
-//  //创建Task3:检测腕部位置							
-//	xTaskCreate((TaskFunction_t	) WristPos_task,
-//							(char*			) "WristPos_task",
-//							(uint16_t		) WristPos_STK_SIZE,
-//							(void * 		) NULL,
-//							(UBaseType_t	) WristPos_TASK_PRIO,
-//							(TaskHandle_t*	) &WristPosTask_Handler);
+  //创建Task3:检测腕部位置							
+	xTaskCreate((TaskFunction_t	) WristPos_task,
+							(char*			) "WristPos_task",
+							(uint16_t		) WristPos_STK_SIZE,
+							(void * 		) NULL,
+							(UBaseType_t	) WristPos_TASK_PRIO,
+							(TaskHandle_t*	) &WristPosTask_Handler);
 //							
 //	//创建Task4:控制电机3的运动					
 //	xTaskCreate((TaskFunction_t	) Elbow_task,
@@ -222,52 +222,24 @@ void Command_task(void * pvParameters)
 //	}
 //}
 
-//void WristPos_task(void * pvParameters)
-//{
-//	float WristPos[3];
-//	BaseType_t SendStatus[3];
-//	u8 i;
-//	
-//	BWT61CL_Init();
-//	
-//  for(;;)
-//  {	
-//		taskENTER_CRITICAL();	//进入临界状态
-//		
-//		if(xEventGroupWaitBits(EventGroupHandler,0x01,pdTRUE,pdTRUE,0))
-//		{
-//			for(i=0;i<3;i++)
-//			{
-//				WristPos[i]=(float)stcAngle.Angle[i]/32768*180;
-//				SendStatus[i]=xQueueSend(WristPosQueue,&WristPos[i],0);
-//			}
-//		
-//			if(SendStatus[0]==pdPASS&&SendStatus[1]==pdPASS&&SendStatus[2]==pdPASS)
-//			{
-//				println_str(&UART1_Handler,"Send to WristPosQueue successfully!");
-//				xEventGroupSetBits(EventGroupHandler,0x04);
-//				vTaskPrioritySet(WristTask_Handler,4);
-//			}
-//			else
-//				println_str(&UART1_Handler,"Could not send to WristPosQueue!");
-//		}
-//	
-//		printf("-----------------------------------\r\n");
-////		//输出加速度
-////		//串口接受到的数据已经拷贝到对应的结构体的变量中了，根据说明书的协议，以加速度为例 stcAcc.a[0]/32768*16就是X轴的加速度，
-////		printf("Acc:%.3f %.3f %.3f\r\n",(float)stcAcc.a[0]/32768*16,(float)stcAcc.a[1]/32768*16,(float)stcAcc.a[2]/32768*16);
-////		vTaskDelay(10);
-////		//输出角速度
-////		printf("Gyro:%.3f %.3f %.3f\r\n",(float)stcGyro.w[0]/32768*2000,(float)stcGyro.w[1]/32768*2000,(float)stcGyro.w[2]/32768*2000);
-////		vTaskDelay(10);
-//		//输出角度
-//		printf("Angle:%.3f %.3f %.3f\r\n",(float)stcAngle.Angle[0]/32768*180,(float)stcAngle.Angle[1]/32768*180,(float)stcAngle.Angle[2]/32768*180);
-//			
-//		taskEXIT_CRITICAL();	//退出临界状态
-//		
-//		vTaskDelay(100);//等待传输完成
-//  }
-//}
+void WristPos_task(void * pvParameters)
+{
+	float WristPos[3];
+	BaseType_t SendStatus[3];
+	u8 i;
+	
+  for(;;)
+  {	
+		taskENTER_CRITICAL();	//进入临界状态
+		
+		Angle_Calcu();
+		printf("%f  , %f  , %f\r\n",Angle_X_Final,Angle_Y_Final,Angle_Z_Final);
+			
+		taskEXIT_CRITICAL();	//退出临界状态
+		
+		vTaskDelay(100);//等待传输完成
+  }
+}
 
 //void Elbow_task(void * pvParameters)
 //{
