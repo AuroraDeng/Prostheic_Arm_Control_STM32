@@ -92,6 +92,6 @@
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\version \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\limits \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\__undef_macros \
-  ..\app\MotionControl\motor_test.h ..\app\sensor\BWT61CL\BWT61CL.h \
-  ..\app\sensor\KWR46C\KWR46C.h ..\app\sensor\HWT101\HWT101.h \
-  ..\app\sensor\HWT101\REG.h ..\app\sensor\kaerman\kaerman.h
+  ..\app\sensor\BWT61CL\BWT61CL.h ..\app\sensor\KWR46C\KWR46C.h \
+  ..\app\sensor\HWT101\HWT101.h ..\app\sensor\HWT101\REG.h \
+  ..\app\sensor\kaerman\kaerman.h

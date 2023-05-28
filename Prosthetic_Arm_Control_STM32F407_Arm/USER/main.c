@@ -10,7 +10,7 @@
 #include "canget.h"
 #include "canprint.h"
 #include "motioncontrol.h"
-#include "motor_test.h"
+#include "math.h"
 #include "BWT61CL.h"
 #include "KWR46C.h"
 #include "HWT101.h"
@@ -150,6 +150,8 @@ void start_task(void * pvParameters)
 
 void Command_task(void * pvParameters)
 {	
+	float WristPos[3]={0};
+	float delta_L[2]={0};
   for(;;)
   {	
 		taskENTER_CRITICAL();	//进入临界状态
@@ -162,6 +164,13 @@ void Command_task(void * pvParameters)
 				Get_CAN_Command(SendCommand);
 			if(USART1_RX_STA&0x8000)
 				Get_USART_Command(&UART1_Handler,SendCommand);	
+			
+			MPlatform.Angle_Calcu();
+			SPlatform.Angle_Calcu();
+			RPY(WristPos,SPlatform,MPlatform);//解算腕关节动平台相对于静平台的姿态(输出是弧度)
+			
+			delta_L[0]=sqrt(2536*(1-cos(SendCommand[0]*Pi/180)))-sqrt(2536*(1-cos(WristPos[0])));//IMU的x轴转动/尺偏桡偏运动/左右方向（有错误）
+			
 			Motor_W1(SendCommand[0]-50000);
 			Motor_W2(SendCommand[2]-50000);
 			Motor_QB(SendCommand[4]-50000);
@@ -225,7 +234,7 @@ void Command_task(void * pvParameters)
 
 void WristPos_task(void * pvParameters)
 {
-	float WristPos[3];
+	float WristPos[2];
 	BaseType_t SendStatus[3];
 	u8 i;
 	
@@ -238,7 +247,8 @@ void WristPos_task(void * pvParameters)
 		
 		SPlatform.Angle_Calcu();
 		printf("SPlatform:%f  , %f  , %f\r\n",SPlatform.Angle_X_Final,SPlatform.Angle_Y_Final,SPlatform.Angle_Z_Final);
-			
+		RPY(WristPos,SPlatform,MPlatform);//解算腕关节动平台相对于静平台的姿态
+		printf("WristPos:%f  , %f  \r\n",WristPos[0],WristPos[1]);
 		taskEXIT_CRITICAL();	//退出临界状态
 		
 		vTaskDelay(100);//等待传输完成

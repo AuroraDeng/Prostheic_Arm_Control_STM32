@@ -325,3 +325,38 @@ void CopeSPData(unsigned char ucData)
 		//hN = (float)stcAngle.Angle[2]/32768*180;
 	}
 }
+
+void RPY(float rpy[],const IMU& SP,const IMU& MP)
+{
+	int i,j,k;
+	float SP_X=SP.Angle_X_Final*Pi/180.0;
+	float SP_Y=SP.Angle_Y_Final*Pi/180.0;
+	float SP_Z=SP.Angle_Z_Final*Pi/180.0;
+	
+	float MP_X=MP.Angle_X_Final*Pi/180.0;
+	float MP_Y=MP.Angle_Y_Final*Pi/180.0;
+	float MP_Z=MP.Angle_Z_Final*Pi/180.0;
+	
+	float R_oaT[3][3]={{cos(SP_Z)*cos(SP_Y),sin(SP_Z)*cos(SP_Y),-sin(SP_Y)},
+										{cos(SP_Z)*sin(SP_Y)*sin(SP_X)-sin(SP_Z)*cos(SP_X),sin(SP_Z)*sin(SP_Y)*sin(SP_X)+cos(SP_Z)*cos(SP_X),cos(SP_Y)*sin(SP_X)},
+										{cos(SP_Z)*sin(SP_Y)*cos(SP_X)+sin(SP_Z)*sin(SP_X),sin(SP_Z)*sin(SP_Y)*cos(SP_X)-cos(SP_Z)*sin(SP_X),cos(SP_Y)*cos(SP_X)}};
+											
+	float R_ob[3][3]={{cos(MP_Z)*cos(MP_Y),cos(MP_Z)*sin(MP_Y)*sin(MP_X)-sin(MP_Z)*cos(MP_X),cos(MP_Z)*sin(MP_Y)*cos(MP_X)+sin(MP_Z)*sin(MP_X)},
+										{sin(MP_Z)*cos(MP_Y),sin(MP_Z)*sin(MP_Y)*sin(MP_X)+cos(MP_Z)*cos(MP_X),sin(MP_Z)*sin(MP_Y)*cos(MP_X)-cos(MP_Z)*sin(MP_X)},
+										{-sin(MP_Y),cos(MP_Y)*sin(MP_X),cos(MP_Y)*cos(MP_X)}};
+	
+	float R_ab[3][3];
+	for (i = 0; i < 3; i++) 
+	{
+      for (j = 0; j < 3; j++) 
+			{
+					R_ab[i][j] = 0;
+          for (k = 0; k < 3; k++) 
+              R_ab[i][j] += R_oaT[i][k] * R_ob[k][j];
+      }
+  }
+//	rpy[0]=-asin(R_ab[1][2])*180/Pi;//相对于静平台的x轴的转动（角度制）
+//	rpy[1]=-asin(R_ab[2][0])*180/Pi;//相对于静平台的y轴的转动（角度制）
+	rpy[0]=-asin(R_ab[1][2]);//相对于静平台的x轴的转动（弧度制）
+	rpy[1]=-asin(R_ab[2][0]);//相对于静平台的y轴的转动（弧度制）
+}

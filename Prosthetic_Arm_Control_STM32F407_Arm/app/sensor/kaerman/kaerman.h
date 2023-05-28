@@ -62,6 +62,7 @@ class IMU
 //void Erjielvbo(float angle_m,float gyro_m);
 void CopeMPData(unsigned char ucData);
 void CopeSPData(unsigned char ucData);
+void RPY(float rpy[],const IMU& SP,const IMU& MP);
 extern IMU MPlatform;
 extern IMU SPlatform;
 

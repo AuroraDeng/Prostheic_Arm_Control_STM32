@@ -26,7 +26,9 @@
 
 -------------------------------------------------------------------------------------------
 
-CANControlOK:从控机可通过CAN/USART接收主机的指令
-CANControlOK_V1：实现一个IMU的姿态检测
-CANControlOK_V1.1.2：实现一个IMU的姿态检测；将IMU设置成一个类
-CANControlOK_V1.2：实现两个IMU的姿态检测，可正确收发运动指令
+78178c7：CANControlOK:从控机可通过CAN/USART接收主机的指令
+f684241：CANControlOK_V1：实现一个IMU的姿态检测
+1e329d6：CANControlOK_V1.1.2：实现一个IMU的姿态检测；将IMU设置成一个类
+bf93368：CANControlOK_V1.2：实现两个IMU的姿态检测，可正确收发运动指令
+
+WristPosControlV1:实现了动静平台上IMU的相对位置求解

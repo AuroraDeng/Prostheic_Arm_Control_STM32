@@ -152,50 +152,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>215</LineNumber>
+          <LineNumber>358</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134231362</Address>
+          <Address>134235058</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\SYSTEM\usart\usart.c</Filename>
+          <Filename>..\app\sensor\kaerman\kaerman.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ProstheticArmControl\../SYSTEM/usart/usart.c\215</Expression>
+          <Expression>\\ProstheticArmControl\../app/sensor/kaerman/kaerman.c\358</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>213</LineNumber>
+          <LineNumber>360</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134231326</Address>
+          <Address>134235192</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\SYSTEM\usart\usart.c</Filename>
+          <Filename>..\app\sensor\kaerman\kaerman.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ProstheticArmControl\../SYSTEM/usart/usart.c\213</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>344</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134234608</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\SYSTEM\usart\usart.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\ProstheticArmControl\../SYSTEM/usart/usart.c\344</Expression>
+          <Expression>\\ProstheticArmControl\../app/sensor/kaerman/kaerman.c\360</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -245,6 +229,16 @@
           <count>0</count>
           <WinNumber>2</WinNumber>
           <ItemText>bRxBuffer[0]</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>R_oaT</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>R_ob</ItemText>
         </Ww>
       </WatchWindow2>
       <Tracepoint>
