@@ -61,6 +61,7 @@ class IMU
 //void erjiehubu_P(float angle_m, float gyro_m);
 //void Erjielvbo(float angle_m,float gyro_m);
 void CopeMPData(unsigned char ucData);
+void CopeSPData(unsigned char ucData);
 extern IMU MPlatform;
 extern IMU SPlatform;
 

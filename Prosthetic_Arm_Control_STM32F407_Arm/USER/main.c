@@ -85,7 +85,7 @@ int main(void)
   Stm32_Clock_Init(336,8,2,7);  	//设置时钟,168Mhz
 	delay_init(168);               	//初始化延时函数
 	MX_GPIO_Init();
-	Serialport_Init(115200,115200,460800,9600);              //初始化USART
+	Serialport_Init(115200,115200,460800,115200,9600);              //初始化USART
 	CAN_Config();
 
 	//创建开始任务
@@ -234,7 +234,10 @@ void WristPos_task(void * pvParameters)
 		taskENTER_CRITICAL();	//进入临界状态
 		
 		MPlatform.Angle_Calcu();
-		printf("%f  , %f  , %f\r\n",MPlatform.Angle_X_Final,MPlatform.Angle_Y_Final,MPlatform.Angle_Z_Final);
+		printf("MPlatform:%f  , %f  , %f\r\n",MPlatform.Angle_X_Final,MPlatform.Angle_Y_Final,MPlatform.Angle_Z_Final);
+		
+		SPlatform.Angle_Calcu();
+		printf("SPlatform:%f  , %f  , %f\r\n",SPlatform.Angle_X_Final,SPlatform.Angle_Y_Final,SPlatform.Angle_Z_Final);
 			
 		taskEXIT_CRITICAL();	//退出临界状态
 		

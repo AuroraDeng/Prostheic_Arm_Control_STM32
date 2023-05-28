@@ -66,6 +66,10 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 	
 	if(huart->Instance==USART1)//如果是串口1，进行串口1 MSP初始化
 	{
+		/**USART3 GPIO Configuration
+    PA9     ------> USART3_TX
+    PA10     ------> USART3_RX
+    */
 		__HAL_RCC_GPIOA_CLK_ENABLE();			//使能GPIOA时钟
 		__HAL_RCC_USART1_CLK_ENABLE();			//使能USART1时钟
 	
@@ -87,6 +91,10 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 	
 	if(huart->Instance==USART2)//如果是串口2，进行串口2 MSP初始化
 	{
+		/**USART3 GPIO Configuration
+    PA2     ------> USART3_TX
+    PA3     ------> USART3_RX
+    */
 		__HAL_RCC_GPIOA_CLK_ENABLE();			//使能GPIOA时钟
 		__HAL_RCC_USART2_CLK_ENABLE();			//使能USART1时钟
 	
@@ -130,7 +138,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 #endif	
 	}
 	
-	if(huart->Instance==UART4)//如果是串口2，进行串口2 MSP初始化
+	if(huart->Instance==UART4)//串口4MSP初始化
 	{
 		/*
 			UART4_TX --> GPIOC Pin 10
@@ -139,7 +147,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 		__HAL_RCC_GPIOC_CLK_ENABLE();			//使能GPIOC时钟
 		__HAL_RCC_UART4_CLK_ENABLE();			//使能UART4时钟
 	
-		GPIO_Initure.Pin=GPIO_PIN_10|GPIO_PIN_11;			//PA10、PA11
+		GPIO_Initure.Pin=GPIO_PIN_10|GPIO_PIN_11;			//PC10、PC11
 		GPIO_Initure.Mode=GPIO_MODE_AF_PP;		//复用推挽输出
 		GPIO_Initure.Pull=GPIO_PULLUP;			//上拉
 		GPIO_Initure.Speed=GPIO_SPEED_FAST;		//高速
@@ -151,7 +159,30 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 		HAL_NVIC_SetPriority(UART4_IRQn,3,3);			//抢占优先级1，子优先级8
 #endif	
 	}
+		
+	if(huart->Instance==UART5)//如果是串口5，进行串口5 MSP初始化
+	{
+		/*
+			USART6_TX --> GPIOB Pin 8
+			USART6_RX --> GPIOB Pin 9
+		*/
+		__HAL_RCC_GPIOB_CLK_ENABLE();			//使能GPIOB时钟
+		__HAL_RCC_UART5_CLK_ENABLE();			//使能UART2时钟
+	
+		GPIO_Initure.Pin=GPIO_PIN_8|GPIO_PIN_9;			//PB8/PB9
+		GPIO_Initure.Mode=GPIO_MODE_AF_PP;		//复用推挽输出
+		GPIO_Initure.Pull=GPIO_PULLUP;			//上拉
+		GPIO_Initure.Speed=GPIO_SPEED_FAST;		//高速
+		GPIO_Initure.Alternate=GPIO_AF8_UART5;	//复用为UART5
+		HAL_GPIO_Init(GPIOB,&GPIO_Initure);	   	//初始化GPIO
+		
+#if EN_UART5_RX
+		HAL_NVIC_EnableIRQ(UART5_IRQn);				//使能UART5中断通道
+		HAL_NVIC_SetPriority(UART5_IRQn,3,3);			//抢占优先级3，子优先级3
+#endif	
+	}
 }
+
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
@@ -180,10 +211,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 ////		CopeWristPosData((unsigned char)bRxBuffer[0]);//处理数据
 			CopeMPData((unsigned char)bRxBuffer[0]);
 	else if(huart->Instance==UART4)
-	{	
-		WitSerialDataIn((unsigned char)dRxBuffer[0]);
-//		CopeElbowKData();
-	}
+		CopeSPData((unsigned char)dRxBuffer[0]);
+	else if(huart->Instance==UART5)
+		WitSerialDataIn((unsigned char)eRxBuffer[0]);
 //	else if(huart->Instance==USART3)//如果是串口3
 ////		CopeElbowFTData((unsigned char *)cRxBuffer,wCount);	 
 //		CopeElbowFTData((unsigned char)cRxBuffer,wCount);
@@ -335,12 +365,59 @@ void UART4_IRQHandler(void)
 
 #endif
 
-void Serialport_Init(u32 bound1,u32 bound2,u32 bound3,u32 bound4)
+#if EN_UART5_RX   //如果使能了串口2接收
+u8 eRxBuffer[RXBUFFERSIZE];
+UART_HandleTypeDef UART5_Handler; //UART句柄
+
+//初始化IO 串口5 
+//bound:波特率
+void uart5_init(u32 bound)
+{	
+	//UART 初始化设置
+	UART5_Handler.Instance=UART5;					    //USART5
+	UART5_Handler.Init.BaudRate=bound;				    //波特率
+	UART5_Handler.Init.WordLength=UART_WORDLENGTH_8B;   //字长为8位数据格式
+	UART5_Handler.Init.StopBits=UART_STOPBITS_1;	    //一个停止位
+	UART5_Handler.Init.Parity=UART_PARITY_NONE;		    //无奇偶校验位
+	UART5_Handler.Init.HwFlowCtl=UART_HWCONTROL_NONE;   //无硬件流控
+	UART5_Handler.Init.Mode=UART_MODE_TX_RX;		    //收发模式
+	HAL_UART_Init(&UART5_Handler);					    //HAL_UART_Init()会使能UART2
+	
+	HAL_UART_Receive_IT(&UART5_Handler, (u8 *)eRxBuffer, RXBUFFERSIZE);//该函数会开启接收中断：标志位UART_IT_RXNE，并且设置接收缓冲以及接收缓冲接收最大数据量
+}
+
+//串口5中断服务程序
+void UART5_IRQHandler(void)                	
+{ 	
+	u32 timeout=0;
+	
+	HAL_UART_IRQHandler(&UART5_Handler);	//调用HAL库中断处理公用函数
+	
+  while (HAL_UART_GetState(&UART5_Handler) != HAL_UART_STATE_READY)//等待就绪
+	{
+		timeout++;////超时处理
+		if(timeout>HAL_MAX_DELAY) break;		
+	}
+	
+	timeout=0;
+	while(HAL_UART_Receive_IT(&UART5_Handler, (u8 *)eRxBuffer, RXBUFFERSIZE) != HAL_OK)//一次处理完成之后，重新开启中断并设置RxXferCount为1
+	{
+	 timeout++; //超时处理
+	 if(timeout>HAL_MAX_DELAY) break;	
+	}
+	
+	__HAL_UART_CLEAR_FLAG(&UART5_Handler,UART_FLAG_RXNE);
+	__HAL_UART_CLEAR_FLAG(&UART5_Handler,UART_FLAG_ORE);
+} 
+#endif	
+
+void Serialport_Init(u32 bound1,u32 bound2,u32 bound3,u32 bound4,u32 bound5)
 {
 	uart1_init(bound1);
 	uart2_init(bound2);
 	uart3_init(bound3);
 	uart4_init(bound4);
+	uart5_init(bound5);
 }
 
 

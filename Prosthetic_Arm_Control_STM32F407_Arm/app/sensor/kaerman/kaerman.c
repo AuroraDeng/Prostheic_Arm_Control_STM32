@@ -284,3 +284,44 @@ void CopeMPData(unsigned char ucData)
 		//hN = (float)stcAngle.Angle[2]/32768*180;
 	}
 }
+
+void CopeSPData(unsigned char ucData)
+{
+	static unsigned char RxBuffer[250];
+	static unsigned char RxCnt = 0;	
+	//LED_REVERSE();					//接收到数据，LED灯闪烁一下
+	RxBuffer[RxCnt++]=ucData;	//将收到的数据存入缓冲区中
+	if (RxBuffer[0]!=0x55) //数据头不对，则重新开始寻找0x55数据头
+	{
+		RxCnt=0;
+		return;
+	}
+	if (RxCnt<11) {return;}//数据不满11个，则返回
+	else
+	{
+		if ( (RxBuffer[1]==0x55)&&(RxBuffer[2]==0x01) )
+		{
+				 SPlatform.hN_roll = (float)((int16_t)(RxBuffer[4]<<8) | RxBuffer[5]) / 32768 * 180;
+					
+				SPlatform.hN_Pitch = (float)((int16_t)(RxBuffer[6]<<8) | RxBuffer[7]) / 32768 * 180;
+					
+				SPlatform.hN_Yaw = (float)((int16_t)(RxBuffer[8]<<8) | RxBuffer[9]) / 32768 * 180;
+		}
+		
+		if ( (RxBuffer[1]==0x55)&&(RxBuffer[2]==0x03) )
+		{
+		
+			//加速度原始数据
+				SPlatform.aacx = (float)((int16_t)(RxBuffer[5]<<8) | RxBuffer[4]) ;					
+				SPlatform.aacy = (float)((int16_t)(RxBuffer[7]<<8) | RxBuffer[6]) ;
+				SPlatform.aacz = (float)((int16_t)(RxBuffer[9]<<8) | RxBuffer[8]) ;
+		  //陀螺仪原始数据
+				SPlatform.gyrox = (float)((int16_t)(RxBuffer[11]<<8) | RxBuffer[10]) ;					
+				SPlatform.gyroy = (float)((int16_t)(RxBuffer[13]<<8) | RxBuffer[12]) ;
+				SPlatform.gyroz = (float)((int16_t)(RxBuffer[15]<<8) | RxBuffer[14]) ;
+			
+		}
+		RxCnt=0;//清空缓存区
+		//hN = (float)stcAngle.Angle[2]/32768*180;
+	}
+}

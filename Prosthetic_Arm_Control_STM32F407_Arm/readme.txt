@@ -26,22 +26,7 @@
 
 -------------------------------------------------------------------------------------------
 
-◆其他重要连接：
-  开发板光盘资料下载地址（视频+文档+源码等）：http://www.openedv.com/posts/list/13912.htm
-
-
-◆友情提示：如果您想以后及时免费的收到正点原子所有开发板资料更新增加通知，请关注微信公众平台：
- 2种添加方法：（动动手提升您的学习效率，惊喜不断哦）
-（1）打开微信->添加朋友->公众号->输入“正点原子”->点击关注
-（2）打开微信->添加朋友->输入“alientek_stm32"->点击关注
- 具体微信添加方法，请参考帖子：http://www.openedv.com/posts/list/45157.htm
- 
-
-
-						
-
-						淘宝店铺： http://openedv.taobao.com
-						           http://eboard.taobao.com
-						公司网站：www.alientek.com
-						技术论坛：www.openedv.com
-                                                微信公众平台：正点原子
+CANControlOK:从控机可通过CAN/USART接收主机的指令
+CANControlOK_V1：实现一个IMU的姿态检测
+CANControlOK_V1.1.2：实现一个IMU的姿态检测；将IMU设置成一个类
+CANControlOK_V1.2：实现两个IMU的姿态检测，可正确收发运动指令
