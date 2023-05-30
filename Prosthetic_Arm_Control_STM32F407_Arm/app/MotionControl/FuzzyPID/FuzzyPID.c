@@ -211,3 +211,4 @@ float FuzzyPID::Inverse_quantization(float maximum, float minimum, float qvalues
     float x = (maximum - minimum) *(qvalues + 3)/6 + minimum;
     return x;
 }
+

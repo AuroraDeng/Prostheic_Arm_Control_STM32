@@ -115,7 +115,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 	}
 	
 	if(huart->Instance==USART3)//如果是串口3，进行串口3 MSP初始化
-	{ /* USART3 clock enable */
+	{ 
+		/* USART3 clock enable */
     __HAL_RCC_USART3_CLK_ENABLE();			//使能USART3时钟
     __HAL_RCC_GPIOB_CLK_ENABLE();				//使能GPIOB时钟
     /**USART3 GPIO Configuration
@@ -358,6 +359,9 @@ void UART4_IRQHandler(void)
 	 timeout++; //超时处理
 	 if(timeout>HAL_MAX_DELAY) break;	
 	}
+
+//	if(__HAL_UART_GET_FLAG(&UART4_Handler, UART_FLAG_RXNE) != RESET)//获取 UART4 的状态标志，例如是否接收到了新的数据、是否发送完成、是否出现错误等:使用 UART_FLAG_RXNE 来检查是否接收到了新的数据
+//		CopeSPData((unsigned char)dRxBuffer[0]);
 	
 	__HAL_UART_CLEAR_FLAG(&UART4_Handler,UART_FLAG_RXNE);
 	__HAL_UART_CLEAR_FLAG(&UART4_Handler,UART_FLAG_ORE);
@@ -410,6 +414,26 @@ void UART5_IRQHandler(void)
 	__HAL_UART_CLEAR_FLAG(&UART5_Handler,UART_FLAG_ORE);
 } 
 #endif	
+
+//void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart){
+//	HAL_StatusTypeDef ERR;
+//	int i = 0;
+//	if(huart->Instance == USART1)
+//	{
+//		__HAL_UNLOCK(&UART1_Handler);
+//		HAL_UART_Receive_IT(&UART1_Handler, (u8 *)aRxBuffer, RXBUFFERSIZE);   
+//	}
+//	else	if(huart->Instance == USART2)
+//	{
+//		__HAL_UNLOCK(&UART2_Handler);
+//		HAL_UART_Receive_IT(&UART2_Handler, (u8 *)bRxBuffer, RXBUFFERSIZE);   			//再开启接收中断
+//	}
+//	else if(huart->Instance == UART4)
+//	{
+//			__HAL_UNLOCK(&UART4_Handler);
+//			HAL_UART_Receive_IT(&UART4_Handler,(u8 *)dRxBuffer, RXBUFFERSIZE);   //再开启接收中断
+//	}
+//}
 
 void Serialport_Init(u32 bound1,u32 bound2,u32 bound3,u32 bound4,u32 bound5)
 {

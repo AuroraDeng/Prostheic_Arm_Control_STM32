@@ -152,6 +152,8 @@ void Command_task(void * pvParameters)
 {	
 	float WristPos[3]={0};
 	float delta_L[2]={0};
+	int32_t x,y;
+	int32_t M1=0,M2=0;
   for(;;)
   {	
 		taskENTER_CRITICAL();	//进入临界状态
@@ -169,10 +171,36 @@ void Command_task(void * pvParameters)
 			SPlatform.Angle_Calcu();
 			RPY(WristPos,SPlatform,MPlatform);//解算腕关节动平台相对于静平台的姿态(输出是弧度)
 			
-			delta_L[0]=sqrt(2536*(1-cos(SendCommand[0]*Pi/180)))-sqrt(2536*(1-cos(WristPos[0])));//IMU的x轴转动/尺偏桡偏运动/左右方向（有错误）
-			
-			Motor_W1(SendCommand[0]-50000);
-			Motor_W2(SendCommand[2]-50000);
+			/*绳子的缩短量计算*/
+			delta_L[0]=sqrt(2536*(1-cos((betax-abs(SendCommand[0]))*Pi/180)))-sqrt(2536*(1-cos(betax*Pi/180-abs(WristPos[0]))));//IMU的X轴转动/尺偏桡偏运动/左右方向
+			delta_L[1]=sqrt(2320*(1-cos((betay-abs(SendCommand[1]))*Pi/180)))-sqrt(2320*(1-cos(betay*Pi/180-abs(WristPos[1]))));//IMU的Y轴转动/屈曲伸展运动/前后方向
+			/*姿态引起的电机形成行程的绝对值*/
+			x=((abs(delta_L[0])/R_CL)*(180/Pi))/((360/GearRatio)/(CountsPerTurn*Harmonic));
+			y=((abs(delta_L[1])/R_CL)*(180/Pi))/((360/GearRatio)/(CountsPerTurn*Harmonic));
+			/*电机行程计算*/
+			M1=0;M2=0;
+			if(SendCommand[0]>0)//右偏
+			{
+				M1+=x;
+				M2+=x;
+			}
+			if(SendCommand[0]<0)//左偏
+			{
+				M1-=x;
+				M2-=x;
+			}
+			if(SendCommand[1]<0)//向前
+			{
+				M1-=y;
+				M2+=y;
+			}
+			if(SendCommand[1]>0)//向后
+			{
+				M1+=y;
+				M2-=y;
+			}
+			Motor_W1(M1);
+			Motor_W2(M2);
 			Motor_QB(SendCommand[4]-50000);
 			Motor_ZB(SendCommand[6]);
 			

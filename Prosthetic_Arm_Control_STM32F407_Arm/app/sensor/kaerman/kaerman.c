@@ -278,7 +278,6 @@ void CopeMPData(unsigned char ucData)
 				MPlatform.gyrox = (float)((int16_t)(ucRxBuffer[11]<<8) | ucRxBuffer[10]) ;					
 				MPlatform.gyroy = (float)((int16_t)(ucRxBuffer[13]<<8) | ucRxBuffer[12]) ;
 				MPlatform.gyroz = (float)((int16_t)(ucRxBuffer[15]<<8) | ucRxBuffer[14]) ;
-			
 		}
 		ucRxCnt=0;//Çå¿Õ»º´æÇø
 		//hN = (float)stcAngle.Angle[2]/32768*180;

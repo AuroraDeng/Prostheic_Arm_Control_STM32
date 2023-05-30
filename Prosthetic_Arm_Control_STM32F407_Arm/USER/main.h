@@ -17,6 +17,12 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
+#define betax   76.314 
+#define betay   80.473
+#define R_CL    16
+#define CountsPerTurn   1000
+#define Harmonic   4
+#define GearRatio  100
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 	
