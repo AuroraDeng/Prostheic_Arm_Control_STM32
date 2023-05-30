@@ -210,9 +210,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	}
 	else if(huart->Instance==USART2)//如果是串口2
 ////		CopeWristPosData((unsigned char)bRxBuffer[0]);//处理数据
-			CopeMPData((unsigned char)bRxBuffer[0]);
+			CopeMPData((unsigned char*)bRxBuffer);
 	else if(huart->Instance==UART4)
-		CopeSPData((unsigned char)dRxBuffer[0]);
+		CopeSPData((unsigned char*)dRxBuffer);
 	else if(huart->Instance==UART5)
 		WitSerialDataIn((unsigned char)eRxBuffer[0]);
 //	else if(huart->Instance==USART3)//如果是串口3
@@ -244,9 +244,7 @@ void USART1_IRQHandler(void)
 #endif	
 
 #if EN_USART2_RX   //如果使能了串口2接收
-//u8 USART2_RX_BUF[USART_REC_LEN];     //接收缓冲,最大USART_REC_LEN个字节.
-u16 USART2_RX_STA=0;       //接收状态标记	
-u8 bRxBuffer[RXBUFFERSIZE];
+u8 bRxBuffer[IMUFrameLength];
 UART_HandleTypeDef UART2_Handler; //UART句柄
 
 //初始化IO 串口1 
@@ -263,7 +261,11 @@ void uart2_init(u32 bound)
 	UART2_Handler.Init.Mode=UART_MODE_TX_RX;		    //收发模式
 	HAL_UART_Init(&UART2_Handler);					    //HAL_UART_Init()会使能UART2
 	
-	HAL_UART_Receive_IT(&UART2_Handler, (u8 *)bRxBuffer, RXBUFFERSIZE);//该函数会开启接收中断：标志位UART_IT_RXNE，并且设置接收缓冲以及接收缓冲接收最大数据量
+	/* 修改接收缓冲区大小 */
+  UART2_Handler.pRxBuffPtr =bRxBuffer;
+  UART2_Handler.RxXferSize = sizeof(bRxBuffer);
+  UART2_Handler.RxXferCount = sizeof(bRxBuffer);
+	HAL_UART_Receive_IT(&UART2_Handler, (u8 *)bRxBuffer, IMUFrameLength);//该函数会开启接收中断：标志位UART_IT_RXNE，并且设置接收缓冲以及接收缓冲接收最大数据量
 }
 
 //串口2中断服务程序
@@ -280,7 +282,7 @@ void USART2_IRQHandler(void)
 	}
 	
 	timeout=0;
-	while(HAL_UART_Receive_IT(&UART2_Handler, (u8 *)bRxBuffer, RXBUFFERSIZE) != HAL_OK)//一次处理完成之后，重新开启中断并设置RxXferCount为1
+	while(HAL_UART_Receive_IT(&UART2_Handler, (u8 *)bRxBuffer,IMUFrameLength) != HAL_OK)//一次处理完成之后，重新开启中断并设置RxXferCount为1
 	{
 	 timeout++; //超时处理
 	 if(timeout>HAL_MAX_DELAY) break;	
@@ -320,7 +322,7 @@ void uart3_init(u32 bound)
 #endif
 
 #if EN_UART4_RX
-u8 dRxBuffer[RXBUFFERSIZE];
+u8 dRxBuffer[IMUFrameLength];
 UART_HandleTypeDef UART4_Handler; //UART句柄
 
 //初始化IO 串口1 
@@ -337,7 +339,11 @@ void uart4_init(u32 bound)
 	UART4_Handler.Init.Mode=UART_MODE_TX_RX;		    //收发模式
 	HAL_UART_Init(&UART4_Handler);					    //HAL_UART_Init()会使能UART4
 	
-	HAL_UART_Receive_IT(&UART4_Handler, (u8 *)dRxBuffer, RXBUFFERSIZE);//该函数会开启接收中断：标志位UART_IT_RXNE，并且设置接收缓冲以及接收缓冲接收最大数据量
+	 /* 修改接收缓冲区大小 */
+  UART4_Handler.pRxBuffPtr = dRxBuffer;
+  UART4_Handler.RxXferSize = sizeof(dRxBuffer);
+  UART4_Handler.RxXferCount = sizeof(dRxBuffer);
+	HAL_UART_Receive_IT(&UART4_Handler, (u8 *)dRxBuffer, IMUFrameLength);//该函数会开启接收中断：标志位UART_IT_RXNE，并且设置接收缓冲以及接收缓冲接收最大数据量
 }
 
 //串口4中断服务程序
@@ -354,7 +360,7 @@ void UART4_IRQHandler(void)
 	}
 	
 	timeout=0;
-	while(HAL_UART_Receive_IT(&UART4_Handler, (u8 *)dRxBuffer, RXBUFFERSIZE) != HAL_OK)//一次处理完成之后，重新开启中断并设置RxXferCount为1
+	while(HAL_UART_Receive_IT(&UART4_Handler, (u8 *)dRxBuffer,IMUFrameLength) != HAL_OK)//一次处理完成之后，重新开启中断并设置RxXferCount为1
 	{
 	 timeout++; //超时处理
 	 if(timeout>HAL_MAX_DELAY) break;	

@@ -31,4 +31,5 @@ f684241：CANControlOK_V1：实现一个IMU的姿态检测
 1e329d6：CANControlOK_V1.1.2：实现一个IMU的姿态检测；将IMU设置成一个类
 bf93368：CANControlOK_V1.2：实现两个IMU的姿态检测，可正确收发运动指令
 
-WristPosControlV1:实现了动静平台上IMU的相对位置求解
+673c158：WristPosControlV1:实现了动静平台上IMU的相对位置求解
+3d6c9dc：WristPosControlV1.1:初步实现了从操作空间到关节空间的运动映射

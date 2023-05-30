@@ -30,13 +30,13 @@ void Command_task(void * pvParameters);
 TaskHandle_t CommandTask_Handler;		//任务句柄	 
 
 //腕部电机运动指令
-#define WRIST_TASK_PRIO			2
+#define WRIST_TASK_PRIO			3
 #define WRIST_STK_SIZE			512
 void Wrist_task(void * pvParameters);
 TaskHandle_t WristTask_Handler;		//任务句柄
 
 //腕部位置传感器检测
-#define WristPos_TASK_PRIO		3
+#define WristPos_TASK_PRIO		2
 #define WristPos_STK_SIZE			256
 void WristPos_task(void * pvParameters);
 TaskHandle_t WristPosTask_Handler;		//任务句柄
@@ -167,9 +167,9 @@ void Command_task(void * pvParameters)
 			if(USART1_RX_STA&0x8000)
 				Get_USART_Command(&UART1_Handler,SendCommand);	
 			
-			MPlatform.Angle_Calcu();
-			SPlatform.Angle_Calcu();
-			RPY(WristPos,SPlatform,MPlatform);//解算腕关节动平台相对于静平台的姿态(输出是弧度)
+//			MPlatform.Angle_Calcu();
+//			SPlatform.Angle_Calcu();
+//			RPY(WristPos,SPlatform,MPlatform);//解算腕关节动平台相对于静平台的姿态(输出是弧度)
 			
 			/*绳子的缩短量计算*/
 			delta_L[0]=sqrt(2536*(1-cos((betax-abs(SendCommand[0]))*Pi/180)))-sqrt(2536*(1-cos(betax*Pi/180-abs(WristPos[0]))));//IMU的X轴转动/尺偏桡偏运动/左右方向
@@ -269,14 +269,21 @@ void WristPos_task(void * pvParameters)
   for(;;)
   {	
 		taskENTER_CRITICAL();	//进入临界状态
+//		if(HAL_UART_Receive(&UART2_Handler, (u8 *)bRxBuffer,IMUFrameLength,20)==HAL_OK)
+//		{
+//			CopeMPData((unsigned char*)bRxBuffer);
+			printf("MPlatform:%f  , %f  , %f\r\n",MPlatform.hN_Yaw,MPlatform.hN_Pitch,MPlatform.hN_roll);
+//		}
 		
-		MPlatform.Angle_Calcu();
-		printf("MPlatform:%f  , %f  , %f\r\n",MPlatform.Angle_X_Final,MPlatform.Angle_Y_Final,MPlatform.Angle_Z_Final);
+//		if(HAL_UART_Receive(&UART4_Handler, (u8 *)dRxBuffer,IMUFrameLength,20)==HAL_OK)
+//		{
+//			CopeSPData((unsigned char*)dRxBuffer);
+			printf("SPlatform:%f  , %f  , %f\r\n",SPlatform.hN_Yaw,SPlatform.hN_Pitch,SPlatform.hN_roll);
+//		}
 		
-		SPlatform.Angle_Calcu();
-		printf("SPlatform:%f  , %f  , %f\r\n",SPlatform.Angle_X_Final,SPlatform.Angle_Y_Final,SPlatform.Angle_Z_Final);
 		RPY(WristPos,SPlatform,MPlatform);//解算腕关节动平台相对于静平台的姿态
 		printf("WristPos:%f  , %f  \r\n",WristPos[0],WristPos[1]);
+		
 		taskEXIT_CRITICAL();	//退出临界状态
 		
 		vTaskDelay(100);//等待传输完成
