@@ -33,4 +33,5 @@ bf93368：CANControlOK_V1.2：实现两个IMU的姿态检测，可正确收发运动指令
 
 673c158：WristPosControlV1:实现了动静平台上IMU的相对位置求解
 3d6c9dc：WristPosControlV1.1:初步实现了从操作空间到关节空间的运动映射
-135fb7b：WristPosControlV1.2:尝试调整腕部IMU的接收方案（未成功）
+135fb7b：WristPosControlV1.1.2:尝试调整腕部IMU的接收方案（未成功）
+ee080b9：WristPosControl_V1.2:实现了腕部两个IMU正确的姿态检测，可正确收发运动指令

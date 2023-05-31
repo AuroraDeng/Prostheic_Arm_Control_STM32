@@ -1,5 +1,5 @@
 Dependencies for Project 'ProstheticArmControl', Target 'ProstheticArmControl': (DO NOT MODIFY !)
-F (.\main.c)(0x6475F5E4)(-xc++ -std=c++11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-D__MICROLIB -gdwarf-3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID -I ../app/MotionControl/ImpedanceControl -I ../app/usart/RS485 -I ../app/gpio -I ../app/sensor/KWR46C -I ../app/sensor/HWT101 -I ../app/timer -I ../app/can -I ../app/sensor/kaerman-I./RTE/_ProstheticArmControl-ID:/keil5/Keil/STM32F4xx_DFP/2.13.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="528" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/main.o -MD)
+F (.\main.c)(0x6476EEA1)(-xc++ -std=c++11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-D__MICROLIB -gdwarf-3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID -I ../app/MotionControl/ImpedanceControl -I ../app/usart/RS485 -I ../app/gpio -I ../app/sensor/KWR46C -I ../app/sensor/HWT101 -I ../app/timer -I ../app/can -I ../app/sensor/kaerman-I./RTE/_ProstheticArmControl-ID:/keil5/Keil/STM32F4xx_DFP/2.13.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="528" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/main.o -MD)
 I (..\USER\main.h)(0x6475575A)
 I (..\SYSTEM\sys\sys.h)(0x63908FC1)
 I (..\USER\stm32f4xx.h)(0x63908FC1)
@@ -115,7 +115,7 @@ I (..\app\sensor\BWT61CL\BWT61CL.h)(0x63908FC1)
 I (..\app\sensor\KWR46C\KWR46C.h)(0x6412895B)
 I (..\app\sensor\HWT101\HWT101.h)(0x6458C3EE)
 I (..\app\sensor\HWT101\REG.h)(0x6455AF41)
-I (..\app\sensor\kaerman\kaerman.h)(0x6475DCAE)
+I (..\app\sensor\kaerman\kaerman.h)(0x6476B3DC)
 F (.\stm32f4xx_it.c)(0x63908FC1)(-xc -std=gnu90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID -I ../app/MotionControl/ImpedanceControl -I ../app/usart/RS485 -I ../app/gpio -I ../app/sensor/KWR46C -I ../app/sensor/HWT101 -I ../app/timer -I ../app/can -I ../app/sensor/kaerman-I./RTE/_ProstheticArmControl-ID:/keil5/Keil/STM32F4xx_DFP/2.13.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="528" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/stm32f4xx_it.o -MD)
 I (..\USER\main.h)(0x6475575A)
 I (..\SYSTEM\sys\sys.h)(0x63908FC1)
@@ -1766,7 +1766,7 @@ I (..\FreeRTOS\include\portable.h)(0x63908FC1)
 I (..\FreeRTOS\include\deprecated_definitions.h)(0x63908FC1)
 I (..\FreeRTOS\portable\GCC\ARM_CM4F\portmacro.h)(0x63908FC1)
 I (..\FreeRTOS\include\mpu_wrappers.h)(0x63908FC1)
-F (..\SYSTEM\can\can.c)(0x64634AAB)(-xc -std=gnu90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID -I ../app/MotionControl/ImpedanceControl -I ../app/usart/RS485 -I ../app/gpio -I ../app/sensor/KWR46C -I ../app/sensor/HWT101 -I ../app/timer -I ../app/can -I ../app/sensor/kaerman-I./RTE/_ProstheticArmControl-ID:/keil5/Keil/STM32F4xx_DFP/2.13.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="528" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/can.o -MD)
+F (..\SYSTEM\can\can.c)(0x64769E7D)(-xc -std=gnu90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID -I ../app/MotionControl/ImpedanceControl -I ../app/usart/RS485 -I ../app/gpio -I ../app/sensor/KWR46C -I ../app/sensor/HWT101 -I ../app/timer -I ../app/can -I ../app/sensor/kaerman-I./RTE/_ProstheticArmControl-ID:/keil5/Keil/STM32F4xx_DFP/2.13.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="528" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/can.o -MD)
 I (..\SYSTEM\can\can.h)(0x6461A827)
 I (..\USER\main.h)(0x6475575A)
 I (..\SYSTEM\sys\sys.h)(0x63908FC1)
@@ -1920,7 +1920,7 @@ I (..\SYSTEM\can\can.h)(0x6461A827)
 I (..\app\usart\usart_print.h)(0x6474B548)
 I (D:\keil5\ARM\ARMCLANG\include\string.h)(0x5CEB78E8)
 I (..\app\usart\RS485\rs485_drv.h)(0x640D4A30)
-F (..\readme.txt)(0x6475F2CD)()
+F (..\readme.txt)(0x64769DB7)()
 F (..\app\CANopen\NMT\NMT_control.c)(0x63908FC1)(-xc++ -std=c++11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-D__MICROLIB -gdwarf-3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID -I ../app/MotionControl/ImpedanceControl -I ../app/usart/RS485 -I ../app/gpio -I ../app/sensor/KWR46C -I ../app/sensor/HWT101 -I ../app/timer -I ../app/can -I ../app/sensor/kaerman-I./RTE/_ProstheticArmControl-ID:/keil5/Keil/STM32F4xx_DFP/2.13.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="528" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/nmt_control.o -MD)
 I (..\app\CANopen\NMT\NMT_control.h)(0x63908FC1)
 I (..\SYSTEM\can\can.h)(0x6461A827)
@@ -3472,8 +3472,8 @@ I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd.h)(0x63908FC1)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h)(0x63908FC1)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x63908FC1)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x63908FC1)
-F (..\app\sensor\kaerman\kaerman.c)(0x6475FF11)(-xc++ -std=c++11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-D__MICROLIB -gdwarf-3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID -I ../app/MotionControl/ImpedanceControl -I ../app/usart/RS485 -I ../app/gpio -I ../app/sensor/KWR46C -I ../app/sensor/HWT101 -I ../app/timer -I ../app/can -I ../app/sensor/kaerman-I./RTE/_ProstheticArmControl-ID:/keil5/Keil/STM32F4xx_DFP/2.13.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="528" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/kaerman.o -MD)
-I (..\app\sensor\kaerman\kaerman.h)(0x6475DCAE)
+F (..\app\sensor\kaerman\kaerman.c)(0x6476B89A)(-xc++ -std=c++11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-D__MICROLIB -gdwarf-3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../CORE -I ../OBJ -I ../USER -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../HALLIB/STM32F4xx_HAL_Driver/Inc -I ../SYSTEM/can -I ../app/CANopen/NMT -I ../app/CANopen -I ../app/CANopen/PDO -I ../app/CANopen/SDO -I ../app/usart -I ../app/EPOS4 -I ../app/MotionControl -I ../FreeRTOS/include -I ../FreeRTOS/portable/GCC/ARM_CM4F -I ../app/sensor/BWT61CL -I ../app/MotionControl/FuzzyPID -I ../app/MotionControl/ImpedanceControl -I ../app/usart/RS485 -I ../app/gpio -I ../app/sensor/KWR46C -I ../app/sensor/HWT101 -I ../app/timer -I ../app/can -I ../app/sensor/kaerman-I./RTE/_ProstheticArmControl-ID:/keil5/Keil/STM32F4xx_DFP/2.13.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-ID:/keil5/ARM/CMSIS/Include-D__UVISION_VERSION="528" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o ../obj/kaerman.o -MD)
+I (..\app\sensor\kaerman\kaerman.h)(0x6476B3DC)
 I (D:\keil5\ARM\ARMCLANG\include\libcxx\math.h)(0x64054D8C)
 I (D:\keil5\ARM\ARMCLANG\include\libcxx\__config)(0x5CEB78E6)
 I (D:\keil5\ARM\ARMCLANG\include\math.h)(0x5CEB78EA)
@@ -3486,3 +3486,72 @@ I (D:\keil5\ARM\ARMCLANG\include\libcxx\limits)(0x5CEB78DC)
 I (D:\keil5\ARM\ARMCLANG\include\libcxx\__undef_macros)(0x5CEB78DC)
 I (D:\keil5\ARM\ARMCLANG\include\libcxx\stdint.h)(0x5CEB78E6)
 I (D:\keil5\ARM\ARMCLANG\include\stdint.h)(0x5CEB78E8)
+I (..\SYSTEM\usart\usart.h)(0x6475D412)
+I (..\SYSTEM\sys\sys.h)(0x63908FC1)
+I (..\USER\stm32f4xx.h)(0x63908FC1)
+I (..\USER\stm32f407xx.h)(0x63908FC1)
+I (..\CORE\core_cm4.h)(0x63908FC1)
+I (..\CORE\cmsis_version.h)(0x63908FC1)
+I (..\CORE\cmsis_compiler.h)(0x63908FC1)
+I (..\CORE\cmsis_armclang.h)(0x63908FC1)
+I (D:\keil5\ARM\ARMCLANG\include\arm_compat.h)(0x5CEB78EA)
+I (D:\keil5\ARM\ARMCLANG\include\arm_acle.h)(0x5CEB78EA)
+I (..\CORE\mpu_armv7.h)(0x63908FC1)
+I (..\USER\system_stm32f4xx.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x63908FC1)
+I (..\USER\stm32f4xx_hal_conf.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x63908FC1)
+I (D:\keil5\ARM\ARMCLANG\include\libcxx\stddef.h)(0x5CEB78DC)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h)(0x640EEB0A)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_adc.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_adc_ex.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h)(0x64618434)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_crc.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cryp.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dac.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dac_ex.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dcmi.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dcmi_ex.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sram.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fsmc.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_nor.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_nand.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pccard.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hash.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2s.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2s_ex.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_iwdg.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rng.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sd.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_sdmmc.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_irda.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_smartcard.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_wwdg.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x63908FC1)
+I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x63908FC1)
+I (D:\keil5\ARM\ARMCLANG\include\libcxx\stdio.h)(0x5CEB78DC)
+I (D:\keil5\ARM\ARMCLANG\include\stdio.h)(0x640D4188)
