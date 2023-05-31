@@ -9,21 +9,26 @@ void CopeMPData(unsigned char ucData[])
 {		
 	static unsigned char ucRxBuffer[11];
 	static unsigned char ucRxCnt = 0;	
-	int i,j;
-	for(i=0;i<21;i++)
+	int i=0,j,sum=0;
+	while(ucData[i]!=0x55||ucData[i+1]!=0x55||ucData[i+2]!=0x01||ucData[i+3]!=0x06)
 	{
-		if (ucData[i]==0x55&&ucData[i+1]==0x55) //数据头不对，则重新开始寻找0x55数据头
-			break;
+		i++;
 	}
 	for(j=i;j<i+11;j++)
-		ucRxBuffer[ucRxCnt++]=ucData[j];	//将收到的数据存入缓冲区中
-	if((ucRxBuffer[1]==0x55)&&(ucRxBuffer[2]==0x01))
 	{
-			MPlatform.hN_roll = (float)((int16_t)(ucRxBuffer[4]<<8) | ucRxBuffer[5]) / 32768 * 180;
+		ucRxBuffer[ucRxCnt]=ucData[j];	//将收到的数据存入缓冲区中
+		if(ucRxCnt<10)
+				sum+=ucRxBuffer[ucRxCnt];
+		ucRxCnt++;
+	}
+		
+	if((uint8_t)sum==ucRxBuffer[10])
+	{
+			MPlatform.hN_roll = (float)((int16_t)(ucRxBuffer[5]<<8) | ucRxBuffer[4]) / 32768 * 180;
 					
-			MPlatform.hN_Pitch = (float)((int16_t)(ucRxBuffer[6]<<8) | ucRxBuffer[7]) / 32768 * 180;
+			MPlatform.hN_Pitch = (float)((int16_t)(ucRxBuffer[7]<<8) | ucRxBuffer[6]) / 32768 * 180;
 					
-			MPlatform.hN_Yaw = (float)((int16_t)(ucRxBuffer[8]<<8) | ucRxBuffer[9]) / 32768 * 180;
+			MPlatform.hN_Yaw = (float)((int16_t)(ucRxBuffer[9]<<8) | ucRxBuffer[8]) / 32768 * 180;
 	}
 	ucRxCnt=0;//清空缓存区
 }
@@ -32,21 +37,25 @@ void CopeSPData(unsigned char ucData[])
 {
 		static unsigned char RxBuffer[11];
 		static unsigned char RxCnt = 0;	
-		int i,j;
-		for(i=0;i<21;i++)
+		int i=0,j,sum=0;
+		while(ucData[i]!=0x55||ucData[i+1]!=0x55||ucData[i+2]!=0x01||ucData[i+3]!=0x06)
 		{
-			if (ucData[i]==0x55&&ucData[i+1]==0x55) //数据头不对，则重新开始寻找0x55数据头
-				break;
-		}			
+			i++;
+		}	
 		for(j=i;j<i+11;j++)
-				RxBuffer[RxCnt++]=ucData[j];	//将收到的数据存入缓冲区中
-		if((RxBuffer[1]==0x55)&&(RxBuffer[2]==0x01))
 		{
-				SPlatform.hN_roll = (float)((int16_t)(RxBuffer[4]<<8) | RxBuffer[5]) / 32768 * 180;
+			RxBuffer[RxCnt]=ucData[j];	//将收到的数据存入缓冲区中
+			if(RxCnt<10)
+				sum+=RxBuffer[RxCnt];
+			RxCnt++;
+		}		
+		if((uint8_t)sum==RxBuffer[10])
+		{
+				SPlatform.hN_roll = (float)((int16_t)(RxBuffer[5]<<8) | RxBuffer[4]) / 32768 * 180;
 					
-				SPlatform.hN_Pitch = (float)((int16_t)(RxBuffer[6]<<8) | RxBuffer[7]) / 32768 * 180;
+				SPlatform.hN_Pitch = (float)((int16_t)(RxBuffer[7]<<8) | RxBuffer[6]) / 32768 * 180;
 					
-				SPlatform.hN_Yaw = (float)((int16_t)(RxBuffer[8]<<8) | RxBuffer[9]) / 32768 * 180;
+				SPlatform.hN_Yaw = (float)((int16_t)(RxBuffer[9]<<8) | RxBuffer[8]) / 32768 * 180;
 		}
 		RxCnt=0;//清空缓存区
 }

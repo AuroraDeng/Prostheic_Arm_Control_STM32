@@ -208,11 +208,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 			}
 		}
 	}
-	else if(huart->Instance==USART2)//如果是串口2
-////		CopeWristPosData((unsigned char)bRxBuffer[0]);//处理数据
-			CopeMPData((unsigned char*)bRxBuffer);
-	else if(huart->Instance==UART4)
-		CopeSPData((unsigned char*)dRxBuffer);
+//	else if(huart->Instance==USART2)//如果是串口2
+//////		CopeWristPosData((unsigned char)bRxBuffer[0]);//处理数据
+//			CopeMPData((unsigned char*)bRxBuffer);
+//	else if(huart->Instance==UART4)
+//		CopeSPData((unsigned char*)dRxBuffer);
 	else if(huart->Instance==UART5)
 		WitSerialDataIn((unsigned char)eRxBuffer[0]);
 //	else if(huart->Instance==USART3)//如果是串口3
@@ -265,7 +265,7 @@ void uart2_init(u32 bound)
   UART2_Handler.pRxBuffPtr =bRxBuffer;
   UART2_Handler.RxXferSize = sizeof(bRxBuffer);
   UART2_Handler.RxXferCount = sizeof(bRxBuffer);
-	HAL_UART_Receive_IT(&UART2_Handler, (u8 *)bRxBuffer, IMUFrameLength);//该函数会开启接收中断：标志位UART_IT_RXNE，并且设置接收缓冲以及接收缓冲接收最大数据量
+//	HAL_UART_Receive_IT(&UART2_Handler, (u8 *)bRxBuffer, IMUFrameLength);//该函数会开启接收中断：标志位UART_IT_RXNE，并且设置接收缓冲以及接收缓冲接收最大数据量
 }
 
 //串口2中断服务程序
@@ -343,7 +343,7 @@ void uart4_init(u32 bound)
   UART4_Handler.pRxBuffPtr = dRxBuffer;
   UART4_Handler.RxXferSize = sizeof(dRxBuffer);
   UART4_Handler.RxXferCount = sizeof(dRxBuffer);
-	HAL_UART_Receive_IT(&UART4_Handler, (u8 *)dRxBuffer, IMUFrameLength);//该函数会开启接收中断：标志位UART_IT_RXNE，并且设置接收缓冲以及接收缓冲接收最大数据量
+//	HAL_UART_Receive_IT(&UART4_Handler, (u8 *)dRxBuffer, IMUFrameLength);//该函数会开启接收中断：标志位UART_IT_RXNE，并且设置接收缓冲以及接收缓冲接收最大数据量
 }
 
 //串口4中断服务程序

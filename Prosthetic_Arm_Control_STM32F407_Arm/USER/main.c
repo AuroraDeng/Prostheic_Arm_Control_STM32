@@ -269,17 +269,17 @@ void WristPos_task(void * pvParameters)
   for(;;)
   {	
 		taskENTER_CRITICAL();	//进入临界状态
-//		if(HAL_UART_Receive(&UART2_Handler, (u8 *)bRxBuffer,IMUFrameLength,20)==HAL_OK)
-//		{
-//			CopeMPData((unsigned char*)bRxBuffer);
+		if(HAL_UART_Receive(&UART2_Handler, (u8 *)bRxBuffer,IMUFrameLength,20)==HAL_OK)
+		{
+			CopeMPData((unsigned char*)bRxBuffer);
 			printf("MPlatform:%f  , %f  , %f\r\n",MPlatform.hN_Yaw,MPlatform.hN_Pitch,MPlatform.hN_roll);
-//		}
+		}
 		
-//		if(HAL_UART_Receive(&UART4_Handler, (u8 *)dRxBuffer,IMUFrameLength,20)==HAL_OK)
-//		{
-//			CopeSPData((unsigned char*)dRxBuffer);
+		if(HAL_UART_Receive(&UART4_Handler, (u8 *)dRxBuffer,IMUFrameLength,20)==HAL_OK)
+		{
+			CopeSPData((unsigned char*)dRxBuffer);
 			printf("SPlatform:%f  , %f  , %f\r\n",SPlatform.hN_Yaw,SPlatform.hN_Pitch,SPlatform.hN_roll);
-//		}
+		}
 		
 		RPY(WristPos,SPlatform,MPlatform);//解算腕关节动平台相对于静平台的姿态
 		printf("WristPos:%f  , %f  \r\n",WristPos[0],WristPos[1]);
