@@ -13,7 +13,7 @@ typedef struct
 		float hN_Pitch = 0; 
 		float hN_Yaw = 0; 
 }IMU;
-void WristPoseEstimate(float WristPos[]);
+void WristPoseEstimate(void);
 void CopeMPData(unsigned char ucData[]);
 void CopeSPData(unsigned char ucData[]);
 void RPY(float rpy[],const IMU& SP,const IMU& MP);

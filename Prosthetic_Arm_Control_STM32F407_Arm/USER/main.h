@@ -19,10 +19,10 @@ extern "C" {
 /* Exported constants --------------------------------------------------------*/
 #define betax   76.314 
 #define betay   80.473
-#define R_CL    16
-#define CountsPerTurn   1000
-#define Harmonic   4
-#define GearRatio  100
+#define R_CL    16.0
+#define CountsPerTurn   500.0
+#define Harmonic   4.0
+#define GearRatio  100.0
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 	

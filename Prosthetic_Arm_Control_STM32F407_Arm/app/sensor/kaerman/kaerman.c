@@ -5,23 +5,23 @@
 IMU MPlatform;
 IMU SPlatform;
 
-void WristPoseEstimate(float WristPos[])
+void WristPoseEstimate(void)
 {
 		if(HAL_UART_Receive(&UART2_Handler, (u8 *)bRxBuffer,IMUFrameLength,20)==HAL_OK)
 		{
 			CopeMPData((unsigned char*)bRxBuffer);
-			printf("MPlatform:%f  , %f  , %f\r\n",MPlatform.hN_Yaw,MPlatform.hN_Pitch,MPlatform.hN_roll);
+			if(MPlatform.hN_Yaw<0)
+				MPlatform.hN_Yaw+=180;
+			else if(MPlatform.hN_Yaw>0)
+				MPlatform.hN_Yaw-=180;
+//			printf("MPlatform:%f  , %f  , %f\r\n",MPlatform.hN_Yaw,MPlatform.hN_Pitch,MPlatform.hN_roll);
 		}
 		
 		if(HAL_UART_Receive(&UART4_Handler, (u8 *)dRxBuffer,IMUFrameLength,20)==HAL_OK)
 		{
 			CopeSPData((unsigned char*)dRxBuffer);
-			printf("SPlatform:%f  , %f  , %f\r\n",SPlatform.hN_Yaw,SPlatform.hN_Pitch,SPlatform.hN_roll);
+//			printf("SPlatform:%f  , %f  , %f\r\n",SPlatform.hN_Yaw,SPlatform.hN_Pitch,SPlatform.hN_roll);
 		}
-		
-		RPY(WristPos,SPlatform,MPlatform);//解算腕关节动平台相对于静平台的姿态
-		printf("WristPos:%f  , %f  \r\n",WristPos[0],WristPos[1]);
-
 }
 void CopeMPData(unsigned char ucData[])
 {		
@@ -42,11 +42,11 @@ void CopeMPData(unsigned char ucData[])
 		
 	if((uint8_t)sum==ucRxBuffer[10])
 	{
-			MPlatform.hN_roll = (float)((int16_t)(ucRxBuffer[5]<<8) | ucRxBuffer[4]) / 32768 * 180;
+			MPlatform.hN_Yaw = (float)((int16_t)(ucRxBuffer[5]<<8) | ucRxBuffer[4]) / 32768 * 180;//X
+		
+			MPlatform.hN_Pitch = (float)((int16_t)(ucRxBuffer[7]<<8) | ucRxBuffer[6]) / 32768 * 180;//Y
 					
-			MPlatform.hN_Pitch = (float)((int16_t)(ucRxBuffer[7]<<8) | ucRxBuffer[6]) / 32768 * 180;
-					
-			MPlatform.hN_Yaw = (float)((int16_t)(ucRxBuffer[9]<<8) | ucRxBuffer[8]) / 32768 * 180;
+			MPlatform.hN_roll = (float)((int16_t)(ucRxBuffer[9]<<8) | ucRxBuffer[8]) / 32768 * 180;//Z
 	}
 	ucRxCnt=0;//清空缓存区
 }
@@ -69,11 +69,11 @@ void CopeSPData(unsigned char ucData[])
 		}		
 		if((uint8_t)sum==RxBuffer[10])
 		{
-				SPlatform.hN_roll = (float)((int16_t)(RxBuffer[5]<<8) | RxBuffer[4]) / 32768 * 180;
+				SPlatform.hN_Yaw = (float)((int16_t)(RxBuffer[5]<<8) | RxBuffer[4]) / 32768 * 180;//X
 					
-				SPlatform.hN_Pitch = (float)((int16_t)(RxBuffer[7]<<8) | RxBuffer[6]) / 32768 * 180;
-					
-				SPlatform.hN_Yaw = (float)((int16_t)(RxBuffer[9]<<8) | RxBuffer[8]) / 32768 * 180;
+				SPlatform.hN_Pitch = (float)((int16_t)(RxBuffer[7]<<8) | RxBuffer[6]) / 32768 * 180;//Y
+			
+				SPlatform.hN_roll = (float)((int16_t)(RxBuffer[9]<<8) | RxBuffer[8]) / 32768 * 180;//Z
 		}
 		RxCnt=0;//清空缓存区
 }
@@ -109,6 +109,6 @@ void RPY(float rpy[],const IMU& SP,const IMU& MP)
   }
 //	rpy[0]=-asin(R_ab[1][2])*180/Pi;//相对于静平台的x轴的转动（角度制）
 //	rpy[1]=-asin(R_ab[2][0])*180/Pi;//相对于静平台的y轴的转动（角度制）
-	rpy[0]=-asin(R_ab[1][2]);//相对于静平台的x轴的转动（弧度制）
-	rpy[1]=-asin(R_ab[2][0]);//相对于静平台的y轴的转动（弧度制）
+	rpy[1]=asin(R_ab[2][0]);//相对于静平台的y轴的转动（弧度制）
+	rpy[0]=-atan(R_ab[2][1]/R_ab[2][2]);//相对于静平台的x轴的转动（弧度制）
 }
