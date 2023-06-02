@@ -170,12 +170,11 @@ void Command_task(void * pvParameters)
 					WristPoseEstimate();
 					RPY(WristPos,SPlatform,MPlatform);//解算腕关节动平台相对于静平台的姿态(输出是弧度)
 					x=0;y=0;
-					if(abs(SendCommand[0]-WristPos[0])<=3||abs(SendCommand[2]-WristPos[2])<=3)
+					if(abs(SendCommand[0]-(WristPos[0]*180/Pi))>=3||abs(SendCommand[2]-(WristPos[1]*180/Pi))>=3)
 					{		
 						/*绳子的缩短量计算*/
-						delta_L[0]=sqrt(2536*(1-cos((76.314-30)*Pi/180)))-sqrt(2536*(1-cos((76.314*Pi/180)-0)));//IMU的X轴转动/尺偏桡偏运动/左右方向
 						delta_L[0]=sqrt(2536*(1-cos((betax-SendCommand[0])*Pi/180)))-sqrt(2536*(1-cos((betax*Pi/180)-WristPos[0])));//IMU的X轴转动/尺偏桡偏运动/左右方向
-						delta_L[1]=sqrt(2320*(1-cos((betay-SendCommand[2])*Pi/180)))-sqrt(2320*(1-cos((betay*Pi/180)-WristPos[2])));//IMU的Y轴转动/屈曲伸展运动/前后方向
+						delta_L[1]=sqrt(2320*(1-cos((betay-SendCommand[2])*Pi/180)))-sqrt(2320*(1-cos((betay*Pi/180)-WristPos[1])));//IMU的Y轴转动/屈曲伸展运动/前后方向
 						/*姿态引起的电机形成行程的绝对值*/
 						x=((abs(delta_L[0])/R_CL)*(180.0/Pi))/((360.0/GearRatio)/(CountsPerTurn*Harmonic));
 						y=((abs(delta_L[1])/R_CL)*(180.0/Pi))/((360.0/GearRatio)/(CountsPerTurn*Harmonic));
@@ -199,17 +198,17 @@ void Command_task(void * pvParameters)
 //					if(SendCommand[2]<0)//向后
 					if(delta_L[1]>0)//动平台向后运动：后偏变大/前偏变小
 					{
-						M1-=y;
-						M2+=y;
+						M1+=y;
+						M2-=y;
 					}
 //					if(SendCommand[2]>0)//向前
 					if(delta_L[1]<0)//动平台向前运动：后偏变小/前偏变大
 					{
-						M1+=y;
-						M2-=y;
+						M1-=y;
+						M2+=y;
 					}
 					M1*=1.3;
-					M2*=1.3;
+					M2*=1.1;
 					Motor_W1(M1);
 					Motor_W2(M2);
 					Motor_QB(0);
