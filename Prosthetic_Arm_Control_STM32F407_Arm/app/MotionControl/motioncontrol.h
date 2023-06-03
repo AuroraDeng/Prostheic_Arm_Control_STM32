@@ -6,6 +6,7 @@
 #include "FuzzyPID.h"
 #include "ImpedanceControl.h"
 #include "math.h"
+#include "kaerman.h"
 
 #ifdef __cplusplus
  extern "C" {
@@ -24,6 +25,7 @@ void Motor_Reset();
 void HelloWorld();
 void WristPositionControl(float PositionError[]);
 void Elbow_CompliantControl(float ReceiveCommand);
+void WristPostureControl(int32_t SendCommand[]);
 
 void Motor_W1(int32_t ReceiveCommand);
 void Motor_W2(int32_t ReceiveCommand);

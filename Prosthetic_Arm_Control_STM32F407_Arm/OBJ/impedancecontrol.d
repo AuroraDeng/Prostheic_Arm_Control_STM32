@@ -85,4 +85,5 @@
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\cstddef \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\version \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\limits \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\__undef_macros
+  D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\__undef_macros \
+  ..\app\sensor\kaerman\kaerman.h

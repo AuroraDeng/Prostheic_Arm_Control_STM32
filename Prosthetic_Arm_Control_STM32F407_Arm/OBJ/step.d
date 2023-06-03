@@ -1,9 +1,9 @@
-../obj/main.o: main.c ..\USER\main.h ..\SYSTEM\sys\sys.h \
-  ..\USER\stm32f4xx.h ..\USER\stm32f407xx.h ..\CORE\core_cm4.h \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\stdint.h \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\__config \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\stdint.h ..\CORE\cmsis_version.h \
-  ..\CORE\cmsis_compiler.h ..\CORE\cmsis_armclang.h \
+../obj/step.o: ..\app\MotionControl\Step\step.c \
+  ..\app\MotionControl\Step\step.h ..\SYSTEM\can\can.h ..\USER\main.h \
+  ..\SYSTEM\sys\sys.h ..\USER\stm32f4xx.h ..\USER\stm32f407xx.h \
+  ..\CORE\core_cm4.h D:\keil5\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  ..\CORE\cmsis_version.h ..\CORE\cmsis_compiler.h \
+  ..\CORE\cmsis_armclang.h \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\arm_compat.h \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\arm_acle.h ..\CORE\mpu_armv7.h \
   ..\USER\system_stm32f4xx.h \
@@ -12,9 +12,7 @@
   ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
   ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h \
   ..\HALLIB\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\stddef.h \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\stddef.h \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\__nullptr \
   ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h \
   ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h \
   ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h \
@@ -65,33 +63,8 @@
   ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h \
   ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h \
   ..\SYSTEM\delay\delay.h ..\SYSTEM\usart\usart.h \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\stdio.h \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\stdio.h ..\SYSTEM\can\can.h \
-  ..\USER\main.h ..\app\usart\usart_print.h \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\string.h \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\string.h ..\app\gpio\gpio.h \
-  ..\app\usart\RS485\rs485_drv.h ..\FreeRTOS\include\FreeRTOS.h \
-  ..\FreeRTOS\include\FreeRTOSConfig.h ..\FreeRTOS\include\projdefs.h \
-  ..\FreeRTOS\include\portable.h \
-  ..\FreeRTOS\include\deprecated_definitions.h \
-  ..\FreeRTOS\portable\GCC\ARM_CM4F\portmacro.h \
-  ..\FreeRTOS\include\mpu_wrappers.h ..\FreeRTOS\include\task.h \
-  ..\FreeRTOS\include\list.h ..\FreeRTOS\include\queue.h \
-  ..\FreeRTOS\include\task.h ..\FreeRTOS\include\event_groups.h \
-  ..\FreeRTOS\include\timers.h ..\app\usart\usart_get.h \
-  ..\app\usart\usart_print.h ..\app\can\canget.h ..\app\can\canprint.h \
-  ..\app\MotionControl\motioncontrol.h ..\app\EPOS4\EPOS.h \
-  ..\app\CANopen\PDO\pdo.h ..\app\CANopen\SDO\sdo.h \
-  ..\app\CANopen\NMT\NMT_control.h \
-  ..\app\MotionControl\FuzzyPID\FuzzyPID.h \
-  ..\app\MotionControl\ImpedanceControl\ImpedanceControl.h \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\math.h \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\math.h \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\type_traits \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\cstddef \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\version \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\limits \
-  D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\__undef_macros \
-  ..\app\sensor\kaerman\kaerman.h ..\app\MotionControl\Step\step.h \
-  ..\app\sensor\KWR46C\KWR46C.h ..\app\sensor\HWT101\HWT101.h \
-  ..\app\sensor\HWT101\REG.h
+  D:\keil5\ARM\ARMCLANG\Bin\..\include\stdio.h ..\app\gpio\gpio.h \
+  ..\app\usart\usart_print.h \
+  D:\keil5\ARM\ARMCLANG\Bin\..\include\string.h \
+  ..\app\usart\RS485\rs485_drv.h \
+  D:\keil5\ARM\ARMCLANG\Bin\..\include\math.h ..\app\CANopen\SDO\sdo.h

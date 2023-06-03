@@ -11,7 +11,7 @@
 #include "canprint.h"
 #include "motioncontrol.h"
 #include "math.h"
-#include "BWT61CL.h"
+#include "step.h"
 #include "KWR46C.h"
 #include "HWT101.h"
 #include "kaerman.h"
@@ -119,13 +119,13 @@ void start_task(void * pvParameters)
 //							(UBaseType_t	) WRIST_TASK_PRIO,
 //							(TaskHandle_t*	) &WristTask_Handler);
 //							
-  //创建Task3:检测腕部位置							
-	xTaskCreate((TaskFunction_t	) WristPos_task,
-							(char*			) "WristPos_task",
-							(uint16_t		) WristPos_STK_SIZE,
-							(void * 		) NULL,
-							(UBaseType_t	) WristPos_TASK_PRIO,
-							(TaskHandle_t*	) &WristPosTask_Handler);
+//  //创建Task3:检测腕部位置							
+//	xTaskCreate((TaskFunction_t	) WristPos_task,
+//							(char*			) "WristPos_task",
+//							(uint16_t		) WristPos_STK_SIZE,
+//							(void * 		) NULL,
+//							(UBaseType_t	) WristPos_TASK_PRIO,
+//							(TaskHandle_t*	) &WristPosTask_Handler);
 //							
 //	//创建Task4:控制电机3的运动					
 //	xTaskCreate((TaskFunction_t	) Elbow_task,
@@ -150,10 +150,6 @@ void start_task(void * pvParameters)
 
 void Command_task(void * pvParameters)
 {	
-	float WristPos[3]={0};
-	float delta_L[2]={0};
-	int32_t x,y;
-	int32_t M1,M2;
   for(;;)
   {	
 			taskENTER_CRITICAL();	//进入临界状态
@@ -165,63 +161,14 @@ void Command_task(void * pvParameters)
 				if(USART1_RX_STA&0x8000)
 					Get_USART_Command(&UART1_Handler,SendCommand);	
 				
-				if(SendCommand[0]>=-30&&SendCommand[0]<=30&&SendCommand[2]<=30&&SendCommand[2]>=-30)
-				{
-					WristPoseEstimate();
-					RPY(WristPos,SPlatform,MPlatform);//解算腕关节动平台相对于静平台的姿态(输出是弧度)
-					x=0;y=0;
-					if(abs(SendCommand[0]-(WristPos[0]*180/Pi))>=3||abs(SendCommand[2]-(WristPos[1]*180/Pi))>=3)
-					{		
-						/*绳子的缩短量计算*/
-						delta_L[0]=sqrt(2536*(1-cos((betax-SendCommand[0])*Pi/180)))-sqrt(2536*(1-cos((betax*Pi/180)-WristPos[0])));//IMU的X轴转动/尺偏桡偏运动/左右方向
-						delta_L[1]=sqrt(2320*(1-cos((betay-SendCommand[2])*Pi/180)))-sqrt(2320*(1-cos((betay*Pi/180)-WristPos[1])));//IMU的Y轴转动/屈曲伸展运动/前后方向
-						/*姿态引起的电机形成行程的绝对值*/
-						x=((abs(delta_L[0])/R_CL)*(180.0/Pi))/((360.0/GearRatio)/(CountsPerTurn*Harmonic));
-						y=((abs(delta_L[1])/R_CL)*(180.0/Pi))/((360.0/GearRatio)/(CountsPerTurn*Harmonic));
-					}
-		//			delta_L[0]=sqrt(2536*(1-cos((betax-abs(SendCommand[0]))*Pi/180.0)))-44;//IMU的X轴转动/尺偏桡偏运动/左右方向
-		//			delta_L[1]=sqrt(2320*(1-cos((betay-abs(SendCommand[2]))*Pi/180.0)))-44;
-					/*电机行程计算*/
-					M1=0;M2=0;
-//					if((SendCommand[0]>0)//动平台向左运动:左偏变大/右偏变小
-					if(delta_L[0]<0)
-					{
-						M1+=x;
-						M2+=x;
-					}
-//					if(SendCommand[0]<0||delta_L[0]>0)//动平台向右运动:左偏变小/右偏变大
-					if(delta_L[0]>0)//右偏
-					{
-						M1-=x;
-						M2-=x;
-					}
-//					if(SendCommand[2]<0)//向后
-					if(delta_L[1]>0)//动平台向后运动：后偏变大/前偏变小
-					{
-						M1+=y;
-						M2-=y;
-					}
-//					if(SendCommand[2]>0)//向前
-					if(delta_L[1]<0)//动平台向前运动：后偏变小/前偏变大
-					{
-						M1-=y;
-						M2+=y;
-					}
-					M1*=1.3;
-					M2*=1.1;
-					Motor_W1(M1);
-					Motor_W2(M2);
-					Motor_QB(0);
-//					Motor_W1(SendCommand[0]-50000);
-//					Motor_W2(SendCommand[2]-50000);
-//					Motor_QB(SendCommand[4]-50000);
-					Motor_ZB(SendCommand[6]);
-					
-					MotorData_CAN_Send();
-				}
-		}
-		taskEXIT_CRITICAL();	//退出临界状态
-		vTaskDelay(2);  
+//				WristPostureControl(SendCommand);//动平台姿态控制
+//				Motor_QB(SendCommand[4]);
+//				Motor_ZB(SendCommand[6]);
+				Inverse_kinematics(SendCommand[8],SendCommand[10],SendCommand[12]);
+//				MotorData_CAN_Send();
+			}   
+				taskEXIT_CRITICAL();	//退出临界状态
+				vTaskDelay(2);                                     
 	}
 }
 
@@ -286,10 +233,6 @@ void WristPos_task(void * pvParameters)
 		if(HAL_UART_Receive(&UART2_Handler, (u8 *)bRxBuffer,IMUFrameLength,20)==HAL_OK)
 		{
 			CopeMPData((unsigned char*)bRxBuffer);				
-//			if(MPlatform.hN_Yaw<0)
-//				MPlatform.hN_Yaw+=180;
-//			else if(MPlatform.hN_Yaw>0)
-//				MPlatform.hN_Yaw-=180;
 			printf("MPlatform: X:%f  , Y:%f  , Z:%f\r\n",MPlatform.hN_Yaw,MPlatform.hN_Pitch,MPlatform.hN_roll);
 		}
 

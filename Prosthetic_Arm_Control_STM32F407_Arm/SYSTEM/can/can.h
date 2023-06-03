@@ -71,7 +71,8 @@ void CAN_Config(void);
 void CAN_Filter_Config(void);
 uint8_t CAN_SendMsg(Message *m);
 u8 CAN_ReceiveMsg(Message* m);
-
+uint8_t can_send_msg(uint32_t id, uint8_t *msg, uint8_t len);
+void StepCANRead(uint8_t NodeID,uint8_t ret[]);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

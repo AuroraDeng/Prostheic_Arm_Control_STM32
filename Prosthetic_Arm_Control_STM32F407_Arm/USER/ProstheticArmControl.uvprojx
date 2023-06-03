@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\OBJ;..\USER;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HALLIB\STM32F4xx_HAL_Driver\Inc;..\SYSTEM\can;..\app\CANopen\NMT;..\app\CANopen;..\app\CANopen\PDO;..\app\CANopen\SDO;..\app\usart;..\app\EPOS4;..\app\MotionControl;..\FreeRTOS\include;..\FreeRTOS\portable\GCC\ARM_CM4F;..\app\sensor\BWT61CL;..\app\MotionControl\FuzzyPID;..\app\MotionControl\ImpedanceControl;..\app\usart\RS485;..\app\gpio;..\app\sensor\KWR46C;..\app\sensor\HWT101;..\app\timer;..\app\can;..\app\sensor\kaerman</IncludePath>
+              <IncludePath>..\CORE;..\OBJ;..\USER;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HALLIB\STM32F4xx_HAL_Driver\Inc;..\SYSTEM\can;..\app\CANopen\NMT;..\app\CANopen;..\app\CANopen\PDO;..\app\CANopen\SDO;..\app\usart;..\app\EPOS4;..\app\MotionControl;..\FreeRTOS\include;..\FreeRTOS\portable\GCC\ARM_CM4F;..\app\sensor\BWT61CL;..\app\MotionControl\FuzzyPID;..\app\MotionControl\ImpedanceControl;..\app\usart\RS485;..\app\gpio;..\app\sensor\KWR46C;..\app\sensor\HWT101;..\app\timer;..\app\can;..\app\sensor\kaerman;..\app\MotionControl\Step</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -666,6 +666,11 @@
               <FileName>ImpedanceControl.c</FileName>
               <FileType>8</FileType>
               <FilePath>..\app\MotionControl\ImpedanceControl\ImpedanceControl.c</FilePath>
+            </File>
+            <File>
+              <FileName>step.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\MotionControl\Step\step.c</FilePath>
             </File>
           </Files>
         </Group>

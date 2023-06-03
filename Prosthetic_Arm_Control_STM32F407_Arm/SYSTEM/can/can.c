@@ -255,4 +255,58 @@ u8 CAN_ReceiveMsg(Message* m)
 	return RxMessage.DLC;
 }
 
+uint8_t can_send_msg(uint32_t id, uint8_t *msg, uint8_t len)
+{
+	CANTxMsg g_canx_txheader={0};
+  uint32_t TxMailbox = CAN_TX_MAILBOX0;
+    
+  g_canx_txheader.StdId = id;         /* 标准标识符 */
+  g_canx_txheader.ExtId = id;         /* 扩展标识符(29位) 标准标识符情况下，该成员无效*/
+  g_canx_txheader.IDE = CAN_ID_STD;   /* 使用标准标识符 */
+  g_canx_txheader.RTR = CAN_RTR_DATA; /* 数据帧 */
+  g_canx_txheader.DLC = len;
+
+  if (HAL_CAN_AddTxMessage(&hcan1, &g_canx_txheader, msg, &TxMailbox) != HAL_OK) /* 发送消息 */
+  {
+    return 1;
+  }
+  
+  while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan1) != 3)
+	{}
+		/* 等待发送完成,所有邮箱(有三个邮箱)为空 */
+      return 0;
+}
+
+void StepCANRead(uint8_t NodeID,uint8_t ret[])
+{
+	Message sdo={0};
+	Message rxm={0};
+	uint32_t data=0;
+	sdo.COB_ID=NodeID;
+	sdo.RTR=0;
+	sdo.len=2;
+	sdo.Data[0]=0x36;
+	sdo.Data[1]=0x6B;
+	
+	uint8_t msg[2]={0x36,0x6B};
+	
+
+	if(can_send_msg(NodeID, msg, 2)==0)
+	{
+	//		data=(sdo.Data[7]<<24)+(sdo.Data[6]<<16)+(sdo.Data[5]<<8)+sdo.Data[4];
+		while(CAN_ReceiveMsg(&rxm)==0||rxm.COB_ID!=NodeID || rxm.len!=6 )
+			
+		{
+		delay_ms(1);
+//    CAN_SendMsg(&sdo);
+//		printf("wait\r\t\n");
+		}
+//		data=(rxm.Data[3]<<24)+(rxm.Data[2]<<16)+(rxm.Data[1]<<8)+rxm.Data[0];
+		int i;
+		for(i=0;i<6;i++)
+			ret[i]=rxm.Data[i];
+		printf("okokokookokokoko\r\t\n");
+	}
+}
+
 /* USER CODE END 1 */

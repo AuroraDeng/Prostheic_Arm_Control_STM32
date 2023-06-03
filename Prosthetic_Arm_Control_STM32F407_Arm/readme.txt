@@ -35,4 +35,5 @@ bf93368：CANControlOK_V1.2：实现两个IMU的姿态检测，可正确收发运动指令
 3d6c9dc：WristPosControlV1.1:初步实现了从操作空间到关节空间的运动映射
 135fb7b：WristPosControlV1.1.2:尝试调整腕部IMU的接收方案（未成功）
 ee080b9：WristPosControl_V1.2:实现了腕部两个IMU正确的姿态检测，可正确收发运动指令
-7d11be9： WristPosControl_V1.3：实现了腕部两个IMU准确的姿态检测，初步可执行上位机运动指令，初步建立了操作空间到关节空间的映射关系
+7d11be9：WristPosControl_V1.3：实现了腕部两个IMU准确的姿态检测，初步可执行上位机运动指令，初步建立了操作空间到关节空间的映射关系
+6040c51：WristPosControl_V1.4：初步实现腕部闭环姿态调整【重要节点】
