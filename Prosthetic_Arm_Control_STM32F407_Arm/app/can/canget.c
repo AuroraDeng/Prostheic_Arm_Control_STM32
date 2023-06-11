@@ -15,7 +15,7 @@ void Get_CAN_Command(int32_t SendCommand[])
 			uint8_t c4=statuscommand[count];
 			count++;
 			int32_t c=(c1<<24)|((c2<<16)|((c3<<8)|c4));
-			SendCommand[i]=c;
+			SendCommand[i]=c-90;
 		}
 		CAN1_RX_FLAG=0;
 }

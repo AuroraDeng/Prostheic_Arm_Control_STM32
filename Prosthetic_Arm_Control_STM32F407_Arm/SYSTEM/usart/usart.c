@@ -66,9 +66,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 	
 	if(huart->Instance==USART1)//如果是串口1，进行串口1 MSP初始化
 	{
-		/**USART3 GPIO Configuration
-    PA9     ------> USART3_TX
-    PA10     ------> USART3_RX
+		/**USART1 GPIO Configuration
+    PA9     ------> USART1_TX
+    PA10     ------> USART1_RX
     */
 		__HAL_RCC_GPIOA_CLK_ENABLE();			//使能GPIOA时钟
 		__HAL_RCC_USART1_CLK_ENABLE();			//使能USART1时钟
@@ -91,9 +91,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 	
 	if(huart->Instance==USART2)//如果是串口2，进行串口2 MSP初始化
 	{
-		/**USART3 GPIO Configuration
-    PA2     ------> USART3_TX
-    PA3     ------> USART3_RX
+		/**USART2 GPIO Configuration
+    PA2     ------> USART2_TX
+    PA3     ------> USART2_RX
     */
 		__HAL_RCC_GPIOA_CLK_ENABLE();			//使能GPIOA时钟
 		__HAL_RCC_USART2_CLK_ENABLE();			//使能USART1时钟

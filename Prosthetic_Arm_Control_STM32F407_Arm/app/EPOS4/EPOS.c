@@ -251,11 +251,13 @@ void Epos::EnableDevice()
 {
 	Sync_Send();
 	
-	WriteControlword(shutdown);
-	
-	Sync_Send();
+//	WriteControlword(shutdown);
+//	
+//	Sync_Send();
 	
 	WriteControlword(switchon_and_enable);
+	
+	Sync_Send();
 }
 
 void Epos::ClearFault()

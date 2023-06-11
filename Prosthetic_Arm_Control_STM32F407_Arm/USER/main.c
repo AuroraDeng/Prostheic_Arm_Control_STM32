@@ -119,13 +119,13 @@ void start_task(void * pvParameters)
 //							(UBaseType_t	) WRIST_TASK_PRIO,
 //							(TaskHandle_t*	) &WristTask_Handler);
 //							
-//  //创建Task3:检测腕部位置							
-//	xTaskCreate((TaskFunction_t	) WristPos_task,
-//							(char*			) "WristPos_task",
-//							(uint16_t		) WristPos_STK_SIZE,
-//							(void * 		) NULL,
-//							(UBaseType_t	) WristPos_TASK_PRIO,
-//							(TaskHandle_t*	) &WristPosTask_Handler);
+  //创建Task3:检测腕部位置							
+	xTaskCreate((TaskFunction_t	) WristPos_task,
+							(char*			) "WristPos_task",
+							(uint16_t		) WristPos_STK_SIZE,
+							(void * 		) NULL,
+							(UBaseType_t	) WristPos_TASK_PRIO,
+							(TaskHandle_t*	) &WristPosTask_Handler);
 //							
 //	//创建Task4:控制电机3的运动					
 //	xTaskCreate((TaskFunction_t	) Elbow_task,
@@ -161,11 +161,11 @@ void Command_task(void * pvParameters)
 				if(USART1_RX_STA&0x8000)
 					Get_USART_Command(&UART1_Handler,SendCommand);	
 				
-//				WristPostureControl(SendCommand);//动平台姿态控制
-//				Motor_QB(SendCommand[4]);
+				WristPostureControl(SendCommand);//动平台姿态控制
+				Motor_QB(SendCommand[4]);
 //				Motor_ZB(SendCommand[6]);
-				Inverse_kinematics(SendCommand[8],SendCommand[10],SendCommand[12]);
-//				MotorData_CAN_Send();
+//				Inverse_kinematics(SendCommand[8],SendCommand[10],SendCommand[12]);
+				MotorData_CAN_Send();
 			}   
 				taskEXIT_CRITICAL();	//退出临界状态
 				vTaskDelay(2);                                     
@@ -232,7 +232,7 @@ void WristPos_task(void * pvParameters)
 		taskENTER_CRITICAL();	//进入临界状态
 		if(HAL_UART_Receive(&UART2_Handler, (u8 *)bRxBuffer,IMUFrameLength,20)==HAL_OK)
 		{
-			CopeMPData((unsigned char*)bRxBuffer);				
+			CopeMPData((unsigned char*)bRxBuffer);	
 			printf("MPlatform: X:%f  , Y:%f  , Z:%f\r\n",MPlatform.hN_Yaw,MPlatform.hN_Pitch,MPlatform.hN_roll);
 		}
 

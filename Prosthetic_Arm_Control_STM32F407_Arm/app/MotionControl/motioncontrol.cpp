@@ -78,12 +78,13 @@ void Motor_W2(int32_t ReceiveCommand)
 
 void Motor_QB(int32_t ReceiveCommand)
 {
+	ReceiveCommand=ReceiveCommand/((360.0/GearRatio)/(CountsPerTurn*Harmonic));
 	motor_QB.MoveToPosition(3000,10000,10000,1,ReceiveCommand);
 }
 
 void Motor_ZB(int32_t ReceiveCommand)
 {
-	ReceiveCommand=ReceiveCommand*300/0.09;
+	ReceiveCommand=(ReceiveCommand/3.6)*4000;
 	motor_ZB.MoveToPosition(3000,10000,10000,1,ReceiveCommand);
 }
 //void Motor_W1(int16_t ReceiveCommand)
@@ -217,7 +218,8 @@ void WristPostureControl(int32_t SendCommand[])
 	static float PreErr[2]={0};
 	int32_t x,y;
 	int32_t M1,M2;
-	double  kp_x=1.1,kd_x=0.8,kp_y=1.15,kd_y=0.8;
+	double  kp_x=0.25,kd_x=0.3,kp_y=0.25,kd_y=0.3;
+//	double  kp_x=1.5,kd_x=1,kp_y=1.5,kd_y=1;
 	if(SendCommand[0]>=-30&&SendCommand[0]<=30&&SendCommand[2]<=30&&SendCommand[2]>=-30)
 	{
 			WristPoseEstimate();
@@ -225,9 +227,13 @@ void WristPostureControl(int32_t SendCommand[])
 			x=0;y=0;
 			CurErr[0]=SendCommand[0]-(WristPos[0]*180/Pi);//PD控制
 			CurErr[1]=SendCommand[2]-(WristPos[1]*180/Pi);
+		
+			PreErr[0]-=CurErr[0];
+			PreErr[1]-=CurErr[1];
+//			SendCommand[0]=kp_x*CurErr[0]+kd_x*PreErr[0];
+//			SendCommand[2]=kp_y*CurErr[1]+kd_y*PreErr[1];
 			SendCommand[0]+=(kp_x*CurErr[0]+kd_x*PreErr[0]);
-			SendCommand[2]+=(kp_y*CurErr[1]+kd_y*PreErr[1]);
-//			if(abs(SendCommand[0]-(WristPos[0]*180/Pi))>=3||abs(SendCommand[2]-(WristPos[1]*180/Pi))>=3)
+			SendCommand[2]+=(kp_y*CurErr[1]+kd_y*PreErr[1]);	
 			if(abs(CurErr[0])>=3||abs(CurErr[1])>=3)
 			{		
 				/*绳子的缩短量计算*/
