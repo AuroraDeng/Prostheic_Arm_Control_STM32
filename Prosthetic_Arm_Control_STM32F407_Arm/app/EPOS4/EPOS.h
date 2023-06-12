@@ -48,9 +48,31 @@ class Epos
 		BOOL  m_bIsAbsolute; //是否为绝对运动
 	
 		/*初始化*/
-		Epos(Uint8 nodeid,Uint8 mode,int32_t profile_pos=0,int32_t actual_pos=0,Uint32 profile_vel=3000,Uint32 actual_vel=0,Uint32 profile_acc=10000,Uint32 actual_acc=0,Uint32 profile_dec=10000,double acutaltorque=0,BOOL isabsolute=1):
-		NodeID(nodeid),Mode(mode),ProfilePos(profile_pos),ActualPos(actual_pos),ProfileVel(profile_vel),ActualVel(actual_vel),ProfileAcc(profile_acc),ActualAcc(actual_acc),ProfileDec(profile_dec),m_bIsAbsolute(isabsolute),AcutalTorque(acutaltorque)
-		{ }
+		Epos(  
+			 Uint8 nodeid,							// 0
+			 Uint8 mode,
+			 int32_t profile_pos=0,			// 2
+			 int32_t actual_pos =0,
+			 Uint32 profile_vel =3000,  // 4
+			 Uint32 actual_vel  =0,
+			 Uint32 profile_acc =10000,
+			 Uint32 actual_acc  =0,     // 7
+			 Uint32 profile_dec =10000,
+			 double acutaltorque=0,
+			 BOOL   isabsolute  =1      // 10
+		):
+			 NodeID(nodeid),						// 0
+			 Mode(mode),
+			 ProfilePos(profile_pos),   // 2
+			 ActualPos(actual_pos),
+			 ProfileVel(profile_vel),   // 4
+			 ActualVel(actual_vel),
+			 ProfileAcc(profile_acc),
+			 ActualAcc(actual_acc),			// 7
+			 ProfileDec(profile_dec),
+			 m_bIsAbsolute(isabsolute),
+			 AcutalTorque(acutaltorque) // 10
+				{ }
 		Epos();
 		
 		void InitPPM();
@@ -68,7 +90,13 @@ class Epos
 		void Set_ProfileAcc(Uint32 profile_acc);
 		void Set_ProfileDec(Uint32 profile_dec);
 		void Set_TargetTorque(int16_t TargetTorque);
-		void UpdateProfileData(Uint8 nodeid,Uint8 mode,int32_t profile_position,Uint32 profile_velocity,Uint32 profile_acceleration,Uint32 profile_deceleration,BOOL is_absolute);
+		void UpdateProfileData(Uint8 nodeid,
+													 Uint8 mode,
+													 int32_t profile_position,
+													 Uint32 profile_velocity,
+												   Uint32 profile_acceleration,
+													 Uint32 profile_deceleration,
+													 BOOL is_absolute           );
 		void UpdateActualData(int32_t actual_position,Uint32 actual_velocity);
 		/*获取运动信息*/
 		int32_t Get_ActualPos();
@@ -80,9 +108,17 @@ class Epos
 		void Get_ActualCurrent(uint8_t cur_data[]);
 		BOOL IsHomePosition();
 	
-		void MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_dec,uint8_t IsAbsolute,int32_t target_position);
+		void MoveToPosition(Uint32 profile_vel,
+												Uint32 profile_acc,
+												Uint32 profile_dec,
+												uint8_t IsAbsolute,
+												int32_t target_position);
 		void MoveToPosition(uint8_t IsAbsolute,int32_t target_position);
-		void MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_dec,int32_t *posList, uint8_t len);
+		void MoveToPosition(Uint32 profile_vel,
+												Uint32 profile_acc,
+												Uint32 profile_dec,
+												int32_t *posList, 
+												uint8_t len);
 		void BackToHomePosition();
 		
 		void ClearFault();//清错
@@ -99,12 +135,14 @@ enum epos_controlword
 {
 	shutdown = 0x06,            /**< will end in device state >ready to switch on< */
   switchon = 0x07,            /**< will end in device state >switched on< */
-  switchon_and_enable = 0x0F, /**< will end in device state >switch on< then auto transition to >operation enabled< */
+  switchon_and_enable = 0x0F, /**< will end in device state >switch on< then    
+																			auto transition to >operation enabled< */
   disablevoltage = 0x00,      /**< will end in device state >switch on disabled< */
   quickstop = 0x02,           /**< will end in device state >quick stop active< */
   disableoperation = 0x07,    /**< will end in device state >switched on< */
   enableoperation = 0x0F,     /**< will end in device state >operation enabled< */
-  faultreset = 0x80,          /**< will end in device state >Fault< and/or >switch on disabled< */
+  faultreset = 0x80,          /**< will end in device state >Fault< and/or > 
+																		switch on disabled< */
 	absolute_movement = 0x1F,
 	relative_movement = 0x5F,
 	absolute_immediate_movement = 0x3F,

@@ -161,32 +161,16 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\app\MotionControl\Step\step.c</Filename>
+          <Filename>.\stm32f4xx_it.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>245</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\app\MotionControl\motioncontrol.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
           <LineNumber>244</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134241284</Address>
+          <Address>134241364</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -198,11 +182,11 @@
           <Expression>\\ProstheticArmControl\../app/MotionControl/motioncontrol.cpp\244</Expression>
         </Bp>
         <Bp>
-          <Number>3</Number>
+          <Number>2</Number>
           <Type>0</Type>
           <LineNumber>268</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134241502</Address>
+          <Address>134241582</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -214,11 +198,11 @@
           <Expression>\\ProstheticArmControl\../app/MotionControl/motioncontrol.cpp\268</Expression>
         </Bp>
         <Bp>
-          <Number>4</Number>
+          <Number>3</Number>
           <Type>0</Type>
           <LineNumber>241</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134240968</Address>
+          <Address>134241048</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -230,11 +214,11 @@
           <Expression>\\ProstheticArmControl\../app/MotionControl/motioncontrol.cpp\241</Expression>
         </Bp>
         <Bp>
-          <Number>5</Number>
+          <Number>4</Number>
           <Type>0</Type>
           <LineNumber>247</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134241362</Address>
+          <Address>134241442</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>

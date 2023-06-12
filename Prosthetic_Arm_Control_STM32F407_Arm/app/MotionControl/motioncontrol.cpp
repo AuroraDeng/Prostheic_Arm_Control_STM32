@@ -78,13 +78,13 @@ void Motor_W2(int32_t ReceiveCommand)
 
 void Motor_QB(int32_t ReceiveCommand)
 {
-	ReceiveCommand=ReceiveCommand/((360.0/GearRatio)/(CountsPerTurn*Harmonic));
+	ReceiveCommand=ReceiveCommand/((360.0/GearRatio)/(1000.0*Harmonic));
 	motor_QB.MoveToPosition(3000,10000,10000,1,ReceiveCommand);
 }
 
 void Motor_ZB(int32_t ReceiveCommand)
 {
-	ReceiveCommand=(ReceiveCommand/3.6)*4000;
+	ReceiveCommand=(ReceiveCommand/3.6)*4000.0;
 	motor_ZB.MoveToPosition(3000,10000,10000,1,ReceiveCommand);
 }
 //void Motor_W1(int16_t ReceiveCommand)

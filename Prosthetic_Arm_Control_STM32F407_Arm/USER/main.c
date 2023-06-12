@@ -163,7 +163,7 @@ void Command_task(void * pvParameters)
 				
 				WristPostureControl(SendCommand);//动平台姿态控制
 				Motor_QB(SendCommand[4]);
-//				Motor_ZB(SendCommand[6]);
+				Motor_ZB(SendCommand[6]);
 //				Inverse_kinematics(SendCommand[8],SendCommand[10],SendCommand[12]);
 				MotorData_CAN_Send();
 			}   
@@ -244,7 +244,6 @@ void WristPos_task(void * pvParameters)
 		
 		RPY(WristPos,SPlatform,MPlatform);//解算腕关节动平台相对于静平台的姿态
 		printf("WristPos:%f  , %f  \r\n",WristPos[0]*180/Pi,WristPos[1]*180/Pi);
-		
 		taskEXIT_CRITICAL();	//退出临界状态
 		
 		vTaskDelay(100);//等待传输完成

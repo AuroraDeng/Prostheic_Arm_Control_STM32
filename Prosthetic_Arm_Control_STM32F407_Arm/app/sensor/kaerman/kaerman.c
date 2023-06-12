@@ -14,13 +14,11 @@ void WristPoseEstimate(void)
 //				MPlatform.hN_Yaw+=180;
 //			else if(MPlatform.hN_Yaw>0)
 //				MPlatform.hN_Yaw-=180;
-//			printf("MPlatform:%f  , %f  , %f\r\n",MPlatform.hN_Yaw,MPlatform.hN_Pitch,MPlatform.hN_roll);
 		}
 		
 		if(HAL_UART_Receive(&UART4_Handler, (u8 *)dRxBuffer,IMUFrameLength,20)==HAL_OK)
 		{
 			CopeSPData((unsigned char*)dRxBuffer);
-//			printf("SPlatform:%f  , %f  , %f\r\n",SPlatform.hN_Yaw,SPlatform.hN_Pitch,SPlatform.hN_roll);
 		}
 }
 void CopeMPData(unsigned char ucData[])
@@ -87,8 +85,8 @@ void RPY(float rpy[],const IMU& SP,const IMU& MP)
 	
 	float MP_X=MP.hN_Yaw*Pi/180.0;
 	float MP_Y=MP.hN_Pitch*Pi/180.0;
-	float MP_Z=MP.hN_roll*Pi/180.0;
-
+//	float MP_Z=MP.hN_roll*Pi/180.0;
+	float MP_Z=SP_Z;
 //	float R[3][3]={{cos(SP_Z-MP_Z),-sin(SP_Z-MP_Z),0},
 //								{sin(SP_Z-MP_Z),cos(SP_Z-MP_Z),0},
 //								{0,0,1}};
@@ -128,8 +126,13 @@ void RPY(float rpy[],const IMU& SP,const IMU& MP)
 	rpy[1]=atan2(-R_ab[2][0],sqrt(pow(R_ab[0][0],2)+pow(R_ab[1][0],2)));//相对于静平台的y轴的转动（弧度制）
 	rpy[0]=atan2(R_ab[2][1],R_ab[2][2]);//相对于静平台的x轴的转动（弧度制）	
 	
-//	MP_X=atan2(R_o1b[2][1],R_o1b[2][2]);//相对于静平台的x轴的转动（弧度制）	
-//	MP_Y=atan2(-R_o1b[2][0],sqrt(pow(R_o1b[0][0],2)+pow(R_o1b[1][0],2)));//相对于静平台的y轴的转动（弧度制）
-//	rpy[0]=MP_X-SP_X;//相对于静平台的y轴的转动（弧度制）
-//	rpy[1]=MP_Y-SP_Y;//相对于静平台的x轴的转动（弧度制）
+//	if(abs(SP_X-MP_X)>40*Pi/180)
+//		rpy[0]=SP_X-MP_X<0?SP_X-MP_X+360*Pi/180:SP_X-MP_X-360*Pi/180;//相对于静平台的y轴的转动（弧度制）
+//	else
+//		rpy[0]=SP_X-MP_X;
+//	
+//	if(abs(SP_Y-MP_Y)>40*Pi/180)
+//		rpy[1]=SP_Y-MP_Y<0?SP_Y-MP_Y+360*Pi/180:SP_Y-MP_Y-360*Pi/180;
+//	else
+//		rpy[1]=SP_Y-MP_Y;//相对于静平台的x轴的转动（弧度制）
 }

@@ -67,7 +67,13 @@ void Epos::Set_ProfileDec(Uint32 profile_dec)
 	{delay_ms(2);}
 }
 
-void Epos::UpdateProfileData(Uint8 nodeid,Uint8 mode,int32_t profile_position,Uint32 profile_velocity,Uint32 profile_acceleration,Uint32 profile_deceleration,BOOL is_absolute)
+void Epos::UpdateProfileData(Uint8 nodeid,
+														 Uint8 mode,
+														 int32_t profile_position,
+													   Uint32 profile_velocity,
+														 Uint32 profile_acceleration,
+														 Uint32 profile_deceleration,
+														 BOOL is_absolute)
 {
 	NodeID = nodeid;
 	Mode= mode;
@@ -89,15 +95,18 @@ int32_t Epos::Get_ActualPos()
 //	WriteControlword(switchon_and_enable);
 	uint8_t pos_data[4];
 	TransmitPDO(Epos::NodeID,3,pos_data);
-	ActualPos=(pos_data[3]<<24)+(pos_data[2]<<16)+(pos_data[1]<<8)+pos_data[0];
+	ActualPos=  ( pos_data[3] << 24 ) + 
+							( pos_data[2] << 16 ) + 
+							( pos_data[1] <<  8 ) + 
+							  pos_data[0];
 	
-	print_str(&UART1_Handler,"The motor ");
-	print_data_dec(&UART1_Handler,Epos::NodeID);
-	print_str(&UART1_Handler,"'s actual position is at ");
-	print_data_dec(&UART1_Handler,Epos::ActualPos);
-	print_str(&UART1_Handler,"\n");
-	return ActualPos;
+	print_str( &UART1_Handler, "The motor ");
+	print_data_dec( &UART1_Handler, Epos::NodeID);
+	print_str( &UART1_Handler, "'s actual position is at ");
+	print_data_dec( &UART1_Handler, Epos::ActualPos);
+	print_str( &UART1_Handler, "\n");
 	
+	return ActualPos; 
 }
 void Epos::Get_ActualPos(uint8_t pos_data[])
 {
@@ -109,7 +118,7 @@ double Epos::Get_AcutalTor()
 	uint8_t tor_data[2];
 	TransmitPDO(Epos::NodeID,4,tor_data);
 	int16_t act_tor=(tor_data[1]<<8)+tor_data[0];
-	AcutalTorque=((double)act_tor/1000.0)*0.106909;//Nm
+	AcutalTorque=( (double)act_tor/1000.0 ) * 0.106909;//Nm
 	return AcutalTorque;
 }
 
@@ -175,6 +184,8 @@ void Epos::MoveToPosition(Uint32 profile_vel,Uint32 profile_acc,Uint32 profile_d
 		WriteControlword(absolute_immediate_movement);
 	else
 		WriteControlword(relative_immediate_movement);
+	
+	Sync_Send();
 }
 
 void Epos::MoveToPosition(uint8_t IsAbsolute,int32_t target_position)
@@ -187,6 +198,8 @@ void Epos::MoveToPosition(uint8_t IsAbsolute,int32_t target_position)
 		WriteControlword(absolute_immediate_movement);
 	else
 		WriteControlword(relative_immediate_movement);
+	
+	Sync_Send();
 	
 }
 
@@ -249,11 +262,11 @@ void Epos::InitCSP()
 
 void Epos::EnableDevice()
 {
-	Sync_Send();
-	
-//	WriteControlword(shutdown);
-//	
 //	Sync_Send();
+	
+	WriteControlword(shutdown);
+	
+	Sync_Send();
 	
 	WriteControlword(switchon_and_enable);
 	
