@@ -80,8 +80,8 @@
   ..\FreeRTOS\include\task.h ..\FreeRTOS\include\event_groups.h \
   ..\FreeRTOS\include\timers.h ..\app\usart\usart_get.h \
   ..\app\usart\usart_print.h ..\app\can\canget.h ..\app\can\canprint.h \
-  ..\app\MotionControl\motioncontrol.h ..\app\EPOS4\EPOS.h \
-  ..\app\CANopen\PDO\pdo.h ..\app\CANopen\SDO\sdo.h \
+  ..\app\sensor\kaerman\kaerman.h ..\app\MotionControl\motioncontrol.h \
+  ..\app\EPOS4\EPOS.h ..\app\CANopen\PDO\pdo.h ..\app\CANopen\SDO\sdo.h \
   ..\app\CANopen\NMT\NMT_control.h \
   ..\app\MotionControl\FuzzyPID\FuzzyPID.h \
   ..\app\MotionControl\ImpedanceControl\ImpedanceControl.h \
@@ -92,6 +92,5 @@
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\version \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\limits \
   D:\keil5\ARM\ARMCLANG\Bin\..\include\libcxx\__undef_macros \
-  ..\app\sensor\kaerman\kaerman.h ..\app\MotionControl\Step\step.h \
-  ..\app\sensor\KWR46C\KWR46C.h ..\app\sensor\HWT101\HWT101.h \
-  ..\app\sensor\HWT101\REG.h
+  ..\app\MotionControl\Step\step.h ..\app\sensor\KWR46C\KWR46C.h \
+  ..\app\sensor\HWT101\HWT101.h ..\app\sensor\HWT101\REG.h

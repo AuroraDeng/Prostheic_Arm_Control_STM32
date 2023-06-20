@@ -239,7 +239,7 @@ void WristPostureControl(int32_t SendCommand[])
 				/*绳子的缩短量计算*/
 				delta_L[0]=sqrt(2536*(1-cos((betax-SendCommand[0])*Pi/180)))-sqrt(2536*(1-cos((betax*Pi/180)-WristPos[0])));//IMU的X轴转动/尺偏桡偏运动/左右方向
 				delta_L[1]=sqrt(2320*(1-cos((betay-SendCommand[2])*Pi/180)))-sqrt(2320*(1-cos((betay*Pi/180)-WristPos[1])));//IMU的Y轴转动/屈曲伸展运动/前后方向
-				/*姿态引起的电机形成行程的绝对值*/
+				/*姿态引起的电机行程的绝对值*/
 				x=((abs(delta_L[0])/R_CL)*(180.0/Pi))/((360.0/GearRatio)/(CountsPerTurn*Harmonic));
 				y=((abs(delta_L[1])/R_CL)*(180.0/Pi))/((360.0/GearRatio)/(CountsPerTurn*Harmonic));
 						

@@ -168,66 +168,18 @@
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>244</LineNumber>
+          <LineNumber>195</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134241364</Address>
+          <Address>134220596</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\app\MotionControl\motioncontrol.cpp</Filename>
+          <Filename>..\SYSTEM\can\can.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ProstheticArmControl\../app/MotionControl/motioncontrol.cpp\244</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>268</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134241582</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\app\MotionControl\motioncontrol.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\ProstheticArmControl\../app/MotionControl/motioncontrol.cpp\268</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>241</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134241048</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\app\MotionControl\motioncontrol.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\ProstheticArmControl\../app/MotionControl/motioncontrol.cpp\241</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>247</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134241442</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\app\MotionControl\motioncontrol.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\ProstheticArmControl\../app/MotionControl/motioncontrol.cpp\247</Expression>
+          <Expression>\\ProstheticArmControl\../SYSTEM/can/can.c\195</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

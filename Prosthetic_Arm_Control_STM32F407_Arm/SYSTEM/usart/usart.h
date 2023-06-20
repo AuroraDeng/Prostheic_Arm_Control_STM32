@@ -47,7 +47,7 @@ extern UART_HandleTypeDef UART5_Handler; //UART句柄
 #define RXBUFFERSIZE   1 //缓存大小
 extern u8 aRxBuffer[RXBUFFERSIZE];//HAL库USART接收Buffer
 extern u8 bRxBuffer[IMUFrameLength];
-extern u8 cRxBuffer[200];
+extern u8 cRxBuffer[6];
 extern u8 dRxBuffer[IMUFrameLength];
 extern u8 eRxBuffer[RXBUFFERSIZE];
 //如果想串口中断接收，请不要注释以下宏定义

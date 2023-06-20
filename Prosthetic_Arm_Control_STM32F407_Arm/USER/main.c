@@ -118,7 +118,8 @@ void start_task(void * pvParameters)
 //							(void * 		) NULL,
 //							(UBaseType_t	) WRIST_TASK_PRIO,
 //							(TaskHandle_t*	) &WristTask_Handler);
-//							
+//			
+#if	WristPosReport						
   //创建Task3:检测腕部位置							
 	xTaskCreate((TaskFunction_t	) WristPos_task,
 							(char*			) "WristPos_task",
@@ -126,6 +127,7 @@ void start_task(void * pvParameters)
 							(void * 		) NULL,
 							(UBaseType_t	) WristPos_TASK_PRIO,
 							(TaskHandle_t*	) &WristPosTask_Handler);
+#endif
 //							
 //	//创建Task4:控制电机3的运动					
 //	xTaskCreate((TaskFunction_t	) Elbow_task,
@@ -167,8 +169,8 @@ void Command_task(void * pvParameters)
 //				Inverse_kinematics(SendCommand[8],SendCommand[10],SendCommand[12]);
 				MotorData_CAN_Send();
 			}   
-				taskEXIT_CRITICAL();	//退出临界状态
-				vTaskDelay(2);                                     
+			taskEXIT_CRITICAL();	//退出临界状态
+			vTaskDelay(2);                                     
 	}
 }
 

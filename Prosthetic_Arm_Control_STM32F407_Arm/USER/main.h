@@ -17,6 +17,8 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
+#define WristPosReport 0
+
 #define betax   76.314 
 #define betay   80.473
 #define R_CL    16.0

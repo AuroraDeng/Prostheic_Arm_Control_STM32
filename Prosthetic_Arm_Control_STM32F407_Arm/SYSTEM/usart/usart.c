@@ -297,7 +297,7 @@ void USART2_IRQHandler(void)
 
 //u8 USART3_RX_BUF[USART_REC_LEN];     //接收缓冲,最大USART_REC_LEN个字节.
 u16 USART3_RX_STA=0;       //接收状态标记	
-u8 cRxBuffer[200];
+u8 cRxBuffer[6];
 UART_HandleTypeDef UART3_Handler; //UART句柄
 
 //初始化IO 串口1 
