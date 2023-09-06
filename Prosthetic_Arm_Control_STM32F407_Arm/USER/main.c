@@ -166,7 +166,7 @@ void Command_task(void * pvParameters)
 				WristPostureControl(SendCommand);//动平台姿态控制
 				Motor_QB(SendCommand[4]);
 				Motor_ZB(SendCommand[6]);
-//				Inverse_kinematics(SendCommand[8],SendCommand[10],SendCommand[12]);
+				Inverse_kinematics(SendCommand[8],SendCommand[10],SendCommand[12]);
 				MotorData_CAN_Send();
 			}   
 			taskEXIT_CRITICAL();	//退出临界状态
